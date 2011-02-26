@@ -1,0 +1,21 @@
+#summary 任务分配/进度报表 请在此页更新任务进度，申领新的章节
+
+注:如果某章需要细分的话请自行在改章节下添加新行
+
+||*章节*||*责任人*||*进度*||
+||前言|| || ||
+||第一章   Android Overview|| || ||
+||第二章   The Stack|| || ||
+||第三章   Quick Start|| || ||
+||第四章   Main Building Blocks|| || ||
+||第五章   Yamba Project Overview|| || ||
+||第六一章 Android User Interface|| || ||
+||第七一章 Preferences, File System, Options Menu, and Intents|| || ||
+||第八一章 Services|| || ||
+||第九一章 Database|| || ||
+||第十一章 Lists and Adapters|| || ||
+||第十一章 Broadcast Receivers|| || ||
+||第十二章 Content Providers|| || ||
+||第十三章 System Services|| || ||
+||第十四章 Android Interface Definition Language|| || ||
+||第十五章 Native Development Kit (NDK)|| || ||
