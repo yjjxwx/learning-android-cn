@@ -6,7 +6,7 @@
 ||*章节*||*责任人*||*进度*||
 ||前言|| || ||
 ||第一章   Android Overview|| || ||
-||第二章   The Stack|| Bearice || 初稿完成 ||
+||第二章   The Stack|| Bearice || [http://code.google.com/p/learning-android-cn/issues/detail?id=2 初稿完成] ||
 ||第三章   Quick Start|| || ||
 ||第四章   Main Building Blocks|| || ||
 ||第五章   Yamba Project Overview|| || ||
