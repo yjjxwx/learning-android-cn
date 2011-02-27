@@ -2,5 +2,5 @@
 
 各译者在词汇的使用上保持一致，切忌生造词汇。
 
-Stack - ?
-Services - ?
+* Stack - ?
+* Services - ?
