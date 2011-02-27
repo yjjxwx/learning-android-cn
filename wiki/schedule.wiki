@@ -8,12 +8,12 @@
 ||第一章   Android Overview|| iEle || 初稿完成 ||
 ||第二章   The Stack|| Bearice || [http://code.google.com/p/learning-android-cn/issues/detail?id=2 初稿完成] ||
 ||第三章   Quick Start|| || ||
-||第四章   Main Building Blocks|| || ||
+||第四章   Main Building Blocks|| iEle || 申领 ||
 ||第五章   Yamba Project Overview|| || ||
-||第六一章 Android User Interface|| || ||
-||第七一章 Preferences, File System, Options Menu, and Intents|| || ||
-||第八一章 Services|| || ||
-||第九一章 Database|| || ||
+||第六章   Android User Interface|| || ||
+||第七章   Preferences, File System, Options Menu, and Intents|| || ||
+||第八章   Services|| || ||
+||第九章   Database|| || ||
 ||第十一章 Lists and Adapters|| || ||
 ||第十一章 Broadcast Receivers|| || ||
 ||第十二章 Content Providers|| || ||
