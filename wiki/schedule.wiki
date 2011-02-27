@@ -4,7 +4,7 @@
 注:如果某章需要细分的话请自行在该章节下添加新行
 
 ||*章节*||*责任人*||*进度*||
-||前言|| || Fleurer |初稿完成|
+||前言|| Fleurer || 初稿完成 ||
 ||第一章   Android Overview|| || ||
 ||第二章   The Stack|| Bearice || [http://code.google.com/p/learning-android-cn/issues/detail?id=2 初稿完成] ||
 ||第三章   Quick Start|| || ||
