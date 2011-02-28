@@ -4,6 +4,7 @@
 
   * Stack - 可根据上下文理解为“架构”
   * Services - ?
+  * Open Handset Alliance - 开放手持设备联盟，翻译时同时标注上英文。
 
 不译的名词：
   * widget
