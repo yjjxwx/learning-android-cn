@@ -10,3 +10,4 @@
 = 不译的名 =
   * widget
   * Content Provider
+  * Activity
