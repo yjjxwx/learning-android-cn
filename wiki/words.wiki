@@ -5,7 +5,8 @@
   * Stack - 可根据上下文理解为“架构”
   * Services - ?
   * Open Handset Alliance - 开放手持设备联盟，翻译时同时标注上英文。
+  * Native Library - 译文中存在"本地库"和“原生库”两种译法，在日后需要统一起来。
 
-不译的名词：
+= 不译的名 =
   * widget
   * Content Provider
