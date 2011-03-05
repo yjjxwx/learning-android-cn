@@ -8,6 +8,7 @@
   * Native Library - 译文中存在"本地库"和“原生库”两种译法，在日后需要统一起来。
   * Building Block - 构件
   * emulator - 仿真器。注意“模拟器(simulator)”在文中另有提及
+  * Summary - 总结。不是“小结”
 
 = 不译的名 =
   * widget
