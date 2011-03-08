@@ -13,4 +13,11 @@
 = 不译的名 =
   * widget
   * Content Provider
+  * Reciever
   * Activity
+
+= 待讨论 =
+  * workspace
+  * project
+  * Layout
+  * View
