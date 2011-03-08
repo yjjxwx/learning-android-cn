@@ -8,9 +8,9 @@
 ||第一章   Android Overview|| iEle || 初稿完成 ||
 ||第二章   The Stack|| Bearice || [http://code.google.com/p/learning-android-cn/issues/detail?id=2 初稿完成] ||
 ||第三章   Quick Start|| Fleurer || 初稿完成 ||
-||第四章   Main Building Blocks|| iEle || 进行中（80%） ||
+||第四章   Main Building Blocks|| iEle || 初稿完成 ||
 ||第五章   Yamba Project Overview|| Bearice || 校对中 ||
-||第六章   Android User Interface|| || ||
+||第六章   Android User Interface|| iEle || 认领 ||
 ||第七章   Preferences, File System, Options Menu, and Intents|| || ||
 ||第八章   Services|| Fleurer || 认领 ||
 ||第九章   Database|| || ||
