@@ -17,7 +17,7 @@
   * Activity
 
 = 待讨论 =
-  * workspace
-  * project
-  * Layout
+  * workspace和project 虽然常见，但都是在截图中有出现。译还是不译呢？
+  * Layout 
   * View
+  * cloud 感觉原文在这里有卖弄之嫌，能否译为“服务端”？
