@@ -10,6 +10,7 @@
   * Main Building Block - 基本构件
   * emulator - 仿真器。注意“模拟器(simulator)”在文中另有提及
   * Summary - 总结。不是“小结”
+  * Home Screen - 主屏幕
 
 = 不译的名 =
   * widget
