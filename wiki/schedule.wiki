@@ -12,9 +12,9 @@
 ||第五章   Yamba Project Overview|| Bearice || 校对中 ||
 ||第六章   Android User Interface|| iEle || 认领 ||
 ||第七章   Preferences, File System, Options Menu, and Intents|| || ||
-||第八章   Services|| Fleurer || 认领 ||
+||第八章   Services|| Fleurer || 初稿完成 ||
 ||第九章   Database|| || ||
-||第十一章 Lists and Adapters|| || ||
+||第十章   Lists and Adapters|| Fleurer || 认领 ||
 ||第十一章 Broadcast Receivers|| || ||
 ||第十二章 Content Providers|| || ||
 ||第十三章 System Services|| || ||
