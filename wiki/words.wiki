@@ -11,6 +11,7 @@
   * emulator - 仿真器。注意“模拟器(simulator)”在文中另有提及
   * Summary - 总结。不是“小结”
   * Home Screen - 主屏幕
+  * business logic - 业务逻辑。不要译成“商业逻辑”
 
 = 不译的名 =
   * widget
