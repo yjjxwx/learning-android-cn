@@ -2,8 +2,8 @@
 
 = 词汇约定 =
 
+  * Application - 除非特殊情景比如“应用商店”，尽量使用“程序”。
   * Stack - 可根据上下文理解为“架构”
-  * Services - ?
   * Open Handset Alliance - 开放手持设备联盟，翻译时同时标注上英文。
   * Native Library - 译文中存在"本地库"和“原生库”两种译法，在日后需要统一起来。
   * Building Block - 构件
@@ -18,6 +18,8 @@
   * Content Provider
   * Reciever
   * Activity
+  * Services
+
 
 = 待讨论 =
   * workspace和project 虽然常见，但都是在截图中有出现。译还是不译呢？
