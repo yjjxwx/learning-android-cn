@@ -3,7 +3,8 @@
 = 词汇约定 =
 
   * Application - 除非特殊情景比如“应用商店”，尽量使用“程序”。
-  * activity/screen - 可根据上下文译为“界面”。在针对类库时不译
+  * activity - 可根据上下文译为“界面”。在针对类库时不译
+  * screen - 可根据上下文译为“界面”
   * Stack - 可根据上下文理解为“架构”
   * Open Handset Alliance - 开放手持设备联盟，翻译时同时标注上英文。
   * Native Library - 译文中存在"本地库"和“原生库”两种译法，在日后需要统一起来。
@@ -13,6 +14,7 @@
   * Summary - 总结。不是“小结”
   * Home Screen - 主屏幕
   * business logic - 业务逻辑。不要译成“商业逻辑”
+  * couple - 耦合
 
 = 不译的名 =
   * widget
