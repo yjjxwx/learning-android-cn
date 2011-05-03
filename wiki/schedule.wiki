@@ -18,5 +18,5 @@
 ||第十一章 Broadcast Receivers|| Bearice || WIP || || ||
 ||第十二章 Content Providers|| iEle || 初稿完成 || || ||
 ||第十三章 System Services|| Fleurer || 认领 || || ||
-||第十四章 Android Interface Definition Language|| iEle || 认领 || || ||
+||第十四章 Android Interface Definition Language|| iEle || 初稿完成 || || ||
 ||第十五章 Native Development Kit (NDK)|| Bearice || 初稿完成 || || ||
