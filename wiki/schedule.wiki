@@ -7,11 +7,11 @@
 ||前言|| Fleurer || 初稿完成 || || ||
 ||第一章   Android Overview|| iEle || 初稿完成 ||  || ||
 ||第二章   The Stack|| Bearice || 初稿完成 || || ||
-||第三章   Quick Start|| Fleurer || 初稿完成 || || ||
+||第三章   Quick Start|| Fleurer || 初校WIP || iEle || ||
 ||第四章   Main Building Blocks|| iEle || 初校WIP || Fleurer || ||
 ||第五章   Yamba Project Overview|| Bearice || 初校完毕 || Fleurer || ||
 ||第六章   Android User Interface|| iEle || 初稿完成 || || ||
-||第七章   Preferences, File System, Options Menu, and Intents|| Fleurer ||  初校认领 || iEle || ||
+||第七章   Preferences, File System, Options Menu, and Intents|| Fleurer || 初稿完成 || || ||
 ||第八章   Services|| Fleurer || 初稿完成 || || ||
 ||第九章   Database|| Bearice || 初稿完成 || || ||
 ||第十章   Lists and Adapters|| Fleurer || 初稿完成 || || ||
