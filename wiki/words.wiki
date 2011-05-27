@@ -16,6 +16,7 @@
   * business logic - 业务逻辑。不要译成“商业逻辑”
   * couple - 耦合
   * explict/implict - 显式/隐式。相较“隐性/显性”更像技术术语。
+  * notification bar - 通知栏
 
 = 不译的名 =
   * widget
