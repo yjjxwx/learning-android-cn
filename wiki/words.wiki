@@ -17,9 +17,10 @@
   * couple - 耦合
   * explict/implict - 显式/隐式。相较“隐性/显性”更像技术术语。
   * notification bar - 通知栏
+  * Listener - 作类名时不译。作名词时译作侦听器，同时附带原文。
+  * widget - 视情景，分别译作“控件”和“小部件”，最好附带原文。
 
 = 不译的名 =
-  * widget
   * Content Provider
   * Reciever
   * Intent
