@@ -20,6 +20,8 @@
   * Listener - 作类名时不译。作名词时译作侦听器，同时附带原文。
   * widget - 视情景，分别译作“控件”和“小部件”，最好附带原文。
   * contact - 联系人，作应用名称时不译。
+  * interprocess communication - 进程间通信。
+  * Android Interface Definition Language - Android接口描述语言
 
 = 不译的名 =
   * Content Provider
