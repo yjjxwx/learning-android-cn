@@ -38,3 +38,4 @@
   * package
   * application 在原文里极为常见的词汇，目前有“程序”和“应用”两种译法。
   * 文中提及的Twitter中的 tweets 和 statuses 要不要l10n成“微博”？用“推”或者“状态”都不太正确。
+  * stub
