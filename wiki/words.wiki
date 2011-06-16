@@ -22,16 +22,17 @@
   * contact - 联系人，作应用名称时不译。
   * interprocess communication - 进程间通信。
   * Android Interface Definition Language - Android接口描述语言
+  * project - 项目
 
 = 不译的名 =
   * Content Provider
   * Reciever
   * Intent
   * Service
+  * workspace
 
 
 = 待讨论 =
-  * workspace和project 虽然常见，但都是在截图中有出现。译还是不译呢？
   * Layout 
   * View
   * cloud 感觉原文在这里有卖弄之嫌，不知译为“服务端”如何？
