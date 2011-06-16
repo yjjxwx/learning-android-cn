@@ -22,7 +22,7 @@
   * contact - 联系人，作应用名称时不译。
   * interprocess communication - 进程间通信。
   * Android Interface Definition Language - Android接口描述语言
-  * project - 项目
+  * project - 项目(二校时留意)
 
 = 不译的名 =
   * Content Provider
@@ -33,6 +33,7 @@
 
 
 = 待讨论 =
+  * tab - “标签”还是”选项卡“？(二校时留意)
   * Layout 
   * View
   * cloud 感觉原文在这里有卖弄之嫌，不知译为“服务端”如何？
