@@ -33,6 +33,7 @@
 
 
 = 待讨论 =
+  * testing all it works - 出现多次，未统一
   * tab - “标签”还是”选项卡“？(二校时留意)
   * Layout 
   * View
