@@ -19,4 +19,4 @@
 ||第十二章 Content Providers|| iEle || 初校完成 || Fleurer || ||
 ||第十三章 System Services|| Fleurer || 初稿完成 || || ||
 ||第十四章 Android Interface Definition Language|| iEle || 初校完成 || Fleurer || ||
-||第十五章 Native Development Kit (NDK)|| Bearice || 初稿完成 || || ||
+||第十五章 Native Development Kit (NDK)|| Bearice || 初校完成 || Fleurer || ||
