@@ -353,7 +353,7 @@ private long getId(Uri uri) {
 
 % As with any major building block, we want to define our Content Provider in the Android Manifest XML file. Notice that in this case the android:authorities property specifies the URI authority authorized to access this content provider. Typically, this authority would be your Content Provider class—which we use here—or your package.
 
-同其它主要构件一致，我们需要将这个ContentProvider注册到Manifest文件中。注意，这里的``android:authorities``定义了URI的典据(authority)，也就是访问这个ContentProvider的凭据。一般来说，这个典据就是ContentProvider的类名，或者类所在的package名。在此我们选择前者。
+同其它基本构件一致，我们需要将这个ContentProvider注册到Manifest文件中。注意，这里的``android:authorities``定义了URI的典据(authority)，也就是访问这个ContentProvider的凭据。一般来说，这个典据就是ContentProvider的类名，或者类所在的package名。在此我们选择前者。
 
 {CODE}
 <application>

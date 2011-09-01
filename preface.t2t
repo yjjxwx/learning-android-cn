@@ -22,11 +22,11 @@
 
 % Chapter 1, Android Overview, is an introduction to Android and its history. 
 
-第一章，**概述**，简单介绍Android及其历史。
+第一章，**Android概述**，简单介绍Android及其历史。
 
 % Chapter 2, The Stack, is an overview of the Android Operating System and all its parts from a very high level. 
 
-第二章，**架构**，简单介绍Android操作系统及其各个组件。
+第二章，**Android的架构**，简单介绍Android操作系统及其各个组件。
 
 % Chapter 3, Quick Start, helps you set up your environment for Android application development. 
 
@@ -34,7 +34,7 @@
 
 % Chapter 4, Main Building Blocks, explains the components that Android provides to application developers to put together an app.
 
-第四章，**基本构件**，展示构成Android应用程序的基本元件。
+第四章，**基本构件**，展示构成Android应用程序的基本组件。
 
 % Chapter 5, Yamba Overview, is the overview of the Yamba application that we’ll build together through the book and use as an example to learn various features of Android. [Explains the Yamba application that we’ll build together through this book and use as an example to learn Android’s various features]
  
