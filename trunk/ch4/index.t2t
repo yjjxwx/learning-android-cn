@@ -3,7 +3,7 @@
 %
 
 %= Main Building Blocks = 
-= 主要构件 =[ch4]
+=基本构件=[ch4]
 
 {ORGI}In this chapter, you will learn about the big blocks in Android. We’ll give you a high-level overview of what Activities are, how Intents work, why Services are cool, how to use Broadcast Receivers and Content Providers to make your app scale, and much more.
 
@@ -17,7 +17,7 @@
 
 
 %== Main Building Blocks ==
-== 主要构件 ==
+==基本构件==
 
 {ORGI}Main building blocks are components that you use as an application developer to build Android apps. They are the conceptual items that you put together to create a bigger whole. When you start thinking about your application, it is good to approach it top down. You design your application in terms of screens, features, and interactions between them. You start with conceptual drawing, something that you can represent in terms of "lines and circles". This approach to application development helps you see the big picture - how the components fit together and it all makes sense.
 
