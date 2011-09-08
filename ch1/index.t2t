@@ -111,7 +111,7 @@ Android是为移动设备而设计的系统。Android的开发团队在设计时
 - 风平浪静了一段时间。
 - 2007年 开放手持设备联盟（Open Handset Alliance)宣布成立，Android正式踏入开源阵营。
 - 2008年 Android SDK 1.0发布。G1手机随之而来，它由HTC出产，并由无线运营商T-Mobile USA发售。
-- 2009年 基于Android的设备如雨后春笋。Android系统发布了几个新版本：Cupcake(1.5)，Donut(1.6)，Eclair(2.0及2.1)。 已有超过20款设备运行Android。
+- 2009年 基于Android的设备如雨后春笋般出现。Android系统发布了几个新版本：Cupcake(1.5)，Donut(1.6)，Eclair(2.0及2.1)。 已有超过20款设备运行Android。
 - 2010年 Android成为仅次于黑莓的第二大智能手机平台。Froyo(Android 2.2)发布，已有超过60款设备运行它。
 
 % In 2005, when Google purchased Android, Inc., the world thought Google is [was] about to enter the smart phone market. There were widespread speculations about device called gPhone.
@@ -120,7 +120,7 @@ Android是为移动设备而设计的系统。Android的开发团队在设计时
 
 % Google CEO, Eric Schmidt, made it clear right away that Android’s ambitions are much larger than a single phone. They saw it as a platform that will enable many phones and other devices out there. [Instead, they envisioned a platform that would enable many phones and other devices.]
 
-而Google的首席执行官Eric Schmit很快就让人们醒悟过来，仅仅一款智能手机是远远不能满足Android野心的：他们要把它做成一个通用的平台，为各种手机和其它设备都提供支持。
+然而Google的首席执行官Eric Schmit很快就让人们醒悟过来，仅仅一款智能手机是远远不能满足Android野心的：他们要把它做成一个通用的平台，为各种手机和其它设备都提供支持。
 
 % === Google’s Motivation ===
 === Google的动机 ===

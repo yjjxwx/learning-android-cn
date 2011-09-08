@@ -117,7 +117,7 @@
 {TRAN}你也许想知道，为什么不直接把Java代码编译成Dalvik字节码呢? 这是有考虑的。让我们回到2005年 Dalvik 项目刚刚开始时，当时 Java 的语法修改很频繁， 但 Java 字节码基本上没有什么太大的改动。于是 Android 团队决定使用 JVM 字节码而不是 Java 源码来产生 Dalvik 代码。
 
 {ORGI}A side effect of this is that in theory you could write Android applications in any other language that compiles down to Java byte code. For example, you could use Python or Ruby. I say in theory ["in theory"] because in practice [删去 you’d still ] need appropriate libraries that are part of the SDK to be available. But it is likely that the open source community will come up with [a] solution to that in the future.
-{TRAN}这样做得到的福利是， 理论上你可以使用任何可以编译成 Java 字节码的语言来开发 Android 应用，比如 Python 或者 Ruby 。 我说“理论上”是因为你还需要可用的 SDK 和库。不过有万能的开源社区在，未来会出现一套完善的解决方案也未可知。
+{TRAN}这样做得到的好处是， 理论上你可以使用任何可以编译成 Java 字节码的语言来开发 Android 应用，比如 Python 或者 Ruby 。 我说“理论上”是因为你还需要可用的 SDK 和库。不过有万能的开源社区在，未来会出现一套完善的解决方案也未可知。
 
 {ORGI}Another thing to keep in mind is that Android Java is a non-standard [nonstandard] collection of Java classes. Java typically ships in:
 {TRAN}另外需要注意的是 Android Java 并非来自标准的 Java 家族。 Java 一般分为: 
@@ -155,7 +155,7 @@
 {TRAN}=== APK 文件 ===
 
 {ORGI}An application is a single APK (application package) [single application package (APK)] file. An APK file roughly has three main components. [删去 It consists of all your Dalvik executable code (Java code compiled automatically to Dalvik executable) plus all your resources (everything that is not code, such as images, layouts, etc.). Additionally, it may contain some native code as well.]
-{TRAN}每个应用都是一个 APK 文件（表示 Application PacKage ）。一个 APK 文件基本上由三个部分组成。它包括了所有的 Dalvik 代码（ Java 源文件可以自动编译成 Dalvik 代码）和所有的资源（也就是除了代码以外的部分，例如图像文件和布局文件）。另外它可能还会包含一些本地库。
+{TRAN}每个应用都是一个 APK 文件（表示 //Application PacKage//，应用程序包 ）。一个 APK 文件基本上由三个部分组成。它包括了所有的 Dalvik 代码（ Java 源文件可以自动编译成 Dalvik 代码）和所有的资源（也就是除了代码以外的部分，例如图像文件和布局文件）。另外它可能还会包含一些本地库。
 
 {ORGI}  - Dalvik executable: this is all your Java source code compiled down to Dalvik executable. This is the code that runs your application.
 {TRAN}  - Dalvik 代码: 由你的 Java 文件编译而来的 Dalvik 字节码。这是完成你程序功能的主要部分。
@@ -169,7 +169,7 @@
 {TRAN}=== 应用程序签名 ===
 
 {ORGI}Android applications must be signed before they can be installed on a device. For development purposes, we’ll be signing applications with a debug key - a key that you already have on your development platform. However, when you want to distribute your application commercially, you’ll want to sign it with your own key. [删去 The details how to do that are at [Signing Your Application http://developer.android.com/guide/publishing/app-signing.html] page. We’ll also discuss it in Going Live chapter.] [增加 The Android developer document titled “Signing Your Application” has the details.]
-{TRAN}Android 程序在安装前必须进行签名。在开发时，我们可以使用开发者密钥(debug key)作为临时签名——这个密钥已经包含在开发环境中。 但作为商品发布时，你就必须使用自己的密钥进行签名。关于签名的具体步骤可以在 Android 网站的 [Signing Your Application http://developer.android.com/guide/publishing/app-signing.html] 页面找到。在后面我们将具体地讨论这个话题。
+{TRAN}Android 程序在安装前必须进行签名。在开发时，我们可以使用开发者密钥(debug key)作为临时签名——这个密钥已经包含在开发环境中。 但作为商品发布时，你就必须使用自己的密钥进行签名。关于签名的具体步骤可以在 Android 网站的 [Signing Your Application http://developer.android.com/guide/publishing/app-signing.html] ( //// )页面找到。在后面我们将具体地讨论这个话题。
 
 %NOTE: Going Live意思似乎是“待发布”的意思，猜该是一个遗忘的占位符号。在书写本章时，作者的连载才刚刚开始。
 

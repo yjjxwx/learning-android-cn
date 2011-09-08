@@ -46,7 +46,7 @@
 
 
 {ORGI}**Figure 5.3. User preferences**
-{TRAN}**Figure 5.3. 用户选项**
+{TRAN}**图 5.3. 用户选项**
 		[images/05-PrefsActivity-final.png]
 
 % [增加 Figure 5.1, “List of status messages from other people, called a timeline” shows how Yamba displays a list of status messages from your friends. Figure 5.2, “Screen where the user can enter a status message” shows the initial Yamba screen, and Figure 5.3, “User preferences” shows the user preferences.]
@@ -248,7 +248,7 @@
 {TRAN}其它程序不能干涉我们的消息数据，这样很好。但我们想让其它程序访问这些数据又该怎么办？毕竟其它程序也可能想善意地利用我们的数据，通过它们独特的表现手法做另一番展示。为此，我们需要创建一个Content Provider为外部提供数据。
 
 {ORGI}=== Android Widgets ===
-{TRAN}=== Android Widgets ===
+{TRAN}=== 应用程序小部件 ===
 
 {ORGI}But who will remember to pull up our app? To demonstrate usefulness of our new Status Data, we’ll put together an App Widget. App widgets are those little components that the user can put on the home screen to see weather updates and such. We’ll create a widget that will pull the latest status update from Yamba database via Status Data Content Provider and display it on the Home screen.
 {TRAN}但是谁会关心我们的数据呢？当然有，比如小部件(App Widget)，也就是挂在主屏幕上显示天气之类的小东西。我们将在这里新建一个小部件，通过Content Provider读取最新消息并显示在主屏幕上。

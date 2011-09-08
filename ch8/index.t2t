@@ -73,7 +73,7 @@ Application 对象中保存着程序各部分所共享的状态。只要程序�
 
 % Notice [增加 Example 8.1, “YambaApplication.java”] that Application object has the usual onCreate() method but it also provides the onTerimante() callback as place to implement any cleanup that we may want to do. At this point we don’t have anything to cleanup, but this is a good opportunity to put some logging information so we can see when the application actually shuts down. We later may expand on this.
 
-留意 ``Application`` 对象里面除了常见的 ``onCreate()`` ，还提供了一个 ``onTerminate()`` 接口，用于在程序退出时的进行一些清理工作。虽然在这里我们没有什么需要清理，但是借机记录一些log信息也不错，方便观察程序在何时退出。
+留意 ``Application`` 对象里面除了常见的 ``onCreate()`` ，还提供了一个 ``onTerminate()`` 接口，用于在程序退出时的进行一些清理工作。虽然在这里我们没有什么需要清理，但是借机记录一些log信息也不错，方便观察程序在何时退出。在后面，我们可能会回到这里，。
 
 %HINT: 原文"onTerimanate"系笔误。
 
@@ -195,11 +195,11 @@ Twitter.Status status = ((YambaApplication) getApplication())
 
 % === Simplifying Status Activity ===
 
-=== 简化Status Activity ===
+=== 简化StatusActivity ===
 
 % Now that the functionality for getting the Twitter object has been moved to Yamba Application, we can simplify Status activity to refer to that functionality there. Here’s what our new PostToTwitter Async task would look like:
 
-现在我们可以通过 YambaApplication 获取 Twitter 对象了，接下来需要对 Status Activity 进行修改，在其中使用 YambaApplication 提供的功能。下面是新版的 ``PostToTwitter`` ：
+现在我们可以通过 YambaApplication 获取 Twitter 对象了，接下来需要对 StatusActivity 进行修改，在其中使用 YambaApplication 提供的功能。下面是新版的 ``PostToTwitter`` ：
 
 {CODE}
 class PostToTwitter extends AsyncTask<String, Integer, String> {
@@ -409,13 +409,13 @@ public class UpdaterService1 extends Service {
 menu.xml 已经更新，接下来就是让它们捕获用户的点击事件。
 
 %=== Update Options Menu Handling ===
-===更新选项菜单的处理===
+===更新选项菜单的事件处理===
 
 %TALK: 这个标题挺绕口，一直想不出来"Handling"怎样译好
 
 % To handle new menu items, we need to update the onOptionsItemSelected() method in StatusActivity, just as we did it in the section called “Update StatusActivity to Handle Menu Events”. So open your StatusActivity.java file and locate the onOptionsItemSelected() method. We now have a framework in this method to support any number of menu items. To add support for starting and stopping our service, we launch intents pointing to our UpdaterService via startService() and stopService() calls. The final code looks like this:
 
-要捕获新条目的点击事件，我们需要更新 ``StatusActivity`` 中的 ``onOptionsItemSelected()`` 方法，这跟我们在 "Update StatusActivity to Handle Menu Events" 一节中所做的一样。打开 StatusActivity.java 文件，找到 ``onOptionsItemSelected`` 方法。现在里边已经有了为不同条目提供支持的大体框架，要增加两个“启动 Service ”与“关闭 Service ”两个条目，需要分别为 ``UpdaterService`` 通过``startService()`` 和 ``stopService()`` 发送 Intent 。更新后的代码如下：
+要捕获新条目的点击事件，我们需要更新 ``StatusActivity`` 中的 ``onOptionsItemSelected()`` 方法，这跟我们在 //"更新StatusActivity，装载菜单"// 一节中所做的一样。打开 StatusActivity.java 文件，找到 ``onOptionsItemSelected`` 方法。现在里边已经有了为不同条目提供支持的大体框架，要增加两个“启动 Service ”与“关闭 Service ”两个条目，需要分别为 ``UpdaterService`` 通过``startService()`` 和 ``stopService()`` 发送 Intent 。更新后的代码如下：
 
 %TALK: "Update StatusActivity to Handle Menu Events"是第七章中一节的标题，待更新。
 
@@ -466,7 +466,7 @@ public boolean onOptionsItemSelected(MenuItem item) {
 
 检验Service正常执行的另一条途径是，进入//Android Settings//查看它是否出现在里面：回到主屏幕，点击``Menu``，选择``Setting``，然后进入``Applications``→``Running services``。正常的话，你的Service就会显示在里面。如 //图8.2//。
 
-**图 8.2. Running Services**
+**图 8.2. 执行中的Services**
 
 	[images/08-RunningServices.png]
 
@@ -635,7 +635,7 @@ D/UpdaterService( 3494): onDestroyed
 
 % We now have a framework and are ready to make the actual connection to the online twitter-like service, pull the status data, and display that data in our application. Twitter and Twitter-like services offer many different APIs to retrieve what is going on with our friends. The jtwitter.jar library exposes most of them to us via the Twitter class. Perhaps one of the most appropriate methods is getFriendsTimeline(), which returns the twenty most recent posts made over the past 24 hours from the user and her friends.
 
-我们已经有了个大体的框架，接下来就连接到 Twitter ，读取数据并且在程序中显示出来。Twitter 或者其他的微博平台提供的 API 都各不相同。这时可以使用三方库 ``jtwitter.jar`` ，它提供了一个 ``Twitter`` 类作为封装。里边最常用的功能之一就是 ``getFriendsTimeline()`` ，它可以返回24小时以内最新的20条消息。
+我们已经有了个大体的框架，接下来就连接到 Twitter ，读取数据并且在程序中显示出来。Twitter 或者其他的微博平台提供的 API 都各不相同。这时可以使用三方库 ``jtwitter.jar`` ，它提供了一个 ``Twitter`` 类作为封装。里边最常用的功能之一就是 ``getFriendsTimeline()`` ，它可以返回24小时中自己和朋友的最新20条消息。
 
 %TALK: 把twitter-like译为“微博”是否合适呢，感觉似乎比“类twitter”顺口一些。
 

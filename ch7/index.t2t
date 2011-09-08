@@ -31,7 +31,9 @@
 
 % The steps to creating preferences for our application will be to:
 
-听起来像是工作量不少，不过有Android提供的框架可用，我们的工作可以大大简化为如下几个步骤：
+听起来像是工作量不少，不过有Android提供的框架可用，我们的工作可以得到大大简化。首先要做的，就是在资源文件中给出选项数据的定义。
+
+为应用程序创建首选项的步骤如下：
 
 % + Create Preference resource file prefs.xml.
 % + Implement PrefsActivity.java file that inflates that resource file.
@@ -154,13 +156,13 @@
 
 % Like we said couple of times earlier, while Eclipse does provide a developer-friendly tools to manage XML files, you often run into certain limitations with with Eclipse. For example, we would like to hide the actual text that the user types in the password field as it’s commonly done with passwords. Android does provide support for that but Eclipse tools haven’t integrated it in there yet. Since we can always edit the XML directly, in this case we to that to add android:password="true" property to our password property. This will cause the password to be masked while user is typing it in.
 
-如前所说，编辑XML有Eclipse提供的辅助工具可用，它们界面友好，使用方便，但有时这也限制了灵活性。比如按照惯例，我们一般希望在密码一栏中隐藏数据的输入，Android也提供了这一功能的支持，但是Eclipse中的工具还没有跟上。这时就需要手工修改XML了，为password元素添加一个属性``android:password="true"``即可。
+如前所说，编辑XML有Eclipse提供的辅助工具可用，它们界面友好，使用方便，但有时这也限制了灵活性。比如按照惯例，我们一般希望在密码框中隐藏数据的输入，Android也提供了这一功能的支持，但是Eclipse中的工具还没有跟上。这时就需要手工修改XML了：为password元素添加一个属性``android:password="true"``，即可在密码框中隐藏用户的输入。
 
 ===PrefsActivity===
 
 % Now that we have the preferences defined in their own XML resource file, we can create the activity to display these preferences. You may recall from <<Activities> that every screen in an Android app is an activity. So, to display the screen where user enters username and password for their online account, we’ll create an activity to handle that screen. This activity will be a special preference-aware activity.
 
-对应首选项的XML资源文件已定义完毕，接下来为它创建一个界面。回想下，我们曾在 //第六章// 提到，Android程序中的任何界面都是Activity。要为用户提供修改选项的界面，我们就该专门新建一个Activity。
+对应首选项的XML资源文件已定义完毕，接下来为它创建一个界面。回想下，我们曾在 //第六章// 提到，Android程序中的任何界面都是Activity。要为用户提供设置用户名与密码的界面，我们就该专门新建一个Activity——只负责处理选项数据的特殊Activity。
 
 % To create an activity, we create a new Java class. To do so, in Eclipse, select your package under your src folder, right-click on the package and select New→Class. A New Java Class window will pop up. You just need to enter PrefsActivity for the Name and click Finish. This will create PrefsActivity.java file under your package in your source folder.
 
@@ -300,7 +302,7 @@ public class PrefsActivity extends PreferenceActivity { // #{1}
 **Title**
 % The tile of this menu as it will appear when displayed. Keep in mind that space on the screen is typically limited so keep the title short. Alternatively, you can provide Title condensed attribute for shorter version of the title that will be shown instead of Title if space is limited. Just like before, best practice is to define the actual text value of the title in strings.xml resource and just reference it here.
 
-菜单项显示的标题。留意屏幕的宽度往往是有限的，因此标题应尽量的短。好习惯是，在此引用``string.xml``中定义的内容。
+菜单项显示的标题。需要留意，屏幕的宽度往往是有限的，因此标题应尽量保持简短，若难以做到，也可以通过TitleCondensed属性，为窄屏幕提供一个专门的标题。这里的好习惯是，将文本内容指向``string.xml``中的定义，同前面一样。
 
 **Icon**
 % The icon that shows along with the menu item’s title. While is is not required, it is a very useful visual cue from usability point of view. However, in this case it illustrates how to point to Android system resources.
@@ -354,7 +356,7 @@ public class PrefsActivity extends PreferenceActivity { // #{1}
 
 % From that point on, the menu is in memory and onCreateOptionsMenu() doesn’t get called again until the activity is destroyed. Each time user selects a menu item though, onOptionsItemSelected() gets called to process that click. We’ll talk about this in the next section.
 
-可以看出，只要Activity不被销毁，``onCreateOptionsMenu()``最多只会被触发一次。当用户选择某菜单项时，会触发``onOptionsItemSelected``，这在下一节讨论。
+可以看出，只要Activity不被销毁，这个菜单就会一直储存在内存中，而``onCreateOptionsMenu()``最多只会被触发一次。当用户选择某菜单项时，会触发``onOptionsItemSelected``，这在下一节讨论。
 
 % We need to update the StatusActivity to load up the options menu. To do that, add onCreateOptionsMenu() method to StatusActivity. This method gets called only first time when user clicks on the menu button.
 
@@ -404,7 +406,7 @@ public boolean onOptionsItemSelected(MenuItem item) {
 % + startActivity() method in context allows us to launch a new activity. In this case, we are creating a new intent specifying to start PrefsActivity class.
 % + Return true to consume the event here.
 
-+ 此方法在任意菜单条目被点击时都会触发，因此我们需要根据不同的条目ID做不同的处理。暂时这里只有一个菜单条目。不过随着程序复杂度的增长，需要添加新条目的时候，这样也是非常容易扩展的。
++ 此方法在任意菜单条目被点击时都会触发，因此我们需要根据不同的条目ID做不同的处理。暂时这里只有一个菜单条目。不过随着程序复杂度的增长，需要添加新条目的时候，只要在switch语句中引入新的条目ID即可，也是非常容易扩展的。
 + ``startActivity()``方法允许我们打开一个新的Activity。在这里，我们创建一条新的Intent，表示打开``PrefsActivity``。
 + 返回true，表示事件处理成功。
     
@@ -446,7 +448,7 @@ public boolean onOptionsItemSelected(MenuItem item) {
 
 % You should be able to run your application at this point and and see the new PrefsActivity by clicking on Menu→Prefs in StatusActivity [增加 (see Figure 7.4, “PrefsActivity”)]. Try changing your username and password, then reboot your phone, restart the app, and verify that the information is still there.
 
-到这里，你已经可以查看新的选项界面了。打开程序，在消息界面中选择Menu→Prefs即可。不妨尝试更改用户名与密码的设置再重启应用程序，查看选项信息是否依然存在。
+到这里，你已经可以查看新的选项界面了。打开程序，在消息界面中选择Menu→Prefs即可。不妨尝试更改用户名与密码的设置再重启应用程序，查看选项数据是否依然存在。
 
 **图 7.4. PrefsActivity**
 
@@ -458,11 +460,11 @@ public boolean onOptionsItemSelected(MenuItem item) {
 
 % Now that we have Preference Activity, and a way to save our username, password and the API root, it is time to make use of it. To programmatically access your preferences, we’ll use SharedPreference class provided by the Android framework.
 
-已经有了选项界面，也有了存储用户名、密码、API root等选项信息的办法，剩下的就是读取选项信息了。要访问选项信息的内容，就使用Android框架的``SharedPreference``类。
+已经有了选项界面，也有了存储用户名、密码、API root等选项数据的办法，剩下的就是读取选项数据了。要在程序中访问选项数据的内容，就使用Android框架的``SharedPreference``类。
 
 % The fact that this class is called SharedPreference refers to the fact that this preference is easily accessible from anywhere in this application. So, any component of an Android application, such as Activities, Services, Broadcast Receivers, and Content Providers.
 
-这个类允许我们在程序的任何部分(比如Activity,Service,BroadcastReceiver,ContentProvider)中访问选项信息，这也正是SharedPreference这个名字的由来。
+这个类允许我们在程序的任何部分(比如Activity,Service,BroadcastReceiver,ContentProvider)中访问选项数据，这也正是SharedPreference这个名字的由来。
 
 % In StatusActivity, add definition for prefs object globally to the class:
 
@@ -490,12 +492,12 @@ public void onCreate(Bundle savedInstanceState) {
 % + Preferences can and do change by the user. So we need a mechanism to notify this activity that old values are stale. To do that, we register this, meaning our StatusActivity with our shared preferences. For this to work, we’ll need to add ...implements OnSharedPreferenceChangeListener to our class definition as well as implement the required onSharedPreferenceChanged() method. This method will be explained in a bit.
 
 + 每个程序都有自己唯一的SharedPreferences对象，可供当前上下文中所有的构件访问。我们可以通过``PreferenceManager.getDefaultSharedPreferences()``来获取它的引用。名字中的"Shared"可能会让人疑惑，它是指允许在当前程序的各部分间共享，而不能与其它程序共享。
-+ 选项信息可以随时为用户修改，因此我们需要提供一个机制来跟踪选项信息的变化。为此我们在StatusActivity中提供一个``OnSharedPreferenceChangeListener``接口的实现，并注册到SharedPreferences对象中。具体内容将在后面讨论。
++ 选项数据可以随时为用户修改，因此我们需要提供一个机制来跟踪选项数据的变化。为此我们在StatusActivity中提供一个``OnSharedPreferenceChangeListener``接口的实现，并注册到SharedPreferences对象中。具体内容将在后面讨论。
 
 
 % Now that we have username, password and API root coming from user-defined preferences, we can refactor our twitter code so it no longer hard-codes them. To do that, we add a private method to StatusActivity that is responsible for returning valid twitter object. This method lazily initializes twitter meaning if twitter exists it returns it as-is, otherwise creates it.
 
-现在用户名、密码与API root几项都已定义。接下来我们可以重构代码中的Twitter对象部分，消除原先的硬编码。我们可以为StatusActivity添加一个私有方法，用以返回可用的twitter对象。它判断twitter对象是否存在，若不存在，则创建新对象。
+现在用户名、密码与API root几项都已定义。接下来我们可以重构代码中的Twitter对象部分，消除原先的硬编码。我们可以为StatusActivity添加一个私有方法，用以返回可用的twitter对象。它将惰性地初始化twitter对象，也就是先判断twitter对象是否存在，若不存在，则创建新对象。
 
 {CODE}
 private Twitter getTwitter() {
@@ -545,7 +547,7 @@ public void onClick(View v) {
 
 % Now, as we mentioned before when updating onCreate() and registering for preference updates, we need to handle what happens when user changes username or password. By registering prefs.registerOnSharedPreferenceChangeListener(this) in onCreate() and implementing OnSharedPreferenceChangeListener, we got a callback method onSharedPreferenceChanged() that system will invoke whenever preferences change. In this method, we simply invalidate the twitter object so next time it is needed, getTwitter() will recreate it.
 
-前面修改``onCreate()``时曾提到，我们需要跟踪用户名与密码的变化。因此，在当前的类中添加``onSharedPreferenceChanged()``方法，然后在``onCreate()``中通过``pres.registerOnSharedPreferenceChangeListener(this)``将它注册到prefs对象，这样就得到一个回调函数，它会在选项信息变化时触发。在这里我们只需简单将twitter设为null，到下次获取引用时，``getTwitter()``会重新创建它的实例。
+前面修改``onCreate()``时曾提到，我们需要跟踪用户名与密码的变化。因此，在当前的类中添加``onSharedPreferenceChanged()``方法，然后在``onCreate()``中通过``pres.registerOnSharedPreferenceChangeListener(this)``将它注册到prefs对象，这样就得到一个回调函数，它会在选项数据变化时触发。在这里我们只需简单将twitter设为null，到下次获取引用时，``getTwitter()``会重新创建它的实例。
 
 {CODE}
 public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
@@ -561,7 +563,7 @@ public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
 
 % So, where are these preferences stored on the device? How secure is my username and password? To answer that, we need to look at how Android filesystem is organized.
 
-话说回来，前面的这些选项信息又是储存在设备的哪里？我的用户名与密码是否安全？在这些问题之前，我们需要先对Android的文件系统有所了解。
+话说回来，前面的这些选项数据又是储存在设备的哪里？我的用户名与密码是否安全？在这些问题之前，我们需要先对Android的文件系统有所了解。
 
 % ===Exploring File System===
 ===浏览文件系统===
@@ -659,7 +661,7 @@ Android框架提供了许多相关的辅助函数，允许应用程序访问文�
 
 % There will be sub-folders in /data/data/com.marakana.yamba2/, but they are well-defined. For example, the preferences are in /data/data/com.marakana.yamba2/shared_prefs/. As a matter of fact, if you open up DDMS perspective in your Eclipse and select File Explorer, you can navigate to this partition. You will probably see com.marakana.yamba2_preferences.xml file in there. You could pull this file and exam in it, or you could use adb shell.
 
-``/data/data/com.marakana.yamba2/``下面也有子目录，但是结构很清晰，不同的数据分在不同的目录之下，比如首选项信息就都位于``/data/data/com.marakana.yamba2/shared_prefs/``。通过Eclipse的File Explorer访问这一目录，可以在里面看到一个``com.marakana.yamba2_preferences.xml``文件。你可以把它拷贝出来，也可以在adb shell中直接查看。
+``/data/data/com.marakana.yamba2/``下面也有子目录，但是结构很清晰，不同的数据分在不同的目录之下，比如首选项数据就都位于``/data/data/com.marakana.yamba2/shared_prefs/``。通过Eclipse的File Explorer访问这一目录，可以在里面看到一个``com.marakana.yamba2_preferences.xml``文件。你可以把它拷贝出来，也可以在adb shell中直接查看。
 
 % adb shell is another one of those common adb subcommands to access the shell of your device (either physical or virtual). For instance, you could just open up your command line terminal and type:
 
