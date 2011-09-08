@@ -57,7 +57,7 @@ Android 内建了 SQLite 支持， 但这并不是说 SQLite 是数据持久化�
 
 % Android provides an elegant interface for your app to interact with a SQLite database. To get access to the database, you first need a helper class that provides a "connection" to the database, creating the connection if it doesn’t already exist. This class, provided to you by the Android framework, is called SQLiteOpenHelper. The database class it returns is an instance of SQLiteDatabase.
 
-针对SQLite数据库的相关操作，Android提供了一套优雅的接口。要访问数据库，你需要一个辅助类来得到数据库的“连接”。这个类就是 Android框架中的``SQLiteOpenHelper``，它可以返回一个 ``SQLiteDatabase`` 对象。
+针对SQLite数据库的相关操作，Android提供了一套优雅的接口。要访问数据库，你需要一个辅助类来获取数据库的“连接”，或者在必要时创建数据库连接。这个类就是 Android框架中的``SQLiteOpenHelper``，它可以返回一个 ``SQLiteDatabase`` 对象。
 
 % In the following subsections I’ll explain some of the background concepts you should know when working with DbHelper. I’m not going to explain SQL or basic database concepts such as normalization, because there are hundreds of good places to find that information and I expect most of my readers already know it. This chapter, though, should give you enough to get started even if your knowledge of databases is spotty.
 
@@ -137,7 +137,7 @@ DbHelper类提供了自己的封装来简化SQL操作。经观察人们发现，
 
 % Secondly, from performance point of view, executing SQL statements repeatedly is highly inefficient because you’d have to parse the SQL every time the statement runs.
 
-其次从性能的角度，重复执行SQL语句是非常耗时的，因为每次执行都需要对其进行解析。
+其次从性能的角度，重复执行SQL语句非常耗时，因为每次执行都需要对其进行解析。
 
 % Finally, the DbHelper methods are more robust and less likely to pass through the compiler with undetected errors. When you include SQL in a program, it’s easy to create errors that turn up only at run time.
 
@@ -152,7 +152,7 @@ DbHelper类提供了自己的封装来简化SQL操作。经观察人们发现，
 
 % A query returns a set of rows along with a pointer called a cursor. You can retrieve results one at a time from the cursor, causing it to advance each time to the next row. You can also move the cursor around in the result set. An empty cursor indicates that you’ve retrieved all the rows.
 
-查询得到的数据将按照Cursor的形式返回。通过Cursor，你可以读出得到的第一行数据并移向下一行，直到返回空为止。也可以在数据集中自由移动，读取所得数据的任意一行。
+查询得到的数据将按照Cursor的形式返回。通过Cursor，你可以读出得到的第一行数据并移向下一行，直到遍历完毕、返回空为止。也可以在数据集中自由移动，读取所得数据的任意一行。
 
 % In general, anything you do with SQL could lead to SQL Exception since it’s code interacting with a system that’s outside our direct control. For example, the database could be running out of space, or somehow corrupted. So, it is a good practice to handle all the `SQLException`s by surrounding your database calls in a try/catch block.
 

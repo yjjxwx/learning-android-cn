@@ -26,7 +26,7 @@
 
 % Chapter 2, The Stack, is an overview of the Android Operating System and all its parts from a very high level. 
 
-第二章，**Android的架构**，简单介绍Android操作系统及其各个组件。
+第二章，**Android的架构**，通过一个较高的视角，观察Android操作系统及其各个组件。
 
 % Chapter 3, Quick Start, helps you set up your environment for Android application development. 
 
@@ -38,7 +38,7 @@
 
 % Chapter 5, Yamba Overview, is the overview of the Yamba application that we’ll build together through the book and use as an example to learn various features of Android. [Explains the Yamba application that we’ll build together through this book and use as an example to learn Android’s various features]
  
-第五章，**Yamba项目简介**，简单介绍一个Android应用Yamba，它将作为贯穿全书的实例，以展示Android的诸多特性。
+第五章，**Yamba项目简介**，简单介绍一个Android应用程序Yamba，它将作为贯穿全书的实例，以展示Android的诸多特性。
  
 % Chapter 6, Android User Interface, explains how to build the user interface for your application.
 

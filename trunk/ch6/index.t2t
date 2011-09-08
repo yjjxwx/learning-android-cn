@@ -386,13 +386,15 @@ Android程序中所有的构件(如Activity、Service、BroadcastReceiver、Cont
 
 % So, once you subclass the framework’s class, override the appropriate method, and call super’s method in it, you are still back at status quo - your code does the same thing the original class did. But now we have a placeholder where we can add our own code.
 
-这样就保留了父类的逻辑。我们可以将自己的逻辑跟在后面，但并不希望从零做起。
+因此，如果你继承来自框架的类，在覆盖的方法中只要调用super中对应的方法，即可按部就班地执行父类的行为——在添加自己的业务逻辑的同时，不会丢掉原先父类的逻辑。
+
+%TALK: status quo - 俚语，status in which的意思，这里译为“按部就班”。
 
 % The very first thing we typically do in activity’s onCreate() is to load the UI from the XML file and inflate it into the Java memory space. In other words, we write some Java code that opens up our XML layout file, parses it, and for each element in XML it creates a corresponding Java object in our memory space. For each attribute of a particular XML element, this code will set that attribute on our Java object. This process is called inflating from XML and the line of code that does all this is setContentView(R.layout.status);.  
 
-% Remember that R class is the automatically generated set of pointers that helps connect the world of Java to our world of XML and other resources in /res folder. Similarly, R.layout.status points to our /res/layout/status.xml file.
+``onCreate()``所做最基本的工作之一就是，读取XML文件并将UI投射到Java的内存空间中。也就是编写Java代码读取并解析XML文件，为XML中表示的每个元素创建一个对应的Java对象，这被称作UI的“投射”(inflating)。而这一步的所有代码，全在``setContentView(R.layout.status);`` 这一句。
 
-``onCreate()``所做最基本的工作之一就是，读取XML文件并将UI投射到Java中。也就是编写Java代码读取并解析XML文件，为XML中表示的每个元素创建一个对应的Java对象，这被称作UI的“投射”(inflating)。而这一步的所有代码，全在``setContentView(R.layout.status);`` 这一句。
+% Remember that R class is the automatically generated set of pointers that helps connect the world of Java to our world of XML and other resources in /res folder. Similarly, R.layout.status points to our /res/layout/status.xml file.
 
 R文件是Eclipse自动生成的资源文件，作为Java与其它资源文件之间的牵线人，储存着一些辅助性质的指针。比如，R.layout.status就是指向``/res/layout/status.xml``文件的指针。
 
@@ -672,10 +674,10 @@ Android程序默认运行在单线程之下。单线程顺序执行所有的操�
 {NOTE}
 %Android system will offer to kill any application that is not responding within a certain time period, typically around five seconds for activities. This is known as Application Not Responding dialog, or ANR for short.[增加 (see Figure 6.9, “Application Not Responding dialog”).]
 
-程序若长时间无响应(一般是五秒)，Android系统会自动弹出一个对话框，询问是否将该程序所在的进程杀死。这个对话框就是Application Not Responding，简称ANR。
+程序若长时间无响应(一般是五秒)，Android系统会自动弹出一个对话框，询问是否将该程序所在的进程杀死。这个对话框就是Application Not Responding(//应用程序无响应//)，简称ANR。
 {/NOTE}
 
-**图 6.9. Application Not Responding**
+**图 6.9. Application Not Responding对话框**
 	[images/06-ANR.png]
 
 % === Multithreaded Execution ===
@@ -1018,7 +1020,8 @@ public class StatusActivity extends Activity implements OnClickListener,
 
 我们的程序运行良好，但它的外观仍略显粗糙，不太好看。这时可以利用Android的相关特性，为程序添加一些图片和色彩。
 
-=== Adding Images ===
+% === Adding Images ===
+=== 添加图片 ===
 
 % For starters, we want to add a background to our screen. This background is going to be some kind of graphics file. In Android, most images go to a resource folder called drawable. You may notice that you already have three folders with such name:
 

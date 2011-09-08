@@ -91,11 +91,11 @@ Android开发并不限制开发者选择任何自己喜欢的编辑器或者IDE�
 好，去 http://www.eclipse.org/downloads/ 可以下载到Eclipse。建议选择Eclipse IDE for Java Developers（注意不是Eclipse for Java EE developers，这个要大两倍），安装至任何目录都可以。
 
 % === Eclipse Workspace ===
-=== Eclipse Workspace ===
+=== Eclipse的工作区 ===
 
 % Eclipse organizes all your work by projects. Projects are placed in a workspace, which is a location you choose. So, where you put your workspace is significant. I recommend ~/workspace as a simple place for your code. On Windows however, I recommend storying your workspace in a directory that doesn’t have spaces [in]it (they complicate anything you might do at the command-line). C:\workspace is a good choice for Windows users.
 
-Eclipse以项目为单位管理用户的工作，项目又都位于workspace中。因此workspace的位置需要明确下来，我建议使用 ``~/workspace`` 这样相对简单的位置来存放自己的代码。Windows的话，仍建议避免在workspace目录中存在空格（使用命令行的时候会添麻烦）——``C:\workspace``该是个好地方。
+Eclipse以项目为单位管理用户的工作，项目又都位于工作区(Workspace)中。因此工作区的位置需要明确下来，我建议使用 ``~/workspace`` 这样相对简单的位置来存放自己的代码。Windows的话，仍建议避免在workspace目录中存在空格（使用命令行的时候会添麻烦）——``C:\workspace``该是个好地方。
 
 % === Setting Up Android Development Tools ===
 === 安装Android Development Tools ===
