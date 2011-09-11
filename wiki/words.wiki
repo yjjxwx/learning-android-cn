@@ -24,6 +24,8 @@
   * Android Interface Definition Language - Android接口描述语言
   * project - 项目(二校时留意)
   * schema - (数据库)原型。
+  * contact - 联系人
+
 
 = 不译的名 =
   * Content Provider
