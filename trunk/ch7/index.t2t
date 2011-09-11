@@ -128,7 +128,7 @@
 
 它的内容大致如下：
 
-**Example 7.1. res/xml/prefs.xml**
+**例 7.1. res/xml/prefs.xml**
 {CODE}
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
@@ -166,13 +166,15 @@
 
 % To create an activity, we create a new Java class. To do so, in Eclipse, select your package under your src folder, right-click on the package and select New→Class. A New Java Class window will pop up. You just need to enter PrefsActivity for the Name and click Finish. This will create PrefsActivity.java file under your package in your source folder.
  
-首先要创建 Activity 对应的类。在 Eclipse 中进入某个 package ，右键选择 New→Class 。在出现的 ``New Java Class`` 窗口中设置名字为``PrefsActivity``，点击 Finish 即可在项目中新建一个PrefsActivity.java文件。
+首先要创建 Activity 对应的类。在 Eclipse 中进入你的 package ，右键选择 New→Class 。在出现的 ``New Java Class`` 窗口中设置名字为``PrefsActivity``，点击 Finish 即可在项目中新建一个PrefsActivity.java文件。
+
+%TALK: 此处的package应为具体的一个package，不能是"某个"。
 
 % Our PrefsActivity class [增加 shown in Example 7.2, “PrefsActivity.java”] going to be a very simple Java file. This is because we inherit from PreferenceActivity, an Android framework provided class that knows how to handle preferences.
 
-为简化选项界面的开发， Android 框架提供了一个 ``PreferenceActivity`` 类。以它为基类，我们的类可以很简单。具体用法请参考 **Example 7.2 PrefsActivity.java**
+为简化选项界面的开发， Android 框架提供了一个 ``PreferenceActivity`` 类。以它为基类，我们的类可以很简单，如**例 7.2 PrefsActivity.java**：
 
-**Example 7.2. PrefsActivity.java**
+**例 7.2. PrefsActivity.java**
 {CODE}
 package com.marakana.yamba2;
 
@@ -230,7 +232,7 @@ public class PrefsActivity extends PreferenceActivity { // #{1}
 
 修改后的Manifest大致如下：
 
-**Example 7.3. AndroidManifest.xml**
+**例 7.3. AndroidManifest.xml**
 {CODE}
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -333,7 +335,7 @@ public class PrefsActivity extends PreferenceActivity { // #{1}
 
 ``menu.xml``的源码如下：
 
-**Example 7.4. res/menu/menu.xml**
+**例 7.4. res/menu/menu.xml**
 {CODE}
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
@@ -424,7 +426,7 @@ public boolean onOptionsItemSelected(MenuItem item) {
 
 更新后的``strings.xml``大致如下：
 
-**Example 7.5. res/values/strings.xml**
+**例 7.5. res/values/strings.xml**
 {CODE}
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
@@ -456,7 +458,7 @@ public boolean onOptionsItemSelected(MenuItem item) {
 
 
 % ==Shared Preferences==
-== SharedPreferences 类 ==
+== SharedPreferences ==
 
 % Now that we have Preference Activity, and a way to save our username, password and the API root, it is time to make use of it. To programmatically access your preferences, we’ll use SharedPreference class provided by the Android framework.
 

@@ -148,11 +148,11 @@ DbHelper类提供了自己的封装来简化SQL操作。经观察人们发现，
 很遗憾，Android框架对SQL的DDL([Data Definition Language http://en.wikipedia.org/wiki/Data_Definition_Language],数据定义语言)部分支持不多，缺少相应的封装。因此要创建表，我们只能通过``execSQL()``调用来运行``CREATE TABLE``之类的SQL语句。但这里不存在用户输入，也就没有安全问题；而且这些代码都很少执行，因此也不会对性能造成影响。
 
 % === Cursors ===
-=== 游标（Cursor） ===
+=== Cursor ===
 
 % A query returns a set of rows along with a pointer called a cursor. You can retrieve results one at a time from the cursor, causing it to advance each time to the next row. You can also move the cursor around in the result set. An empty cursor indicates that you’ve retrieved all the rows.
 
-查询得到的数据将按照Cursor的形式返回。通过Cursor，你可以读出得到的第一行数据并移向下一行，直到遍历完毕、返回空为止。也可以在数据集中自由移动，读取所得数据的任意一行。
+查询得到的数据将按照Cursor(游标)的形式返回。通过Cursor，你可以读出得到的第一行数据并移向下一行，直到遍历完毕、返回空为止。也可以在数据集中自由移动，读取所得数据的任意一行。
 
 % In general, anything you do with SQL could lead to SQL Exception since it’s code interacting with a system that’s outside our direct control. For example, the database could be running out of space, or somehow corrupted. So, it is a good practice to handle all the `SQLException`s by surrounding your database calls in a try/catch block.
 
@@ -180,7 +180,7 @@ DbHelper类提供了自己的封装来简化SQL操作。经观察人们发现，
 
 同前面的很多类一样，它也是继承自Android框架中的某个类，也就是``SQLiteOpenHelper``。我们需要实现该类的构造函数，``onCreate()``方法和``onUpgrade()``方法。
 
-**Example 9.1. DbHelper.java, version 1**
+**例 9.1. DbHelper.java, version 1**
 {CODE}
 package com.marakana.yamba4;
 
@@ -275,7 +275,7 @@ public class DbHelper1 extends SQLiteOpenHelper { //#{1}
 
 接下来重构``UpdaterService``，为它添加写入数据库的相关代码。
 
-**Example 9.2. UpdaterService.java, version 1**
+**例 9.2. UpdaterService.java, version 1**
 {CODE}
 package com.marakana.yamba4;
 
@@ -567,7 +567,7 @@ try {
 为实现代码的重用，我们将创建一个新类``StatusData``，用以处理数据库的相关操作。它将SQLite操作封装起来，并提供接口，供Yamba中的其它类调用。这一来Yamba中的构件若需要数据，那就访问StatusData即可，而不必纠结于数据库操作的细节。在[第十二章 #ch12]中，我们还将基于这一设计，提供ContentProvider的实现。
 
 
-**Example 9.3. StatusData.java**
+**例 9.3. StatusData.java**
 {CODE}
 package com.marakana.yamba4;
 
@@ -721,7 +721,7 @@ public class StatusData { //#{1}
 
 到这里，数据库的相关操作已都独立到了StatusData中。接下来把它放到``Application``对象里面，随后就可以让其它构件(比如``UpdaterService``与``TimelineActivity``)访问了。
 
-**Example 9.4. YambaApplication.java**
+**例 9.4. YambaApplication.java**
 {CODE}
 ...
 private StatusData statusData; //#{1}
@@ -783,7 +783,7 @@ public synchronized int fetchStatusUpdates() {  //#{3}
 
 接下来可以利用新的``YambaApplication``，重构原先的``UpdaterService``。现在``run()``中的代码已都移到了``fetchStatusUpdates()``中，而且``UpdaterService``也不再需要内部的``StatusData``对象了。
 
-**Example 9.5. UpdaterService.java**
+**例 9.5. UpdaterService.java**
 {CODE}
 ...
 

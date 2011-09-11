@@ -63,7 +63,7 @@ ScrollView中只能存放单独一个子元素。要让多个View一起滚动，
 
 在这个例子中，我们使用ScrollView将TextView包了起来。以后TextView中的内容变多体积变大，ScrollView就会自动为它加上滚动条。
 
-**Example 10.1. res/layout/timeline_basic.xml**
+**例 10.1. res/layout/timeline_basic.xml**
 {CODE}
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -220,7 +220,7 @@ public class TimelineActivity1 extends Activity { // #{1}
 
 同前面一样，第一步仍是修改资源文件。修改``timeline.xml``，为Timeline的布局添加一个ListView。
 
-**Example 10.3. res/layout/timeline.xml**
+**例 10.3. res/layout/timeline.xml**
 
 {CODE}
 <?xml version="1.0" encoding="utf-8"?>
@@ -291,7 +291,7 @@ ListView中单行数据的Layout定义在文件``row.xml``中。
 ``SimpleCursorAdapter``需要我们给出单行数据的显示方式（这在row.xml中已经做好了）、数据（在这里是一个Cursor）
 、以及record到List中单行的映射方法。最后的这个参数负责将Cursor的每列映射为List中的一个View。
 
-**Example 10.5. TimelineActivity.java, version 2**
+**例 10.5. TimelineActivity.java, version 2**
 {CODE}
 package com.marakana.yamba5;
 
@@ -379,7 +379,7 @@ TimelineAdapter就是我们自定义的Adapter。虽说SimpleCursorAdapter映射
 
 一般来讲，若不清楚类里需要覆盖的函数是哪个，查阅相关的官方文档即可。在这里，可以参阅http://developer.android.com/reference/android/widget/SimpleCursorAdapter.html。
 
-**Example 10.6. TimelineAdapter.java**
+**例 10.6. TimelineAdapter.java**
 {CODE}
 package com.marakana.yamba5;
 
@@ -438,7 +438,7 @@ public class TimelineAdapter extends SimpleCursorAdapter { // #{1}
 
 前面将Adapter相关的一些细节移入了``TimelineAdapter``，因此可以进一步简化``TimelineActivity``类。
 
-**Example 10.7. TimelineActivity.java, version 3**
+**例 10.7. TimelineActivity.java, version 3**
 {CODE}
 package com.marakana.yamba5;
 
@@ -520,7 +520,7 @@ public class TimelineActivity3 extends Activity {
 
 如下即针对 ``TimelineAdapter`` 的最后一轮迭代，在此实现一个自定义的 ``ViewBinder`` 作为常量，并把它交给 ``SimpleCursorAdapter`` 。
 
-**Example 10.8. TimelineActivity.java with ViewBinder**
+**例 10.8. TimelineActivity.java with ViewBinder**
 {CODE}
   ...
 
@@ -604,7 +604,7 @@ public class TimelineActivity3 extends Activity {
 
 好，要把``TimelineActivity``置为主入口，我们只需加上相应的声明，再把``StatusActivity``中的代码挪过去即可。
 
-**Example 10.9. AndroidManifest.xml**
+**例 10.9. AndroidManifest.xml**
 {CODE}
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -707,7 +707,7 @@ protected void onCreate(Bundle savedInstanceState) {
 
 首先修改//munu.xml//文件，添加新的菜单项也就是开关按钮。这时原先启动/关闭Service的两个按钮已经没必要了，删除即可。
 
-**Example 10.10. res/menu/menu.xml**
+**例 10.10. res/menu/menu.xml**
 {CODE}
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
@@ -733,7 +733,7 @@ protected void onCreate(Bundle savedInstanceState) {
 + 将原先的``itemServiceStart``与``itemServiceStop``替换为``itemToggleService``。
 
 
-**Example 10.11. BaseActivity.java**
+**例 10.11. BaseActivity.java**
 {CODE}
 package com.marakana.yamba5;
 
@@ -837,7 +837,7 @@ public class BaseActivity extends Activity { // #{1}
 
 好，已经有了``BaseActivity``类，接下来修改``TimelineActivity``也使用它。如下为``TimelineActivity``的完整实现：
 
-**Example 10.12. TimelineActivity.java, final version**
+**例 10.12. TimelineActivity.java, final version**
 {CODE}
 package com.marakana.yamba5;
 

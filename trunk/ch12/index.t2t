@@ -400,7 +400,7 @@ Yamba小部件不会太复杂，仅仅展示最近的消息更新即可。为创
 
 现在对小部件的设计已有大致了解，下面是具体实现：
 
-Example 12.1. YambaWidget.java
+**例 12.1. YambaWidget.java**
 {CODE}
 package com.marakana.yamba7;
 
@@ -511,7 +511,7 @@ public class YambaWidget extends AppWidgetProvider { // #{1}
 
 小部件的外观布局很简单。留意我们在这里重用了TimelineActivity中用到的``row.xml``文件，用以表示消息的显示。另外再给它加一个小标题，在主屏幕上更醒目些。
 
-Example 12.2. res/layout/yamba_widget.xml
+例 12.2. res/layout/yamba_widget.xml
 {CODE}
 <?xml version="1.0" encoding="utf-8"?>
   <!-- #1 -->
@@ -549,7 +549,7 @@ Example 12.2. res/layout/yamba_widget.xml
 
 这个XML文件用于描述小部件的基本信息。它一般用于定义小部件的布局、更新频率以及尺寸等信息。
 
-Example 12.3. res/xml/yamba_widget_info.xml
+例 12.3. res/xml/yamba_widget_info.xml
 {CODE}
 <?xml version="1.0" encoding="utf-8"?>
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"

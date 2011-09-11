@@ -155,7 +155,7 @@ FibLib 中定义了//菲波那契数列//的4种算法：
 
 我们从简入手，先提供Java版本的实现，稍后再实现C的本地版本。
 
-**Example 15.1. FibLib.java**
+**例 15.1. FibLib.java**
 {CODE}
 package com.marakana;
 
@@ -309,7 +309,7 @@ JNIEXPORT jlong JNICALL Java_com_marakana_FibLib_fibNI
 
 C版本的菲波那契算法与Java版本差异不大。下面就是``fib.c``中的代码：
 
-**Example 15.2. jni/fib.c**
+**例 15.2. jni/fib.c**
 {CODE}
 #include "com_marakana_FibLib.h" /* #{1} */
 
@@ -371,7 +371,7 @@ JNIEXPORT jlong JNICALL Java_com_marakana_FibLib_fibNI
 
 要编译本地库，那就需要在``Android.mk``中给出编译项目的描述。如下：
 
-**Example 15.3. jni/Android.mk**
+**例 15.3. jni/Android.mk**
 {CODE}
 LOCAL_PATH := $(call my-dir)
 
@@ -421,7 +421,7 @@ include $(BUILD_SHARED_LIBRARY)
 
 FibActivity允许用户输入一个数字，分别运行四种算法计算这个值对应的菲波那契数，并将不同算法花费的时间输出，供我们比较。这个Activity需要调用到``FibLib``和``linfib.so``。
 
-**Example 15.4. FibActivity.java**
+**例 15.4. FibActivity.java**
 {CODE}
 package com.marakana;
 

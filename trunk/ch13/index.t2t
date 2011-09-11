@@ -82,7 +82,7 @@
 
 指南针的主界面里只有一个控件，那就是表盘(Rose)。它也将自己注册给``SensorManager``，监听来自传感器的事件，调整表盘的角度。
 
-**Example 13.1. Compass.java**
+**例 13.1. Compass.java**
 {CODE}
 package com.marakana;
 
@@ -206,7 +206,7 @@ public class Compass extends Activity implements SensorEventListener { //#{1}
 
 自定义一个UI控件，``onDraw()``算是最重要的方法之一，它负责控件的绘制与显示。在``Rose``这里，图片的绘制可由父类完成，我们需要做的就是添加自己的逻辑，使图片可以按圆心旋转一定的度数，以表示指南针的方位。
 
-**Example 13.2. Rose.java**
+**例 13.2. Rose.java**
 
 {CODE}
 package com.marakana;
@@ -296,7 +296,7 @@ public class Rose extends ImageView { //#{1}
 
 本例的布局不是我们关注的重点。里面只有一个表示标题的TextView控件，和一个表示输出的TextView控件。其中输出可能会比较长，因此把它包在一个ScrollView里。
 
-**Example 13.3. res/layout/main.xml**
+**例 13.3. res/layout/main.xml**
 
 {CODE}
 <?xml version="1.0" encoding="utf-8"?>
@@ -335,7 +335,7 @@ public class Rose extends ImageView { //#{1}
 
 这就是我们唯一的Activity。我们将在这里初始化界面，连接到LocationManager，然后使用Geocoder检索我们的地理地址。LocationManager可以通过不同的位置信息源(比如GPS或者网络)来获得我们的当前位置，以经纬度的格式返回。Geocoder以此检索在线的位置数据库，即可获得当前位置的地理地址。检索的结果可能有多个，精度不一。
 
-**Example 13.4. WhereAmI.java**
+**例 13.4. WhereAmI.java**
 
 {CODE}
 package com.marakana;
@@ -459,7 +459,7 @@ public class WhereAmI extends Activity implements LocationListener { // #{1}
 
 这个app的Manifest文件也很普通。需要留意的一个地方是，要注册LocationListener，必先获取相应的权限。GPS和网络是最常用的位置信息源，不过Android也预留了其它信息源的扩展接口——未来也可能有更好更精确的信息源出现。为此，Android将位置信息的权限分成了两级：精确位置(Fine Location)和近似位置(Coarse Location)。
 
-**Example 13.5. AndroidManifest.xml**
+**例 13.5. AndroidManifest.xml**
 {CODE}
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -538,7 +538,7 @@ WhereAmI程序只是用来演示位置服务使用方法的小样例。接下来
 
 已经有了选项的名与值，接下来修改``prefs.xml``。
 
-**Example 13.6. 修改过的 res/xml/prefs.xml**
+**例 13.6. 修改过的 res/xml/prefs.xml**
 
 {CODE}
 <?xml version="1.0" encoding="utf-8"?>
@@ -576,7 +576,7 @@ WhereAmI程序只是用来演示位置服务使用方法的小样例。接下来
 
 在``YambaApplication.java``里面简单添加一个getter方法即可：
 
-**Example 13.7. YambaApplication.java**
+**例 13.7. YambaApplication.java**
 
 {CODE}
 public class YambaApplication extends Application implements
@@ -601,7 +601,7 @@ getter函数准备就绪，接下来重构StatusActivity即可。
 
 StatusActivity是位置信息。同WhereAmI一样，我们仍调用LocationManager的``getSystemService()``，并注册到位置服务，订阅其更新。也同样实现一个LocationListener接口，也就意味着需要在Activity里面添加几个回调方法，好在位置变化时得到新的location对象。到下次更新状态的时候，即可在这里看到我们的位置信息。
 
-**Example 13.8. StatusActivity.java**
+**例 13.8. StatusActivity.java**
 
 {CODE}
 package com.marakana.yamba8;
@@ -809,7 +809,7 @@ public class StatusActivity extends BaseActivity implements OnClickListener,
 以上的原理就在于，``IntentService``的``onHandleIntent()``会在独立的线程中执行。
 
 % **Example 13.9. UpdaterService.java based on IntentService**
-**Example 13.9. UpdaterService.java，基于IntentService**
+**例 13.9. UpdaterService.java，基于IntentService**
 {CODE}
 package com.marakana.yamba8;
 
@@ -862,7 +862,7 @@ public class UpdaterService1 extends IntentService { // #{1}
 
 这样，我们重构了原先的Service。要测试它，不妨先把Start/Stop Service的按钮改为Refresh按钮。为此需要修改``menu.xml``添加这个新条目，然后在BaseActivity类中修改它的处理方法。
 
-**Example 13.10. res/xml/menu.xml**
+**例 13.10. res/xml/menu.xml**
 {CODE}
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
@@ -881,7 +881,7 @@ public class UpdaterService1 extends IntentService { // #{1}
 接下来修改``BaseActivity.java``文件，添加这个按钮的处理方法，也就是修改``onOptionsItemSelected()``中对应的case语句。同时``onMenuOpened()``已经没有用处了，删掉即可。
 
 % **Example 13.11. BaseActivity.java with support for Refresh button**
-**Example 13.11. BaseActivity.java，添加Refresh按钮之后**
+**例 13.11. BaseActivity.java，添加Refresh按钮之后**
 {CODE}
 public class BaseActivity extends Activity {
   ...
@@ -945,7 +945,7 @@ PendingIntent是Intent与某操作的组合。一般是把它交给他人，由�
 ===添加Interval选项===
 
 % **Example 13.12. strings.xml with arrays for interval options**
-**Example 13.12. strings.xml，添加Interval选项相关的string-array**
+**例 13.12. strings.xml，添加Interval选项相关的string-array**
 {CODE}
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
@@ -985,7 +985,7 @@ PendingIntent是Intent与某操作的组合。一般是把它交给他人，由�
 有了这两列数组，接下来修改prefs.xml添加Interval(时间间隔)选项。
 
 % **Example 13.13. prefs.xml with support for interval preference setting**
-**Example 13.13. prefs.xml，添加Interval选项**
+**例 13.13. prefs.xml，添加Interval选项**
 
 {CODE}
 <?xml version="1.0" encoding="utf-8"?>
@@ -1021,7 +1021,7 @@ PendingIntent是Intent与某操作的组合。一般是把它交给他人，由�
 适用的是，使用Alarm服务定时发送Intent启动UpdaterService。为此，我们需要得到AlarmManager的引用，创建一个PendingIntent负责启动UpdaterService，并设置一个时间间隔。要通过PendingIntent启动Service，就调用``PendingIntent.getService()``。
 
 % **Example 13.14. BootReceiver.java updated with Alarm service calls to periodically start Updater service**
-**Example 13.14. BootReceiver.java，通过Alarm服务定时启动UpdaterService**
+**例 13.14. BootReceiver.java，通过Alarm服务定时启动UpdaterService**
 {CODE}
 package com.marakana.yamba8;
 
@@ -1092,7 +1092,7 @@ public class BootReceiver extends BroadcastReceiver {
 收到新消息，由UpdaterService首先得知，因此我们把通知的功能加入到``UpdaterService``类里：先获取Notification服务的引用，创建一个Notification对象，然后将收到消息的相关信息作为通知交给它。而Notification对象本身带有一个PendingIntent，当用户点击通知的时候，可以将界面转到Timeline界面。
 
 % **Example 13.15. UpdaterService.java with Notifications**
-**Example 13.15. UpdaterService.java，利用Notification服务**
+**例 13.15. UpdaterService.java，利用Notification服务**
 {CODE}
 package com.marakana.yamba8;
 

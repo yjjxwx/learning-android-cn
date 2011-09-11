@@ -77,7 +77,7 @@ Application 对象中保存着程序各部分所共享的状态。只要程序�
 
 %HINT: 原文"onTerimanate"系笔误。
 
-**Example 8.1. YambaApplication.java**
+**例 8.1. YambaApplication.java**
 {CODE}
 package com.marakana.yamba3;
 
@@ -151,7 +151,7 @@ public class YambaApplication1 extends Application implements
 
 现在我们已经有了``YambaApplication``类，也转移了 ``StatusActivity`` 的一部分功能过来。接下来可以进一步简化 ``StatusActivity``：
 
-**Example 8.2. StatusActivity using YambaApplication**
+**例 8.2. StatusActivity using YambaApplication**
 
 {CODE}
 ...
@@ -292,7 +292,7 @@ class PostToTwitter extends AsyncTask<String, Integer, String> {
 
 鉴于“最小可用”原则，我们在学习的时候也该从简入手。到这里，先只在每个覆盖的方法中记录些日志。我们Service的样子大致如下：
 
-**Example 8.3. UpdaterService.java, version 1**
+**例 8.3. UpdaterService.java, version 1**
 
 {CODE}
 package com.marakana.yamba3;
@@ -383,7 +383,7 @@ public class UpdaterService1 extends Service {
 
 %TALK: Menu Resource一节待更新。
 
-**Example 8.4. menu.xml**
+**例 8.4. menu.xml**
 {CODE}
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
@@ -494,7 +494,7 @@ public boolean onOptionsItemSelected(MenuItem item) {
 
 解决这一问题的最好办法，就是利用Java内置的线程支持，把网络相关的操作放到另一个线程里。Service在控制UI的主线程之外执行，这使得它们与用户交互的代码总是分离的。这点对Yamba这样与网络交互的界面而言尤为重要，而且对其它场景也同样适用，哪怕它花费的时间不长。
 
-**Example 8.5. UpdaterService.java, version 2**
+**例 8.5. UpdaterService.java, version 2**
 {CODE}
 package com.marakana.yamba3;
 
@@ -674,7 +674,7 @@ public class YambaApplication extends Application implements OnSharedPreferenceC
 
 接下来我们可以为 ``UpdaterService`` 写些代码，让它连接到API，读取朋友的最新消息。
 
-**Example 8.6. UpdaterService.java, final version**
+**例 8.6. UpdaterService.java, final version**
 {CODE}
 package com.marakana.yamba3;
 

@@ -67,7 +67,7 @@
 
 % Chapter 12, Content Providers, shows how to design a content provider to share data between applications, using the content provider to enable our app widget to display data on the home screen. [Shows how to design a content provider to share data between applications, in this case using it to enable our app widget to display data on the home screen]
 
-第十二章，**Content Provider**，介绍Content Provider的编写方法，用于在不同的应用程序间共享数据。以便在 Home 页面中的 Widgets 中显示数据。
+第十二章，**Content Provider**，介绍Content Provider的编写方法，用于在不同的应用程序间共享数据。在这里，我们通过它来为显示在主界面上的小部件提供数据。
 
 % Chapter 13, System Services, goes into various system services that an app developer can tap into. [Introduces various system services that an app developer can tap into]
 
