@@ -158,19 +158,19 @@
 
 如前所说，编辑XML有Eclipse提供的辅助工具可用，它们界面友好，使用方便，但有时这也限制了灵活性。比如按照惯例，我们一般希望在密码框中隐藏数据的输入，Android也提供了这一功能的支持，但是Eclipse中的工具还没有跟上。这时就需要手工修改XML了：为password元素添加一个属性``android:password="true"``，即可在密码框中隐藏用户的输入。
 
-===PrefsActivity===
+=== PrefsActivity 类 ===
 
 % Now that we have the preferences defined in their own XML resource file, we can create the activity to display these preferences. You may recall from <<Activities> that every screen in an Android app is an activity. So, to display the screen where user enters username and password for their online account, we’ll create an activity to handle that screen. This activity will be a special preference-aware activity.
 
-对应首选项的XML资源文件已定义完毕，接下来为它创建一个界面。回想下，我们曾在 //第六章// 提到，Android程序中的任何界面都是Activity。要为用户提供设置用户名与密码的界面，我们就该专门新建一个Activity——只负责处理选项数据的特殊Activity。
+对应首选项的XML资源文件已定义完毕，接下来为它创建一个 Activity 。回想下，我们曾在 //第六章// 提到，Android 程序中的任何界面都是 Activity 。要为用户提供设置用户名与密码的界面，我们就该专门新建一个只负责处理选项数据的特殊Activity。
 
 % To create an activity, we create a new Java class. To do so, in Eclipse, select your package under your src folder, right-click on the package and select New→Class. A New Java Class window will pop up. You just need to enter PrefsActivity for the Name and click Finish. This will create PrefsActivity.java file under your package in your source folder.
-
-创建Activity对应的类。在Eclipse中进入你的package，右键选择New→Class。在出现的``New Java Class``窗口中设置名字为``PrefsActivity``，点击Finish即可在项目中新建一个PrefsActivity.java文件。
+ 
+首先要创建 Activity 对应的类。在 Eclipse 中进入某个 package ，右键选择 New→Class 。在出现的 ``New Java Class`` 窗口中设置名字为``PrefsActivity``，点击 Finish 即可在项目中新建一个PrefsActivity.java文件。
 
 % Our PrefsActivity class [增加 shown in Example 7.2, “PrefsActivity.java”] going to be a very simple Java file. This is because we inherit from PreferenceActivity, an Android framework provided class that knows how to handle preferences.
 
-为简化首选项界面的开发，Android框架提供了一个``PreferenceActivity``类。以它为基类，我们的类可以很简单。
+为简化选项界面的开发， Android 框架提供了一个 ``PreferenceActivity`` 类。以它为基类，我们的类可以很简单。具体用法请参考 **Example 7.2 PrefsActivity.java**
 
 **Example 7.2. PrefsActivity.java**
 {CODE}
@@ -456,7 +456,7 @@ public boolean onOptionsItemSelected(MenuItem item) {
 
 
 % ==Shared Preferences==
-==SharedPreferences==
+== SharedPreferences 类 ==
 
 % Now that we have Preference Activity, and a way to save our username, password and the API root, it is time to make use of it. To programmatically access your preferences, we’ll use SharedPreference class provided by the Android framework.
 
@@ -601,7 +601,7 @@ Android设备主要有三个分区，即：
 
 
 % ===System Partition===
-===系统分区===
+=== 系统分区 ===
 
 % System partition is where your entire Android operating system is. This is the main partition containing all your preinstalled applications, system libraries, Android framework, linux command line tools, and so on.
 
@@ -616,7 +616,7 @@ Android设备主要有三个分区，即：
 在仿真器中，系统分区对应的映像文件是``system.img``，它与平台相关，位于android-sdk/platforms/android-8/images目录。
 
 % ===SDCard Partition===
-===SDCard分区===
+=== SDCard 分区===
 
 % SDCard partition is a free-for-all mass storage. Your app can read files from this partition as well as write files to it if it holds WRITE_TO_EXTERNAL_STORAGE permission. This is a great place to store large files, such as music, photos, videos and similar.
 
@@ -635,7 +635,7 @@ SDCard分区是个通用的存储空间。你的程序只要拥有WRITE_TO_EXTER
 这个分区的镜像文件一般是sdcard.img，位于对应设备的AVD目录之下，也就是``~/.android/avd``之下的某个子目录。对真机而言，它就是一个SD卡。
 
 % ===User Data Partition===
-===用户数据分区===
+=== 用户数据分区 ===
 
 % As user and app developer, the most important partition is the User Data partition. This is where all your user data is stored, all the downloaded apps are located, and most importantly, all apps' data is. This includes both preinstalled apps as well as user-downloaded apps.
 
@@ -658,6 +658,7 @@ Android框架提供了许多相关的辅助函数，允许应用程序访问文�
 新建应用程序的时候，你需要为Java代码指定一个package，按约定，它的名字一般都是逆序的域名，比如``com.marakana.yamba``。应用安装之后，Android会为应用单独创建一个目录``/data/data/com.marakana.yamba/``。其中的内容就是应用程序的私有数据。
 
 %TALK: 查了下，这些数据还不是加密的，似乎把SD卡偷走就能读出来里面的数据...没搞懂这安全是什么来头。 -fleuria
+% @fleuria APP Data是由权限的，也就是说不同的应用不能读取其他应用的数据（因为应用的进程是有自己的uid和gid的，当然如果你是root权限就没什么用了）
 
 % There will be sub-folders in /data/data/com.marakana.yamba2/, but they are well-defined. For example, the preferences are in /data/data/com.marakana.yamba2/shared_prefs/. As a matter of fact, if you open up DDMS perspective in your Eclipse and select File Explorer, you can navigate to this partition. You will probably see com.marakana.yamba2_preferences.xml file in there. You could pull this file and exam in it, or you could use adb shell.
 

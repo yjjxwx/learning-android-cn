@@ -53,7 +53,7 @@ Android 内建了 SQLite 支持， 但这并不是说 SQLite 是数据持久化�
 
 
 % == DbHelper ==
-== DbHelper ==
+== DbHelper 类 ==
 
 % Android provides an elegant interface for your app to interact with a SQLite database. To get access to the database, you first need a helper class that provides a "connection" to the database, creating the connection if it doesn’t already exist. This class, provided to you by the Android framework, is called SQLiteOpenHelper. The database class it returns is an instance of SQLiteDatabase.
 
@@ -148,7 +148,7 @@ DbHelper类提供了自己的封装来简化SQL操作。经观察人们发现，
 很遗憾，Android框架对SQL的DDL([Data Definition Language http://en.wikipedia.org/wiki/Data_Definition_Language],数据定义语言)部分支持不多，缺少相应的封装。因此要创建表，我们只能通过``execSQL()``调用来运行``CREATE TABLE``之类的SQL语句。但这里不存在用户输入，也就没有安全问题；而且这些代码都很少执行，因此也不会对性能造成影响。
 
 % === Cursors ===
-=== Cursor ===
+=== 游标（Cursor） ===
 
 % A query returns a set of rows along with a pointer called a cursor. You can retrieve results one at a time from the cursor, causing it to advance each time to the next row. You can also move the cursor around in the result set. An empty cursor indicates that you’ve retrieved all the rows.
 

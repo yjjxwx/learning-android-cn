@@ -18,7 +18,8 @@
 
 本书假定读者拥有java或类似语言的基础，配合实例，参照一个合适的难度，手把手地为你讲解Android应用的开发过程。Learning Android，更是体会Android的思维方式。
 
-=== What’s Inside ===
+%=== What’s Inside ===
+=== 内容简介 ===
 
 % Chapter 1, Android Overview, is an introduction to Android and its history. 
 
@@ -66,7 +67,7 @@
 
 % Chapter 12, Content Providers, shows how to design a content provider to share data between applications, using the content provider to enable our app widget to display data on the home screen. [Shows how to design a content provider to share data between applications, in this case using it to enable our app widget to display data on the home screen]
 
-第十二章，**Content Provider**，介绍Content Provider的编写方法，为不同的应用程序提供数据。以及。
+第十二章，**Content Provider**，介绍Content Provider的编写方法，用于在不同的应用程序间共享数据。以便在 Home 页面中的 Widgets 中显示数据。
 
 % Chapter 13, System Services, goes into various system services that an app developer can tap into. [Introduces various system services that an app developer can tap into]
 

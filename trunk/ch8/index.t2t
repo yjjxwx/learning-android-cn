@@ -195,7 +195,7 @@ Twitter.Status status = ((YambaApplication) getApplication())
 
 % === Simplifying Status Activity ===
 
-=== 简化StatusActivity ===
+=== 简化 StatusActivity ===
 
 % Now that the functionality for getting the Twitter object has been moved to Yamba Application, we can simplify Status activity to refer to that functionality there. Here’s what our new PostToTwitter Async task would look like:
 
@@ -257,7 +257,7 @@ class PostToTwitter extends AsyncTask<String, Integer, String> {
 
 % The basic procedure for creating a service, as with Activities and other main building blocks, is to subclass a Service class provided by the Android framework.
 
-创建 Service 的过程与创建 Activity 或者其它基础构件类似，首先都是基于 Android 框架提供的基类，派生一个子类。
+创建 Service 的过程与创建 Activity 或者其它基础构件类似，首先创建一个类，继承 Android 框架中提供的基类。
 
 % To create the new service, we need to create a new Java file. Go ahead and select your Java package in the src folder, right-click and choose New→Class, and type in UpdaterService as the class name. This will create a new UpdaterService.java file as part of your package.
 
@@ -476,7 +476,7 @@ public boolean onOptionsItemSelected(MenuItem item) {
 
 
 % ==Looping In The Service==
-== 在Service中循环 ==
+== 在 Service 中循环 ==
 
 % By design, our service is supposed to wake up every so often, check the online service for new status updates, then go back to "sleep" for some time. And this work needs to keep on happening forever, until the service is stopped. A good way to implement this is to have our service run in a loop and to pause execution between iterations. Java provides a Thread.sleep() method that we can use to make the currently running thread pause and relinquish CPU for some number of milliseconds.
 
@@ -631,7 +631,7 @@ D/UpdaterService( 3494): onDestroyed
 
 
 % ==Pulling Data From Twitter==
-== 从Twitter读取数据 ==
+== 从 Twitter 读取数据 ==
 
 % We now have a framework and are ready to make the actual connection to the online twitter-like service, pull the status data, and display that data in our application. Twitter and Twitter-like services offer many different APIs to retrieve what is going on with our friends. The jtwitter.jar library exposes most of them to us via the Twitter class. Perhaps one of the most appropriate methods is getFriendsTimeline(), which returns the twenty most recent posts made over the past 24 hours from the user and her friends.
 
@@ -794,7 +794,7 @@ public class UpdaterService extends Service {
 
 
 % ===Testing it all works [修改为 Testing the Service]===
-=== 测试Service ===
+=== 测试 Service ===
 
 % Now we can run our application, start the service, and see the list of our friends' statuses in the logcat:
 
