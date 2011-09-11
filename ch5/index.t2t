@@ -193,7 +193,7 @@
 {TRAN}数据都已保存在了数据库中，但还没有办法显示出来。在此我们为 Yamba 设计一个显示Timeline的界面，方便用户查看朋友消息。
 
 {ORGI}=== Timeline Activity ===
-{TRAN}=== Timeline界面 ===
+{TRAN}=== Timeline 界面 ===
 
 {ORGI}We’re going to develop this third and final activity in multiple stages. First, we’ll use existing knowledge of Android UI and put something together. It will work, sort of. Next, we’ll improve on that design. The app will look better, but it won’t be nearly as ready for the prime time since our design won’t be able to handle real-world usage. Finally, we’ll get it right by introducing Lists and Adapters to the mix. [Finally, we’ll get it right by introducing Lists and Adapters to the mix and use them to tie the data to our user interface.]
 {TRAN}接下来分步实现第三个也是最后一个界面。首先利用已知的Android UI知识组装出一个半成品，能基本工作就好；然后改进设计，它会看起来更漂亮些，但是依然不能满足现实世界的需求；最后我们引入List与Adapter，使之完善可用。
@@ -212,7 +212,7 @@
 {TRAN}我们想让Yamba智能地响应外部事件。为此，在这里引入Broadcast Receiver机制。
 
 {ORGI}=== Boot and Network Receivers ===
-{TRAN}=== Boot Reciever与Network Reciever ===
+{TRAN}=== Boot Reciever 与 Network Reciever ===
 %TALK: 这里的 Receivers 翻译成侦听器是否合适?
 %TALK: 几个Building Blocks都尽量保留原文吧
 

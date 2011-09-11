@@ -23,7 +23,7 @@
 		[images/02-AndroidStack.png]
 
 {ORGI}== Linux ==
-{TRAN}== Linux ==
+{TRAN}== Linux 系统 ==
 
 {ORGI}Android is built on top of Linux. Linux is a great operating system and a poster child of open source. There are many good reasons for choosing Linux as the base of the Android stack. Some of the main ones are portability, security, and features.
 {TRAN}Android 是基于 Linux 系统构建的。 Linux 是一个伟大的操作系统，也是一个经典的开源项目。选择 Linux 作为 Andoird 系统基础的原因有很多，而最主要的因素，在于它的可移植性、安全性以及丰富的特性。
@@ -83,7 +83,7 @@
 
 
 {ORGI}== Dalvik ==
-{TRAN}== Dalvik ==
+{TRAN}== Dalvik 虚拟机 ==
 
 {ORGI}Dalvik is a purpose-built virtual machine designed specifically for Android. It is developed by Dan Bornstein and his team at Google. [Dalvik is a purpose-built virtual machine designed specifically for Android, developed by Dan Bornstein and his team at Google.]
 {TRAN}Dalvik 是一个专为 Android 设计的虚拟机。它由 Dan Bornstein 和他在 Google 的团队开发。

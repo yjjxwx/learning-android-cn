@@ -7,11 +7,11 @@
 
 % In this chapter, you will learn how to create selection widgets, such as a ListView. But this isn’t just a chapter about user interface elements. We are continuing to deepen our understanding of data from the previous chapter by learning how to read data from the database of statuses and simply output it on the screen as scrollable text first. You will then learn about Adapters in order to connect your database directly with the list. You will create a custom adapter in order to be able to implement some additional functionality. You will link this new activity with your main activity so that the user can both post and read tweets.
 
-在本章，你将学到选择性控件(比如``ListView``)的创建方法。但是这里讨论的重点绝对不在用户界面，而在于进一步巩固我们在上一章中对“数据”的理解——前面是简单地读取数据再输出到屏幕，到这里改为使用Adapter直接将数据库与List绑定在一起。你可以创建一个自己的Adapter，从而添加额外的功能。在此，我们新建一个界面，并将它作为用户发送/阅读消息的主界面。
+在本章，你将学到选择性控件(比如``ListView``)的创建方法。但是这里讨论的重点绝对不在用户界面，而在于进一步巩固我们在上一章中对“数据”的理解——前面是简单地读取数据再输出到屏幕，到这里改为使用Adapter直接将数据库与List绑定在一起。你可以创建一个自己的Adapter，从而添加额外的功能。在此，我们新建一个 Activity ，并将它作为用户发送/阅读消息的主界面。
 
 % By the end of this chapter, your app will be able to post new tweets, as well as pull them from Twitter, store them in local database, and let the user read the statuses in a nice and efficient UI. At that point, your app will have three activities and a service.
 
-前面我们已经实现了发送消息、从Twitter读取消息、缓存入本地数据库等功能，在这里，我们再实现一个美观高效的UI允许用户阅读消息。到本章结束，Yamba将拥有三个Activity和一个Service。
+前面我们已经实现了发送消息、从 Twitter 读取消息、缓存入本地数据库等功能，在这里，我们再实现一个美观高效的UI允许用户阅读消息。到本章结束，Yamba将拥有三个 Activity 和一个 Service 。
 
 
 ==TimelineActivity==
@@ -103,15 +103,15 @@ ScrollView中只能存放单独一个子元素。要让多个View一起滚动，
 
 % Now that we have the layout file, we need to create the TimelineActivity class. To do that, just as with any other Java file, in Eclipse Package Explorer, right-click on your com.marakana.yamba package, choose New→Class and for Name enter TimelineActivity.
 
-我们已经有了一个布局文件，接下来创建TimelineActivity类。同其它文件一样，进入Eclipse Package Explorer，右击com.marakana.yamba包，选择``New→Class``，在名字一栏输入//TimelineActivity//。
+我们已经有了一个布局文件，接下来创建 ``TimelineActivity`` 类。同其它文件一样，进入 Eclipse Package Explorer，右击 com.marakana.yamba 包，选择``New→Class``，在名字一栏输入 //TimelineActivity//。
 
 % And just as before, whenever we create a new Java class that is one of those main building blocks—such as Activities, Services, Broadcast Receivers, and Content Providers—we first subclass a base class provided by the Android framework. In case of Activities, that class is Activity.
 
-同前面一样，我们创建的类只要是基本构件——不管Activity，Service，Broadcast Reciever还是Content Provider——就肯定是基于Android框架提供的基类派生出来的子类。对Activity而言，其基类即``Activity``。
+同前面一样，我们创建的类只要是基本构件，无论是 Activity、Service、Broadcast Reciever 还是 Content Provider，都是基于 Android 框架中的基类继承出来的子类。对Activity而言，其基类即 ``Activity``。
 
 % The method we almost universally override in any activity is onCreate(). This is a great place for us to initialize the database. The flip side of the coin is onDestroy(), a good place to clean up anything that we create in onCreate(). In this case, we close the database in onDestroy(). Since we’d like to have the data as fresh as possible, we put the code for querying the database and outputting the data in onResume(), the method called every time this activity is brought up front. Here’s what our code looks like:
 
-我们通常会为每个Activity都实现一个``onCreate()``，这是初始化数据库的好地方。与之对应，我们在``onDestroy()``中清理``onCreate()``中创建的资源，也就是关闭数据库。我们希望显示的消息尽可能最新，因此把查询数据库的代码放在``onResume()``中，这样在界面每次显示时都会执行。代码如下：
+我们通常会为每个 Activity 实现一个 ``onCreate()`` ，这是初始化数据库的好地方。与之对应，我们在 ``onDestroy()`` 中清理 ``onCreate()`` 中创建的资源，也就是关闭数据库。我们希望显示的消息尽可能最新，因此把查询数据库的代码放在 ``onResume()`` 中，这样在界面每次显示时都会执行。代码如下：
 
 {CODE}
 package com.marakana.yamba5;
@@ -187,15 +187,15 @@ public class TimelineActivity1 extends Activity { // #{1}
 + 我们得记着关闭数据库并释放资源。数据库是在``onCreate()``中打开，因此可以在``onDestroy()``中关闭。注意``onDestroy()``只有在系统清理资源时才被调用。
 + 调用``query()``方法从数据库中查询数据，返回一个Cursor对象作为迭代器。参数似乎多的过了头，不过几乎都是对应着SQL的SELECT语句的各个部分。在这里也就相当与``SELECT * FROM timeline ORDER BY created_at DESC``。这些``null``表示我们并没有使用SQL语句中相应的部分，比如``WHERE``, ``GROUPING``, 与 ``HAVING``等。
 + ``startManagingCursor()``用于提示Activity自动管理Cursor的生命周期，使之同自己保持一致。“保持一致”的意思是，它能保证在Activity销毁时，同时释放掉Cursor关联的数据，这样有助于优化垃圾收集的性能。如果没有自动管理，那就只能在各个方法中添加代码，手工地管理Cursor了。
-+ cursor——回忆下``Cursors``一节的内容——即通过``query()``方法查询数据库所得的结果。按照表的形式，暂存多行多列的数据。每一行都是一条独立的记录——比如Timeline中的一条消息——而其中的列则都是预先定义的，比如``_id``, ``created_at``, ``user``以及``txt``。前面提到Cursor是个迭代器，我们可以通过它在每次迭代中读取一条记录，而在没有剩余数据时退出迭代。
-+ 对于cursor的当前记录，我们可以通过类型与列号来获取其中的值。由此，cursor.getString(3)返回一个字符串，表示消息的内容；cursor.getLong(1)返回一个数值，表示消息创建时的时间戳。但是，把列号硬编码在代码中不是个好习惯，因为数据库的原型一旦有变化，我们就不得不手工调整相关的代码，而且可读性也不好。更好的方法是，使用列名——回想下，我们曾在 //第九章//中定义过C_USER与C_TEXT等字符串——调用``cursor.getColumnIndex()``得到列号，然后再取其中的值。
-+ 使用``String.t()``对每行输出进行格式化。在这里我们选择使用TextView控件显示数据，因此只能显示文本，或者说有格式的文本。我们在以后的迭代中更新这里。
++ cursor——回忆下``Cursors``一节的内容——即通过``query()``方法查询数据库所得的结果。按照表的形式，暂存多行多列的数据。每一行都是一条独立的记录——比如Timeline中的一条消息——而其中的列则都是预先定义的，比如 ``_id``, ``created_at``, ``user``以及``txt``。前面提到Cursor是个迭代器，我们可以通过它在每次迭代中读取一条记录，而在没有剩余数据时退出迭代。
++ 对于 cursor 的当前记录，我们可以通过类型与列号来获取其中的值。由此，``cursor.getString(3)`` 返回一个字符串，表示消息的内容； ``cursor.getLong(1)`` 返回一个数值，表示消息创建时的时间戳。但是，把列号硬编码在代码中不是个好习惯，因为数据库的原型一旦有变化，我们就不得不手工调整相关的代码，而且可读性也不好。更好的方法是，使用列名——回想下，我们曾在 //第九章//中定义过 ``C_USER`` 与 ``C_TEXT`` 等字符串——调用 ``cursor.getColumnIndex()`` 得到列号，然后再取其中的值。
++ 使用 ``String.format()`` 对每行输出进行格式化。在这里我们选择使用TextView控件显示数据，因此只能显示文本，或者说有格式的文本。我们在以后的迭代中更新这里。
 + 最后把新的一行追加到textTimeline的文本中，用户就可以看到了。
 
 
 % While this approach works for smaller data sets, it is not optimal or recommended. The better approach is to use a ListView to represent the list of statuses that we have in the database. ListView, which we’ll use in the next version of our TimelineActivity, is much more scalable and efficient.
 
-上面的方法对较小的数据集还没问题，但绝对不是值得推荐的好方法。更好的方法是使用ListView，正如下文所示——它可以绑定数据库，伸缩性更好的同时也更加高效。
+上面的方法对较小的数据集还没问题，但绝对不是值得推荐的好方法。更好的方法是使用 ListView ，正如下文所示——它可以绑定数据库，伸缩性更好的同时也更加高效。
 
 
 % ==About Adapters==
@@ -424,7 +424,7 @@ public class TimelineAdapter extends SimpleCursorAdapter { // #{1}
 % + Next, we find the specific TextView in the row.xml file.
 % + Finally, we set the value of textCreatedAt to the relative time since the timestamp. To do this, we use Android SDK method DateUtils.getRelativeTimeSpanString().
 
-+ 创建我们自定义的Adapter。基于Android提供的Adapter派生一个新类，这里选择前面用到的SimpleCursorAdapter。
++ 创建我们自定义的 Adapter，它继承了 Android 提供的 Adapter 类，这里将它命名为 SimpleCursorAdapter 。
 + 跟上个例子一样，这个常量用以指明数据库中我们感兴趣的列。
 + 这个常量用以指明数据列对应View的ID。
 + 因为是新定义的类，因此需要一个构造函数。在这里仅仅通过super调用父类的构造函数即可。
@@ -506,11 +506,11 @@ public class TimelineActivity3 extends Activity {
 
 % Instead of creating a new TimelineAdapter that is a subclass of SimpleCursorAdapter and overriding its bindView() method, we could also attach the business logic directly to the existing SimpleCursorAdapter. This approach is more efficient because we are not replacing what bindView() already does and we do not require a separate custom adapter class.
 
-除去派生一个TimelineAdapter并覆盖``bindView()``之外，我们也可以直接为SimpleCursorAdapter添加业务逻辑。这样既能保留原先的``bindView()``所做的工作，又省去一个类，更加简便。
+除去继承一个 TimelineAdapter 并覆盖 ``bindView()`` 方法外，我们也可以直接为 SimpleCursorAdapter 添加业务逻辑。这样既能保留原先的 ``bindView()`` 所做的工作，又省去一个类，更加简便。
 
 % To attach business logic to an existing SimpleCursorAdapter, use its setViewBinder() method. We will need to supply the method with an implementation of ViewBinder. ViewBinder is an interface that specifies setViewValue(), where the actual binding of a particular date element to particular view happens.
 
-``SimpleCursorAdapter``提供了一个``setViewBinder()``方法为它的业务逻辑提供扩展，它取一个``ViewBinder``的实现作为参数。``ViewBinder``是个接口，里面声明了一个``setViewValue()``方法，也就是在这里，它将具体的日期元素与View真正地绑定起来。
+``SimpleCursorAdapter``提供了一个 ``setViewBinder()`` 方法为它的业务逻辑提供扩展，它取一个 ``ViewBinder`` 的实现作为参数。 ``ViewBinder`` 是个接口，里面声明了一个 ``setViewValue()`` 方法，也就是在这里，它将具体的日期元素与View真正地绑定起来。
 
 % Again, we discovered setViewBinder() feature of this SimpleCursorAdapter framework class by reading reference documentation for it.
 
@@ -518,7 +518,7 @@ public class TimelineActivity3 extends Activity {
 
 % In our final iteration of TimelineAdapter, we create a custom ViewBinder as a constant and attach it to the stock SimpleCursorAdapter.
 
-如下即针对``TimelineAdapter``的最后一轮迭代，在此实现一个自定义的``ViewBinder``作为常量，并把它交给``SimpleCursorAdapter``。
+如下即针对 ``TimelineAdapter`` 的最后一轮迭代，在此实现一个自定义的 ``ViewBinder`` 作为常量，并把它交给 ``SimpleCursorAdapter`` 。
 
 **Example 10.8. TimelineActivity.java with ViewBinder**
 {CODE}

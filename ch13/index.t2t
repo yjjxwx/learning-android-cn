@@ -269,33 +269,33 @@ public class Rose extends ImageView { //#{1}
 
 
 % ==Location Service==
-==Location服务==
+== Location（位置） 服务==
 
 % Now that you have seen how the sensor manager works, we can look at the Location API, another system service provided by Android. Just like sensors, the Location API is supported via the Location manager. And just like sensors, we get the Location manager via a getSystemService() call.
 
-前面已对SensorManager的工作方式有所了解，接下来看下Location服务的API。同Sensor服务类似，Location服务是通过LocationManager进行管理，而且也是通过getSystemService()获取它的引用。
+前面已对 SensorManager 的工作方式有所了解，接下来看下 Location 服务的 API。同  Sensor 服务类似， Location 服务是通过 LocationManager 进行管理，而且也是通过 getSystemService() 获取它的引用。
 
 % Once we have access to the Location service, we need to register a Location listener with it so the service can call back when there’s a change in location. Again, we’ll do this by implementing a Location listener interface.
 
-使用Location服务，我们需要传递给它一个侦听器(Listener)，这一来在位置改变的时候可以作出响应。同前面相似，我们在这里实现一个LocationListener接口。
+使用 Location 服务，我们需要传递给它一个侦听器，这一来在位置改变的时候可以作出响应。同前面相似，我们在这里实现一个 ``LocationListener`` 接口。
 
 % If you recall from the section called “Common Steps in Using System Services”, processing GPS and other location updates can be very taxing for the battery. To minimize the battery consumption, we want to listen to location updates only while in the Running state. To do that, we’ll register for the updates in onResume() and unregister in onPause(), taking the advantage of the Activity lifecycle.
 
-//"使用系统服务的一般步骤"//一节曾提到，使用GPS服务或者其它位置操作都是非常费电的。为尽量地节约电能，我们只在Running状态中使用Location服务。因此利用Activity生命周期的设定，将它限制在``onResume()``与``onPause()``之间。
+//"使用系统服务的一般步骤"//一节曾提到，使用 GPS 服务或者其它位置操作都是非常费电的。为尽量地节约电能，我们只在 Running 状态中使用 Location 服务。因此利用 Activity 生命周期的设定，将它限制在 ``onResume()`` 与 ``onPause()`` 之间。
 
 % ===Where Am I? Demo===
-===实例: Where Am I?===
+=== 实例: Where Am I? ===
 
 % This example illustrates how to use location-based services in Android. First, we use LocationManager to figure out our current location based on the resources in the environment available to the device, such as GPS or a wireless network. Secondly, we use Geocoder to convert this location to an address.
 
-使用这个例子展示Android中位置服务的用法。首先通过LocationManager利用可用的信息源(GPS或者无线网)获取当前的位置信息，然后使用Geocoder将它转换为人类可读的地理地址。
+使用这个例子展示 Android 中位置服务的用法。首先通过 LocationManager 利用可用的信息源(GPS或者无线网)获取当前的位置信息，然后使用 Geocoder 将它转换为人类可读的地理地址。
 
 % ====The Layout====
-====Layout====
+====布局====
 
 % The layout for this example is trivial. Our resource file provides a TextView widget for the title and another TextView widget for the output. Since the output could be longer than the screen size, we wrap the output in a ScrollView widget.
 
-本例的Layout不是我们关注的重点。里面只有一个表示标题的TextView控件，和一个表示输出的TextView控件。其中输出可能会比较长，因此把它包在一个ScrollView里。
+本例的布局不是我们关注的重点。里面只有一个表示标题的TextView控件，和一个表示输出的TextView控件。其中输出可能会比较长，因此把它包在一个ScrollView里。
 
 **Example 13.3. res/layout/main.xml**
 

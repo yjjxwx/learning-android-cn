@@ -165,9 +165,9 @@ class TimelineReceiver extends BroadcastReceiver { // #{1}
 
 % At this point, our receiver is ready but not registered. Unlike BootReceiver, where we registered our receiver with the system statically, via the manifest file, we’ll register TimelineReceiver programmatically. This is because TimelineReceiver makes sense only within TimelineActivity as it’s purpose is to refreshing the list when the user is looking at Timeline Activity.
 
-要让Receiver正常工作，我们还需要将它注册。不过这里不像刚才的``BootReceiver``那样在Manifest文件中添加声明就好，我们需要动态地注册TimelineReceiver。因为``TimelineReceiver``仅在用户查看Timeline界面时才有意义，将它静态地注册到Manifest文件的话，会无谓地浪费资源。
+要让Receiver正常工作，我们还需要将它注册。不过这里不像刚才的``BootReceiver``那样在Manifest文件中添加声明就好，我们需要动态地注册TimelineReceiver。因为 ``TimelineReceiver`` 仅在用户查看 Timeline 界面时才有意义，将它静态地注册到Manifest文件的话，会无谓地浪费资源。
 
-%TALK: 上面翻译中加了一句。类似的情景可以在"系统服务"一章中见到，在Activity休眠时没必要注册系统服务，不然会浪费资源。
+%TALK: 上面翻译中加了一句。类似的情景可以在"系统服务"一章中见到，在 Activity 休眠时没必要注册系统服务，不然会浪费资源。
 
 **Example 11.5. TimelineActivity.java中的内部类TimelineReceiver**
 {CODE}
@@ -203,7 +203,7 @@ protected void onPause() {
 % + We register the receiver in onResume() so that it’s registered whenever the TimelineActivity is running. Recall that all paths to the Running state go through the onResume() method, as described in the section called “Running State”.
 % + Similarly, we unregister the receiver on the way to the Stopped state (recall the section called “Stopped State”). onPause() is a good place to do that.
 
-+ 在``TimelineActivity``进入Running状态时注册Receiver。前面在//"Running状态"//一节中曾提到，在Activity进入Running状态之前，肯定要经过``onResume()``。因此，这里是注册Receiver的好地方。
++ 在``TimelineActivity``进入 Running 状态时注册 Receiver 。前面在//"Running状态"//一节中曾提到，在Activity进入Running状态之前，肯定要经过``onResume()``。因此，这里是注册Receiver的好地方。
 + 与之相对，Activity在进入Stopped状态之前，肯定会经过``onPause()``。可以在这里注销Receiver。
 
 
