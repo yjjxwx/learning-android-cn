@@ -49,13 +49,13 @@
 
 % To code our Compass demo application, we get SensorManager, the class that represents the Sensor system service. We make our main activity implement SensorEventListener so that we can register it (i.e. this) to get updates for a specific sensor. We register and unregister the listener in onResume() and onPause() respectively. To implement the sensor listeners, our activity provides onAccuracyChanged() and onSensorChanged(). The former is a requirement, but we’ll leave it empty because the accuracy of the orientation sensor is not expected to change. The latter call is what’s really of interest to us.
 
-表示Sensor系统服务的类是``SensorManager``，接下来就是跟它打交道了。在Activity中实现一个``SensorEventListener``，将它注册到``SensorManager``中即可订阅特定传感器的更新。为了省电，我们将传感器操作安排在``onResume()``与``onPause()``之间。然后实现侦听器(Listener)，在Activity中提供``onAccuracyChanged()``和``onSensorChanged()``两个方法。前者必须，后者可选。不过我们对传感器的精度(Accuracy)并无兴趣——因为方向传感器(Orientation Sensor)的精度在中间并不会发生变化，我们真正感兴趣的是它的数据。所以在这里我们将前者留空，而提供后者的实现。
+表示传感器服务(Sensor Service)的类是``SensorManager``，接下来就是跟它打交道了。在Activity中实现一个``SensorEventListener``，将它注册到``SensorManager``中即可订阅特定传感器的更新。为了省电，我们将传感器操作安排在``onResume()``与``onPause()``之间。然后实现侦听器(Listener)，在Activity中提供``onAccuracyChanged()``和``onSensorChanged()``两个方法。前者必须，后者可选。不过我们对传感器的精度(Accuracy)并无兴趣——因为方向传感器(Orientation Sensor)的精度在中间并不会发生变化，我们真正感兴趣的是它的数据。所以在这里我们将前者留空，而提供后者的实现。
 
 % When the orientation sensor changes, the Sensor service calls back our sensor listener via onSensorChanged() and reports the new sensor data. The data always comes back as an array of float values that represent degrees and therefore range from 0 to 359. In the case of orientation sensor, the elements represent the following dimensions, illustrated in Figure 13.1, “Axis”:
 
 在方向传感器状态变化时，传感器服务会回调``onSensorChanged()``，通知侦听器(Listener)得到了新数据。这些数据都是0~359之间的浮点数组成的数组。方位角(azimuth)与磁偏角(pitch与roll)，构成了下边的坐标，如 //图13.1//：
 
-%NOTE: 磁偏角：磁针指示的方向并不是正南正北，而是微偏西北和东南，这在科学上称为磁偏角。
+(译者注: 磁偏角：磁针指示的方向并不是正南正北，而是微偏西北和东南，这在科学上被称作磁偏角。)
 
 % Index [0], the azimuth:: The amount of rotation around the Z axis from the vertical position around the back and then around the bottom toward the front. 
 % Index [1], the pitch:: The amount of rotation around the X axis from the front to the left and then the around the back toward the right. 
@@ -80,7 +80,7 @@
 
 % The main Compass activity sets the Rose as its only widget on the screen. It also registers with SensorManager to listen to sensor events, and updates the Rose orientation accordingly.
 
-指南针的主界面里只有一个控件，那就是表盘(Rose)。它也将自己注册给``SensorManager``，监听传感器的事件，调整表盘的角度。
+指南针的主界面里只有一个控件，那就是表盘(Rose)。它也将自己注册给``SensorManager``，监听来自传感器的事件，调整表盘的角度。
 
 **Example 13.1. Compass.java**
 {CODE}

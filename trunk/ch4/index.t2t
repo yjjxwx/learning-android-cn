@@ -49,13 +49,13 @@
 {ORGI}An activity is usually a single screen that the user sees on the device at one time. An application typically has multiple activities and the user flips back and forth among them. As such, activities are the most visible part of your application.
 {TRAN}Activity 即设备在某一时刻所显示的界面。一个程序通常含有多个界面，用户可在其间切换。对用户而言，这就是程序的外观部分。
 
-%TALK: 在表示“程序的外观”时，我们将Activity译作“界面”；在表示构件或者某个类的时候，我们将保留原文。<-- 到时可以把这句写进译序里面。
+(译者注: 在表示“程序的外观”时，我们将Activity译作“界面”；在表示构件或者某个类的时候，我们将保留原文。)
 
 {ORGI}I usually use a website as an analogy for activities. Just like a website consists of multiple pages, so does an Android application consists of multiple activities. Just like a website has a "home page", an Android app has a "main" activity. It is usually the one that is shown first when you launch the application. And just like a website has to provide some sort of navigation among various pages, an Android app should do the same.
 {TRAN}我通常喜欢拿网页来类比Activity：就像一个网站含有多个网页，Android程序也含有多个界面(Activity)；网站有主页，Android程序有主界面(main Activity)——也就是启动程序时显示的第一个界面；为了方便用户在多个页面之间跳转，网站会提供导航功能，Android也一样。 
 
 {ORGI}On the web, you can jump from a page on one website to a page on another. Similarly, in Android, you could be looking at an activity of one application, but shortly after you could start another activity in a completely separate application. For example, if you are in your Contacts app, and you choose to text a friend, you’d be launching the activity to compose a text message in the Messaging application.
-{TRAN}在网站里，你可以从某页面跳转到另一个网站的页面。类似地在Android中，你也可以在某程序的界面里启动或访问其它程序的界面。比如在通讯录应用中，你可以选择某个朋友，直接进入短信应用的界面为他写消息。
+{TRAN}在网站里，你可以从某页面跳转到另一个网站的页面。类似地在Android中，你也可以在某程序的界面里启动或访问其它程序的界面。比如在联系人应用中，你可以选择某个朋友，直接进入短信应用的界面为他写消息。
 
 %TALK: “通讯录应用”这一名词疑似不统一。 
 
@@ -196,7 +196,7 @@
 		[images/04-Contacts-Provider.png]
 
 {ORGI}This separation of data storage and the actual user interface application offers greater flexibility to mash up various parts of the system. For example, a user could install an alternative Address Book application that uses the same data as the default Contacts app. Or, install widgets on the Home Screen that allow for easy changes in the System Settings, such as turning on or off the Wifi, Bluetooth or GPS features. Many phone manufactures take advantage of Content Providers to add their own applications on top of standard Android to improve overall user experience, such as HTC Sense.
-{TRAN}把数据的存储与用户界面分离开来，这使得系统中各个部分之间的联系更加紧密，拆换起来也更加灵活。比如用户可以安装一个新的通讯录应用替换掉原先的默认的联系人app，同时仍希望使用原先的数据；或在主屏幕上面安装一个小部件，方便做些开关WiFi/蓝牙/GPS之类的系统设置。也有许多手机制造商(比如 [HTC Sense http://en.wikipedia.org/wiki/HTC_Sense])基于Content Provider机制，设计一套自己的软件集来提升用户体验。
+{TRAN}把数据的存储与用户界面分离开来，这使得系统中各个部分之间的联系更加紧密，拆换起来也更加灵活。比如用户可以安装一个新的地址薄应用(Address Book App)替换掉原先的默认的联系人应用(Contacts App)，同时仍希望使用原先的数据；或在主屏幕上面安装一个小部件，方便做些开关WiFi/蓝牙/GPS之类的系统设置。也有许多手机制造商(比如 [HTC Sense http://en.wikipedia.org/wiki/HTC_Sense])基于Content Provider机制，设计一套自己的软件集来提升用户体验。
 
 {ORGI}Content Providers are a relatively simple interface with the standard insert(), update(), delete() and query() methods. These methods look a lot like standard database methods, so it is relatively easy to implement a content provider as a proxy to the database. Having said that, you are much more likely to use content providers than write your own.
 {TRAN}Content Provider的接口很简单，那就是``insert()``、``update()``、``delete()``与``query()``。这与一个数据库的接口很相似，因此针对某数据库实现一个Content Provider当作代理也十分简单。话虽这么说，不过你该更喜欢使用现成的Content Provider，而不是自己造轮子。
