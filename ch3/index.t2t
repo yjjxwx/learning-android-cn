@@ -179,7 +179,7 @@ Eclipse以项目为单位管理用户的工作，项目又都位于工作区(Wor
 
 Manifest文件是应用程序各部分之间的牵线人。它申明了程序中包含的构件(Building Blocks)以及相应的权限等信息。
 
-**Example 3.1. AndroidManifest.xml**
+**例 3.1. AndroidManifest.xml**
 {CODE}
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -205,7 +205,7 @@ Manifest文件是应用程序各部分之间的牵线人。它申明了程序中
 
 Layout文件用于表示界面的布局。在这里我们只用到了一个界面，就是上面定义的Activity：``HelloWorld``。
 
-**Example 3.2. res/layout/main.xml**
+**例 3.2. res/layout/main.xml**
 {CODE}
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -223,7 +223,7 @@ Layout文件用于表示界面的布局。在这里我们只用到了一个界�
 
 这也是个XML文件，内容是程序中出现的所有文本。比如按钮的名字、Label、默认的文本等等，都统一在这一文件之下。把问题分解，令不同文件各司其职，这是个很好的做法——哪怕是XML文件。由此，Layout文件负责Widget的布局，Strings文件负责文本内容。
 
-**Example 3.3. res/values/strings.xml**
+**例 3.3. res/values/strings.xml**
 {CODE}
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
@@ -245,7 +245,7 @@ R文件负责Java与外部资源之间的关联。它在res目录中的内容发
 
 既然有Eclipse代劳，对这个文件本身我们不必关注太多。不过它里面的数据是非常有用的。
 
-**Example 3.4. gen/com/marakana/R.java**
+**例 3.4. gen/com/marakana/R.java**
 {CODE}
 /* AUTO-GENERATED FILE.  DO NOT MODIFY.
  *
@@ -279,7 +279,7 @@ public final class R {
 
 Java代码是整个程序的驱动者。它会被编译为可执行格式，在Dalvik之上执行。
 
-**Example 3.5. HelloWorld.java**
+**例 3.5. HelloWorld.java**
 {CODE}
 package com.marakana;
 

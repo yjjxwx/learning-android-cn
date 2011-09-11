@@ -40,7 +40,7 @@ Broadcast Receiver是Android中发布/订阅机制(又称为//Observer模式//)�
 % TALK: 怀疑是原文错误： and in turn will launch our TimelineActivity activity. 根据下面的代码看应该是 UpdaterService
 % TALK: 支持楼上。
 
-**Example 11.1. BootReceiver.java**
+**例 11.1. BootReceiver.java**
 {CODE}
 package com.marakana.yamba6;
 
@@ -83,7 +83,7 @@ public class BootReceiver extends BroadcastReceiver { // #{1}
 要将BootReceiver注册到系统，我们需要在Manifest文件中添加它的声明，还需要定义它的intent-filter，用以过滤出自己关心的事件。
 
 
-**Example 11.2. AndroidManifest.xml: 在<application>标签之下**
+**例 11.2. AndroidManifest.xml: 在<application>标签之下**
 {CODE}
 ...
 <receiver android:name=".BootReceiver">
@@ -99,7 +99,7 @@ public class BootReceiver extends BroadcastReceiver { // #{1}
 
 针对某特定事件，在声明了它的intent-filter之后，还需要赋予应用程序以相应的权限。在这里那就是``android.permission.RECEIVE_BOOT_COMPLETED``。
 
-**Example 11.3. AndroidManifest.xml: 在<manifest>标签之下**
+**例 11.3. AndroidManifest.xml: 在<manifest>标签之下**
 {CODE}
 ...
 <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -137,7 +137,7 @@ public class BootReceiver extends BroadcastReceiver { // #{1}
 
 为解决这一问题，我们将创建另一个BroadcastReceiver，使它作为``TimelineActivity``的内部类。
 
-**Example 11.4. TimelineActivity.java，内部类TimelineReceiver**
+**例 11.4. TimelineActivity.java，内部类TimelineReceiver**
 {CODE}
 ...
 class TimelineReceiver extends BroadcastReceiver { // #{1}
@@ -169,7 +169,7 @@ class TimelineReceiver extends BroadcastReceiver { // #{1}
 
 %TALK: 上面翻译中加了一句。类似的情景可以在"系统服务"一章中见到，在 Activity 休眠时没必要注册系统服务，不然会浪费资源。
 
-**Example 11.5. TimelineActivity.java中的内部类TimelineReceiver**
+**例 11.5. TimelineActivity.java中的内部类TimelineReceiver**
 {CODE}
 ...
 @Override
@@ -211,7 +211,7 @@ protected void onPause() {
 
 前面还剩一个``filter``对象没解释：它是一个``IntentFilter``的实例，用以过滤出Receiver感兴趣的事件。在这里，我们通过一条表示Action事件的字符串来初始化它。
 
-**Example 11.6. TimelineActivity.java，修改后的 onCreate()**
+**例 11.6. TimelineActivity.java，修改后的 onCreate()**
 {CODE}
 ...
 filter = new IntentFilter("com.marakana.yamba.NEW_STATUS"); // #{1}
@@ -234,7 +234,7 @@ filter = new IntentFilter("com.marakana.yamba.NEW_STATUS"); // #{1}
 
 在第八章 Service 中，我们为``UpdaterService``创建了一个内部类``Updater``，负责在独立的线程中连接到服务端并抓取数据。第一手数据在它手里，因此由它负责发送通知是合理的。
 
-**Example 11.7. UpdaterService.java， 内部类Updater**
+**例 11.7. UpdaterService.java， 内部类Updater**
 {CODE}
 ...
 private class Updater extends Thread {
@@ -318,7 +318,7 @@ private class Updater extends Thread {
 接下来，我们创建一个新的Receiver：``NetworkReceiver``。步骤同前面一样，新建一个Java类，并继承``BroadcastReceiver``，然后在Manifest文件中注册它。
 
 
-**Example 11.8. NetworkReceiver.java**
+**例 11.8. NetworkReceiver.java**
 {CODE}
 package com.marakana.yamba6;
 
@@ -373,7 +373,7 @@ public class NetworkReceiver extends BroadcastReceiver { // #{1}
 
 新的Receiver已经编写完毕，接下来将它注册到Manifest文件。
 
-**Example 11.9. AndroidManifest.xml: 在<application>标签之下**
+**例 11.9. AndroidManifest.xml: 在<application>标签之下**
 {CODE}
 ...
 <receiver android:name=".NetworkReceiver">
@@ -388,7 +388,7 @@ public class NetworkReceiver extends BroadcastReceiver { // #{1}
 
 我们还需要更新应用程序所需的权限。在系统中，网络连接状况是受保护的信息，要获取它，我们需要用户赋予应用程序以专门的权限。
 
-**Example 11.10. AndroidManifest.xml: 在<manifest>标签之下**
+**例 11.10. AndroidManifest.xml: 在<manifest>标签之下**
 {CODE}
 ...
 <uses-permission android:name="android.permission.INTERNET" /> <!-- #{1} -->
@@ -429,7 +429,7 @@ public class NetworkReceiver extends BroadcastReceiver { // #{1}
 
 首先是给出权限的定义。解释它们是什么、如何使用、处于何种保护级别。
 
-**Example 11.11. 在Manifest文件中定义权限**
+**例 11.11. 在Manifest文件中定义权限**
 {CODE}
 <manifest>
 
@@ -483,7 +483,7 @@ public class NetworkReceiver extends BroadcastReceiver { // #{1}
 
 UpdaterService会在每次收到新数据时广播一条Intent，但我们不希望任何人都可以收到这条Intent，因此限制只有拥有授权的Receiver才可以收到这条Intent。
 
-**Example 11.12. UpdaterService中的内部类Updater**
+**例 11.12. UpdaterService中的内部类Updater**
 {CODE}
   ...
   private class Updater extends Thread {
@@ -539,7 +539,7 @@ UpdaterService会在每次收到新数据时广播一条Intent，但我们不希
 
 我们还需要检查Receiver得到的广播是否合法。为此，在注册Receiver时为它添加上相关的权限信息。
 
-**Example 11.13. TimelineReceiver in TimelineActivity.java**
+**例 11.13. TimelineReceiver in TimelineActivity.java**
 {CODE}
 ...
 public class TimelineActivity extends BaseActivity {

@@ -53,7 +53,7 @@ AIDL的语法与Java的接口(interface)十分相似，都是在里面给出方�
 
 先定义Service的接口。如下可见，它与一般的Java接口十分相似。有CORBA经验的读者肯定可以认出AIDL与CORBA的IDL之间的渊源。
 
-**Example 14.1. ILogService.aidl**
+**例 14.1. ILogService.aidl**
 {CODE}
 package com.marakana.logservice; // #{1}
 
@@ -82,7 +82,7 @@ interface ILogService { // #{3}
 
 接下来查看对应``Message``的AIDL实现。
 
-**Example 14.2. Message.aidl**
+**例 14.2. Message.aidl**
 {CODE}
 package com.marakana.logservice; // #{1}
 
@@ -119,7 +119,7 @@ parcelable Message;
 
 在远程Service的实现中，``onBind()``方法需要返回一个IBinder对象表示远程Service的一个实现。为实现``IBinder``，我们可以继承自动生成的``ILogervice.Stub``类。同时在里面提供我们自定义的AIDL方法，也就是几个``log()``方法。
 
-Example 14.3. LogService.java
+**例 14.3. LogService.java**
 {CODE}
 package com.marakana.logservice;
 
@@ -182,7 +182,7 @@ public class LogService extends Service { // #{1}
 
 作为``Parcel``，对象必须知道如何处理自身的编码/解码。
 
-**Example 14.4. Message.java**
+**例 14.4. Message.java**
 {CODE}
 package com.marakana.logservice;
 
@@ -344,7 +344,7 @@ public class Message implements Parcelable { // #{1}
 
 连接上Service之后，我们就可以像本地对象那样使用它了。不过，要传递复杂的数据类型(比如自定义的Java对象)，就必须把它做成Parcel。对我们的Message类型而言，它已经实现了Parcelable接口，拿来直接使用即可。
 
-**Example 14.5. LogActivity.java**
+**例 14.5. LogActivity.java**
 {CODE}
 package com.marakana.logclient;
 

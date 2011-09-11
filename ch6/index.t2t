@@ -217,7 +217,7 @@ AbsoluteLayout(绝对布局)可以为它的子元素设置一个屏幕上的绝�
 % By default, Eclipse created a file called main.xml under res/layout folder. For consistency purposes, we should rename this file to status.xml to match our StatusActivity. To rename a file in Eclipse, right-click on it, choose Refactor→Rename… and enter new name. Eclipse is somewhat smart about renaming files and does more than just change the name. It also offers to lookup all the places where this file is referred from and update those references as well. While this feature works well when renaming a Java file, it is not fully automatic with XML files. So, renaming this file requires us to change the line in Java where we refer to it via the R class. To do that, in your StatusActivity’s onCreate(), change setContentView(R.layout.main); to setContentView(R.layout.status);.
 
 
-Eclipse默认会在``res/layout``下创建一个``main.xml``文件。出于一致性的考虑，我们将把它的名字改为``status.xml``以对应StatusActivity。在Eclipse中重命名一个文件，就右键点击它，选择//Refactor→Rename…//，输入新名字即可。Eclipse在重命名时会智能地做些同步工作，使所有引用到这个文件的地方保持一致。这在更新Java文件时可以做到完全自动，但对XML文件就不那么尽善尽美了。修改一个XML文件名，我们还需要手工修改Java代码中引用R class的相关部分。比如在这里，就需要将``onCreate()``里的``setContentView(R.layout.main)``修改为``setContentView(R.layout.status)``。
+Eclipse默认会在``res/layout``下创建一个``main.xml``文件。出于一致性的考虑，我们将把它的名字改为``status.xml``以对应StatusActivity。在Eclipse中重命名一个文件，就右键点击它，选择//Refactor→Rename…//，输入新名字即可。Eclipse在重命名时会智能地做些同步工作，使所有引用到这个文件的地方保持一致。这在更新Java文件时可以做到完全自动，但对XML文件就不那么尽善尽美了。修改一个XML文件名，我们还需要手工修改Java代码中引用R类的相关部分。比如在这里，就需要将``onCreate()``里的``setContentView(R.layout.main)``修改为``setContentView(R.layout.status)``。
 
 %TALK: "So, renaming this file requires us to change the line in Java where we refer to it via the R class." 很绕的一句。
 
@@ -238,7 +238,7 @@ Eclipse默认会在``res/layout``下创建一个``main.xml``文件。出于一�
 
 StatusActivity的源码大致如下：
 
-**Example 6.1. res/layout/status.xml**
+**例 6.1. res/layout/status.xml**
 {CODE}
 <?xml version="1.0" encoding="utf-8"?>
 
@@ -327,7 +327,7 @@ Android精细地划分了文件的职责：布局在资源文件中给出了定�
 % Here’s what our strings.xml file looks like at this point: [修改为 Example 6.2, “res/values/strings.xml” shows what our strings.xml file looks like at this point.]
 现在string.xml的内容大致如下：
 
-**Example 6.2. res/values/strings.xml**
+**例 6.2. res/values/strings.xml**
 
 {CODE}
 <?xml version="1.0" encoding="utf-8"?>
@@ -406,7 +406,7 @@ R文件是Eclipse自动生成的资源文件，作为Java与其它资源文件�
 
 添加处理外部事件的响应函数，不一定需要额外继承一个类。Android的UI对象对此已做考虑。比如，想让某按钮处理点击事件，你可以定义一个方法``onClick()``，然后调用setOnClickListener，将this传给它，因为``onClick()``的定义正在这个对象里面。
 
-**Example 6.3. StatusActivity.java, version 1**
+**例 6.3. StatusActivity.java, version 1**
 
 {CODE}
 package com.marakana.yamba1;
@@ -528,7 +528,7 @@ Java在classpath中搜索它所有的类。要让我们的代码可以访问这�
 
 在这里，我们要求访问网络服务，因此需要用户为它授予INTERNET的访问权限。双击打开AndroidManifest.xml文件，Eclipse通常会按照WYSIWYG的形式打开它。同前面一样，在这个界面中即可完成绝大部分的工作，但是Eclipse的这一功能并不完整，灵活性也差强人意，我们不如直接修改源文件。因此，选择最右边显示"AndroidManifest.xml"的标签，将``<uses-permission android:name="android.permission.INTERNET" />``加入``<manifest>``元素之下。
 
-**Example 6.4. AndroidManifest.xml**
+**例 6.4. AndroidManifest.xml**
 {CODE}
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -700,7 +700,7 @@ Android程序默认运行在单线程之下。单线程顺序执行所有的操�
 
 % However, one of the problems that we’d run into by using standard Java Thread class is that another thread is not allowed to update the elements in the main UI thread. This make sense since to update the UI thread we would need to synchronize with the current state of its objects and that would be a job on its own.
 
-但这里有一点，那就是Java线程不可以直接访问其它线程的私有数据，比如UI线程中的控件。这样考虑是为了避免一些同步问题。
+但这里有一点，那就是Java线程不可以直接访问其它线程的私有数据，比如UI线程中的控件。这样设计可以避免一些同步问题。比如UI线程若在执行中，就并不希望其它线程来扰乱自己的状态。
 
 %TALK: "This make sense since to update the UI thread we would need to synchronize with the current state of its objects and that would be a job on its own." 这句很别扭，上文意译为“这样可以避免一些同步问题”只说了前半句，丢失了一些意思。
 
@@ -719,7 +719,7 @@ Android程序默认运行在单线程之下。单线程顺序执行所有的操�
 
 例6.5是使用AsyncTask修改过的代码，实现异步发布到服务端。它的开头部分与例6.3相似，不同在于它是使用了异步任务，不会阻塞在网络操作上。
 
-**Example 6.5. StatusActivity.java, version 2**
+**例 6.5. StatusActivity.java, version 2**
 
 {CODE}
 package com.marakana.yamba1;
@@ -836,7 +836,7 @@ Android为不同的事件(如触摸、点击等)提供了不同的侦听器。�
 
 从Java的角度来看，我们需要实现一个``TextWatcher``来监视文本框的变化。它会在用户更改文本的时候触发，并根据字数的变化更新计数器。
 
-**Example 6.6. res/layout/status2.xml**
+**例 6.6. res/layout/status2.xml**
 {CODE}
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Main Layout of Status Activity -->
@@ -879,7 +879,7 @@ Android为不同的事件(如触摸、点击等)提供了不同的侦听器。�
 
 下面的``StatusActivity``实现了``TextWatcher``接口，新加入的方法列在后面。TextView初始为绿色，表示还可以继续输入；随着字数增长，它会变成黄色，表示字数接近上限；最后变成红色，表示已经达到了字数限制。
 
-**Example 6.7. StatusActivity.java, final version**
+**例 6.7. StatusActivity.java, final version**
 {CODE}
 package com.marakana.yamba1;
 
@@ -1124,7 +1124,7 @@ Android使用标准的RGB颜色，加上可选的Alpha项，你可以使用RGB�
 
 也可以修改``textColor``属性更改TextView的文本颜色。比如我们觉得白色不错，可以把它设置为``#fff``，也可以输入``@android:color/white``引用操作系统内置的资源定义，也就是白色。
 
-**Example 6.8. res/layout/status.xml**
+**例 6.8. res/layout/status.xml**
 {CODE}
 <?xml version="1.0" encoding="utf-8"?>
 
