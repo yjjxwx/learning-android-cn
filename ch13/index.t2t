@@ -268,19 +268,19 @@ public class Rose extends ImageView { //#{1}
 
 
 % ==Location Service==
-== Location（位置） 服务==
+== 位置服务==
 
 % Now that you have seen how the sensor manager works, we can look at the Location API, another system service provided by Android. Just like sensors, the Location API is supported via the Location manager. And just like sensors, we get the Location manager via a getSystemService() call.
 
-前面已对 SensorManager 的工作方式有所了解，接下来看下 Location 服务的 API。同  Sensor 服务类似， Location 服务是通过 LocationManager 进行管理，而且也是通过 getSystemService() 获取它的引用。
+前面已对传感器服务的工作方式有所了解，接下来看下位置服务的 API。同传感器服务类似，位置服务是通过 ``LocationManager`` 进行管理，而且也是通过 getSystemService() 获取它的引用。
 
 % Once we have access to the Location service, we need to register a Location listener with it so the service can call back when there’s a change in location. Again, we’ll do this by implementing a Location listener interface.
 
-使用 Location 服务，我们需要传递给它一个侦听器，这一来在位置改变的时候可以作出响应。同前面相似，我们在这里实现一个 ``LocationListener`` 接口。
+使用位置服务，我们需要传递给它一个侦听器(Listener)，这一来在位置改变的时候可以作出响应。同前面相似，我们在这里实现一个 ``LocationListener`` 接口。
 
 % If you recall from the section called “Common Steps in Using System Services”, processing GPS and other location updates can be very taxing for the battery. To minimize the battery consumption, we want to listen to location updates only while in the Running state. To do that, we’ll register for the updates in onResume() and unregister in onPause(), taking the advantage of the Activity lifecycle.
 
-//"使用系统服务的一般步骤"//一节曾提到，使用 GPS 服务或者其它位置操作都是非常费电的。为尽量地节约电能，我们只在 Running 状态中使用 Location 服务。因此利用 Activity 生命周期的设定，将它限制在 ``onResume()`` 与 ``onPause()`` 之间。
+//"使用系统服务的一般步骤"//一节曾提到，使用 GPS 服务或者其它位置操作都是非常费电的。为尽量地节约电能，我们只在 Running 状态中使用 位置服务。因此利用 Activity 生命周期的设定，将它限制在 ``onResume()`` 与 ``onPause()`` 之间。
 
 % ===Where Am I? Demo===
 === 实例: Where Am I? ===
@@ -333,7 +333,7 @@ public class Rose extends ImageView { //#{1}
 
 % This is our main activity, which sets up the screen, connects to LocationManager, and uses the Geocoder to figure out our address. The LocationManager uses location providers, such as GPS or Network, to figure out our current location. The location is expressed as latitude and longitude values. The Geocoder searches an online database for known addresses in the vicinity of the location provided. It may come up with multiple results, some more specific than others.
 
-这就是我们唯一的Activity。我们将在这里初始化界面，连接到LocationManager，然后使用Geocoder检索我们的地理地址。LocationManager可以通过不同的Location信息源(比如GPS或者网络)来获得我们的当前位置，以经纬度的格式返回。Geocoder以此检索在线的位置数据库，即可获得当前位置的地理地址。检索的结果可能有多个，精度不一。
+这就是我们唯一的Activity。我们将在这里初始化界面，连接到LocationManager，然后使用Geocoder检索我们的地理地址。LocationManager可以通过不同的位置信息源(比如GPS或者网络)来获得我们的当前位置，以经纬度的格式返回。Geocoder以此检索在线的位置数据库，即可获得当前位置的地理地址。检索的结果可能有多个，精度不一。
 
 **Example 13.4. WhereAmI.java**
 
@@ -436,20 +436,20 @@ public class WhereAmI extends Activity implements LocationListener { // #{1}
 % + If we do find known addresses for this location, we print them out.
 % + Some other callback methods are required to implement the LocationListener interface. We don’t use them for this example.
 
-+ 留意WhereAmI实现了LocationListener。它是LocationManager用来通知地址变更的接口。
-+ 指向LocationManager的私有变量。
++ 留意WhereAmI实现了``LocationListener``。它是``LocationManager``用来通知地址变更的接口。
++ 指向``LocationManager``的私有变量。
 + 指向Geocoder的私有变量。
 + textOut是表示输出结果的TextView。
-+ 在当前上下文通过``getSystemService()``获取LocationManager的引用。有关//当前上下文//的有关内容，可见``Application Context``一节。
++ 在当前上下文通过``getSystemService()``获取``LocationManager``的引用。有关//当前上下文//的有关内容，可见``Application Context``一节。
 + 创建一个Geocoder的实例，将当前上下文传递给它。
-+ 还需要一段时间才可以获得新的位置信息。因此LocationManager会缓存着上次得到的地址，可以减少用户的等待。
++ 还需要一段时间才可以获得新的位置信息。因此``LocationManager``会缓存着上次得到的地址，可以减少用户的等待。
 + 同前面一样，在进入Running状态之前也就是``onResume`()``时注册到系统服务。在这里，通过``requestLocationUpdates()``订阅位置服务的更新。
 + 在离开Running状态之后也就是``onPause()``时注销。
-+ ``onLocationChanged()``是LocationManager负责调用的一个回调方法，在位置信息发生变化时触发。
++ ``onLocationChanged()``是``LocationManager``负责调用的一个回调方法，在位置信息发生变化时触发。
 + 得到了Location对象。它里面有不少有用的信息，我们格式化一下，使之容易阅读。
 + 只要得到Location对象，就可以检索"geocode"了，它可以将经纬度转换为实际的地址。
 + 如果得到正确的地址，就输出到textOut。
-+ LocationListener接口中还有许多其它的回调方法，这里没有用到这些功能，因此留空。
++ ``LocationListener``接口中还有许多其它的回调方法，这里没有用到这些功能，因此留空。
 
 
 % ====Manifest file====
@@ -457,7 +457,7 @@ public class WhereAmI extends Activity implements LocationListener { // #{1}
 
 % The manifest file for this app is fairly standard. Notice that in order to be able to register as a location listener, we have to hold the appropriate permissions. Keep in mind that although we have GPS and Network as two most commonly used Location Providers, Android is built with extensibility in mind. In the future, we may have other types of providers as well. For that reason, Android breaks down the location permissions into abstract fine location and coarse location permissions.
 
-这个app的Manifest文件也很普通。需要留意的一个地方是，要注册Location的侦听器(Listener)，必先获取相应的权限。GPS和网络是最常用的Location信息源，不过Android也预留了其它信息源的扩展接口——未来也可能有更好更精确的信息源出现。为此，Android将位置信息的权限分成了两级：精确位置(Fine Location)和近似位置(Coarse Location)。
+这个app的Manifest文件也很普通。需要留意的一个地方是，要注册LocationListener，必先获取相应的权限。GPS和网络是最常用的位置信息源，不过Android也预留了其它信息源的扩展接口——未来也可能有更好更精确的信息源出现。为此，Android将位置信息的权限分成了两级：精确位置(Fine Location)和近似位置(Coarse Location)。
 
 **Example 13.5. AndroidManifest.xml**
 {CODE}
@@ -482,7 +482,7 @@ public class WhereAmI extends Activity implements LocationListener { // #{1}
 
 % + Declares that this app uses location providers. The location permissions could be android.permission.ACCESS_FINE_LOCATION for a GPS provider or android.permission.ACCESS_COARSE_LOCATION for a wireless network provider.
 
-+ 声明这个app使用了Location信息源。针对GPS，它的权限是``android.permission.ACCESS_FINE_LOCATION``；针对无线网，它的权限是``android.permission.ACCESS_COARSE_LOCATION``。
++ 声明这个app使用了位置信息源。针对GPS，它的权限是``android.permission.ACCESS_FINE_LOCATION``；针对无线网，它的权限是``android.permission.ACCESS_COARSE_LOCATION``。
 
 
 % At this point, your WhereAmI application is complete. It illustrates how to use LocationManager to get the actual location via a specific location provider and how to convert that location into known addresses via Geocoder. An example of the result is shown in Figure 13.2, “WhereAmI”.
@@ -506,7 +506,7 @@ WhereAmI程序只是用来演示位置服务使用方法的小样例。接下来
 
 % First, the user may not want to broadcast her location to the world, so we should ask. A good place to ask would be the Preferences. And to do that, this time around, we’ll use a ListPreference property. This is somewhat different from the EditTextPreferences we’ve seen before in Chapter 7, Preferences, File System, Options Menu, and Intents, in that it requires a list of items. In fact, it requires two lists: one to display and one to use for actual values.
 
-在将用户的位置信息广播出去之前，我们需要事先征得用户本人的同意。这不只是个人偏好，更牵涉到个人隐私。首选项就是询问用户本人意愿的一个好地方。在这里，我们可以使用ListPreference。它可以提供一列选项，同时为每个选项对应一个值。
+在将用户的位置信息广播出去之前，我们需要事先征得用户本人的同意。这不只是个人偏好，更牵涉到个人隐私。首选项就是询问用户本人意愿的一个好地方。在这里，我们可以使用``ListPreference``。它可以提供一列选项，同时为每个选项对应一个值。
 
 % So we’ll add couple of strings to our strings.xml file and create two new string resources: one to represent names of our location providers in a form friendly to human readers, and the other to represent their values. To do that, we’ll add the following to our strings.xml file:
 
@@ -770,7 +770,7 @@ public class StatusActivity extends BaseActivity implements OnClickListener,
 + 检查用户是否愿意发布自己的位置信息。
 + 如果检查通过，就使用getSystemService()获取位置信息。这个调用只是获得现有系统服务的引用，因此它的代价并不是很高昂。
 + 如果可以，获取缓存中的位置信息。
-+ 注册到LocationManager，订阅位置的更新。在这里，我们可以为位置变化指明一个时间间隔以及位置间距。我们只关心城市级别的位置变化，因此将间距的值定为一千米，时间间隔定为一小时(3,600,000微秒)。留意这只是给系统的一个提示，而非强制。
++ 注册到``LocationManager``，订阅位置的更新。在这里，我们可以为位置变化指明一个时间间隔以及位置间距。我们只关心城市级别的位置变化，因此将间距的值定为一千米，时间间隔定为一小时(3,600,000微秒)。留意这只是给系统的一个提示，而非强制。
 + 在用户发布消息时，检查当前是否有位置信息存在。如果有，就把它放在一个double类型的数组里，传给Twitter对象的``setMyLocation()``方法。
 + 实现LocationManager触发的回调方法，``onLocationChanged()``。它在位置变化时触发，以一个新的Location对象作为参数。
 + 这个方法在位置信息源不可用时触发。我们可以在这里注销订阅，以节约电能。
