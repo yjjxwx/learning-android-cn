@@ -35,7 +35,7 @@ Broadcast Receiver是Android中发布/订阅机制(又称为//Observer模式//)�
 
 % It would be much cleaner and simpler if somehow UpdaterService was started automatically by the system when the device is powered up. To do this, we create BootReceiver, a broadcast receiver that will get launched by the system when the boot is complete, and in turn will launch our TimelineActivity activity. The following few lines sets up our broadcast receiver.
 
-如果能让UpdaterService随着系统启动而自动启动，那就可以省去用户的手工操作了。为此，我们将新建一个Broadcast Receiver用以响应系统启动的事件，即``BootReceiver``，并由它负责启动UpdaterService。
+如果能让UpdaterService随着系统启动而自动启动，那就可以省去用户的手工操作了。为此，我们将新建一个Broadcast Receiver用以响应系统启动的事件，即``BootReceiver``，并由它负责启动UpdaterService。BootReciever的代码只有如下几行：
 
 % TALK: 怀疑是原文错误： and in turn will launch our TimelineActivity activity. 根据下面的代码看应该是 UpdaterService
 % TALK: 支持楼上。
@@ -119,11 +119,11 @@ public class BootReceiver extends BroadcastReceiver { // #{1}
 
 % At this point, you can reboot your device. Once it comes back up, your UpdaterService should be up and running. You can verify that either by looking at the LogCat for our output, or by using System Settings and checking that the service is running.
 
-接下来重启设备。重启之后若一切正常，UpdaterService就应该处于运行状态了。你可以通过LogCat的输出来检查它是否启动成功，也可以通过System Settings查看它是否存在于当前正在运行的Service列表。
+接下来重启设备。重启之后若一切正常，UpdaterService就应该处于运行状态了。你可以通过LogCat的输出来检查它是否启动成功，也可以通过System Settings检查它是否存在于当前正在运行的Service列表。
 
 % To verify via System Settings, at the Home screen, click on th Menu button and choose Settings→Applications→Running Services. You should see UpdaterService listed there. At this point, you know the BootReceiver did indeed get the broadcast and has started the UpdaterService.
 
-通过System Settings的话，可以回到主屏幕，点击菜单按钮，选择``Settings→Applications→Running Services``。如果正常，即可在列表中见到UpdaterService，表示BootReceiver已经收到了系统广播的事件，并成功地启动了Service。
+要使用System Settings，可以回到主屏幕，点击菜单按钮，选择``Settings→Applications→Running Services``。如果正常，即可在列表中见到UpdaterService，表示BootReceiver已经收到了系统广播的事件，并成功地启动了UpdaterService。
 
 
 % == The TimelineReceiver ==
@@ -224,7 +224,7 @@ filter = new IntentFilter("com.marakana.yamba.NEW_STATUS"); // #{1}
 
 
 % == Broadcasting Intents ==
-== 广播 Intent ==
+== 发送广播 ==
 
 % Finally, to trigger the filter, we need to broadcast an intent that matches the action that the intent filter is listening for. In case of BootReceiver, earlier, we didn’t have to do this because the system was already broadcasting the appropriate intent. However, for TimelineReceiver, the broadcast is ours to do because the intent is specific to our application.
 
@@ -307,7 +307,7 @@ private class Updater extends Thread {
 
 % With the current design, our service will start automatically at boot time and will attempt to connect to the cloud and retrieve latest updates approximately every minute. One of the problems with the current design is that the service will try to do so even when there’s no Internet connection available. This adds unnecessary attempts to wake up the radio and connect to the server, all of which is taxing the battery. Imagine how many wasteful attempts would be made while your phone is in Flight Mode on a cross-country flight. This highlights some of the inherit constraints for programming for mobile devices - we’re limited by the battery life and network connectivity.
 
-现在，我们的Service已经可以跟随系统启动，并每分钟定时尝试连接服务端以获取数据。但这样的设计存在一个问题，那就是即使设备没有联网，程序仍定时试图连接服务端抓取数据，这样只会无谓地浪费电能。假如你正在坐一趟国际航班，上面没有网络连接，几个小时下来不难想像这将多么浪费。电能与网络连接情况都不是永久的，我们应尽量减少无谓的操作。
+现在，我们的Service已经可以跟随系统启动，并每分钟定时尝试连接服务端以获取数据。但这样的设计存在一个问题，那就是即使设备没有联网，程序仍定时试图连接服务端抓取数据，这样只会无谓地浪费电能。假如你正在坐一趟国际航班，上面没有网络连接，几个小时下来不难想像这将多么浪费。电能与网络连接都不是永久的，我们应尽量减少无谓的操作。
 
 % A better approach would be to listen to network availability broadcasts and use that information to intelligently turn the service off when the Internet is unavailable and turn it back on when data connection comes back up. The system does send an intent whenever connection availability changes. Another system service allows us to find out what changed and act accordingly.
 
@@ -357,7 +357,7 @@ public class NetworkReceiver extends BroadcastReceiver { // #{1}
 % + If the flag was false, we know that the network has changed and is now available. So we start our UpdaterService, the inverse of our previous stop action.
 
 + 同前面一样，它也是``BroadcastReceiver``的子类。
-+ 系统会在这条Intent中加入一组附加数据，表示网络的连接情况。也就是``ConnectivityManager.EXTRA_NO_CONNECTIVITY``所对应的布尔值。前面我们曾为自己的Intent加入附加数据，在这里相反，只管取出数据即可。若这个值为true，则表示网络断开。
++ 系统会在发送广播时，在这条Intent中加入一组附加数据，表示网络的连接情况，也就是``ConnectivityManager.EXTRA_NO_CONNECTIVITY``所对应的布尔值。前面我们曾为自己的Intent加入附加数据，在这里相反，只管取出数据即可。若这个值为true，则表示网络断开。
 + 如果网络断开，则向UpdaterService发送一条Intent，令它停止。通过系统传入的Context对象。
 + 如果网络连接，则启动UpdaterService，与前面相反。
 
@@ -412,7 +412,7 @@ public class NetworkReceiver extends BroadcastReceiver { // #{1}
 
 % As discussed in the section called “Updating Manifest File for Internet Permission”, an application must be granted permissions to access certain restricted features of the system, such as connecting to Internet, sending SMS messages, making phone calls, reading the user’s contacts, taking photos, and so on. It is user who has to grant all or none of the permissions to the application at installation time, and it is the job of the application developer to list all the permissions the app needs to successfully run by adding the <uses-permission> element to the manifest file. So far, we’ve added permissions to Yamba in order to access the Internet, kick off our boot-time service, and learn about network changes.
 
-前面我们曾讨论过，应用程序若要访问系统的某项功能(比如连接网络、发短信、打电话、读取通讯录、拍照等等)，那就必须获取相应的权限。比如Yamba，就需要连接网络、监视系统启动、监视网络连接情况这三项权限。它们都在Manifest文件中<user-permission>部分给出了声明，至于能否得到这些权限，则由用户在安装时决定。
+我们曾在第六章的 //更新Manifest文件，获取Internet权限//  一节讨论过，应用程序若要访问系统的某项功能(比如连接网络、发短信、打电话、读取通讯录、拍照等等)，那就必须获取相应的权限。比如现在的Yamba，就需要连接网络、监视系统启动、监视网络连接情况这三项权限。它们都在Manifest文件中<user-permission>部分给出了声明，至于能否得到这些权限，则由用户在安装时决定，要么全部赋予，要么全部拒绝。
 
 % But now that we have our Updater service sending a broadcast action to our Timeline receiver, we may want to restrict permission to send and receive that broadcast to our own app. Otherwise, it would be possible for another app, knowing what our action looks like, to send it and cause actions in our application that we didn’t intent.
 
@@ -471,6 +471,7 @@ public class NetworkReceiver extends BroadcastReceiver { // #{1}
 + 定义另一项权限，用于保护Timeline更新事件的接收。步骤与上相同。
 + 给出了这些定义之后，我们仍需为应用程序申请这些权限。这里就同申请系统权限一样了，通过<uses-permissions>标签。
 
+
 % At this point, we have defined our two custom permissions and have requested them for our application. Next, we need to make sure the sender and receiver both play by the rules.
 
 到这里，我们添加了两项自定义的权限，也为应用程序申请了对这两项权限。接下来，我们需要保证广播的发布者与订阅者分别能够符合自己的权限。
@@ -518,8 +519,6 @@ UpdaterService会在每次收到新数据时广播一条Intent，但我们不希
   } // Updater
   ...
 {/CODE}
-
-
 
 % + This is the name of the permission that we are requiring the receiver to have. It needs to be the same as the permission name in the manifest file that we specified previously.
 % + To enforce the permission on the receiver, we simply add it to the sendBroadcast() call as the optional second parameter. If the receiver doesn’t have this particular permission granted to it by the user, the receiver won’t be notified and will never know that our message just got dropped.
@@ -569,14 +568,14 @@ public class TimelineActivity extends BaseActivity {
 
 % We now have a pair of custom permissions and we are enforcing them in both the sender and the receiver of the broadcast. This illustrates some of the capabilities of Android to fine-tune the permission system.
 
-现在，我们已为双方应用了权限机制。读者可以在这个过程中体会Android权限机制的精妙之处。
+现在，我们已为收发双方应用了权限机制。读者可以在这个过程中体会Android权限机制的精妙之处。
 
 % == Summary ==
 == 小结 ==
 
 % Yamba is now complete and ready for prime time. Our application can now send status updates to our online service, get the latest statuses from our friends, get started automatically on boot time, and be refreshed live when a new status is received.
 
-到这里，Yamba已经接近完工，它已经可以发送消息、阅读Timeline、自动启动，以及即时更新Timeline的显示。
+到这里，Yamba已经接近完工，它已经可以发送消息、阅读Timeline、开机自动启动，以及在收到新消息时更新Timeline的显示。
 
 % __Figure 11.1, “Yamba Completion”__ illustrates what we have done so far as part of the design outlined in __Figure 5.4, “Yamba Design Diagram”__.
 

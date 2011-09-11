@@ -190,7 +190,7 @@
 {TRAN}Content Provider是应用程序之间共享数据的接口。Android默认使每个应用程序都运行在沙盒(sandbox)里面，自己的数据与外面的程序完全隔离，要传递数据则必须依赖一些特定的接口。少量数据通过Intent传递即可，大量的数据就需要Content Provider了。为此，Content Provider提供了一套很好的按照[CRUD原则 http://en.wikipedia.org/wiki/Create,_read,_update_and_delete]设计的接口，如//图4.4//。
 
 {ORGI}Android system uses this mechanism all the time. For example, Contacts Provider is a content provider that exposes all users contacts data to various applications. Settings Provider exposes system settings to various applications including the built-in Settings application. Media Store is responsible for storing and sharing all various media, such as photos, and music across various applications. [增加 Figure 4.5, “Contacts application using Contacts Provider to get the data” illustrates how the Contacts app uses Contacts Provider, a totally separate application, to retrieve data about users’ contacts. The Contacts app itself doesn’t have any contacts data, and Contacts Provider doesn’t have any user interface.]
-{TRAN}Android将这种机制应用到了方方面面。比如Contact Provider专为不同的应用程序提供联系人数据，Setting Provider专为不同的应用程序提供系统的配置信息，Media Store为不同的应用程序提供多媒体信息(比如图片、音乐)的存储与分享，等等。
+{TRAN}Android将这种机制应用到了方方面面。比如Contacts Provider专为不同的应用程序提供联系人数据，Settings Provider专为不同的应用程序提供系统的配置信息，Media Store为不同的应用程序提供多媒体信息(比如图片、音乐)的存储与分享，等等。
 
 	**图4.5  Contacts Provider**
 		[images/04-Contacts-Provider.png]
