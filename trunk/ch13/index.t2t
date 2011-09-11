@@ -6,26 +6,26 @@
 
 % Like many modern operating systems, Android comes with a number of system services that are always on, always running, and readily available to developers to tap into. These system services include things like Location service, Sensor service, WiFi service, Alarm service, Telephony service, Bluetooth service, and so on. System services are started at boot time and are guaranteed to be running by the time your application launches.
 
-同其它现代操作系统一样，Android也内置了一系列的系统服务。它们都是随着系统启动，并一直处于运行状态，随时可供开发者访问。比如Location服务、Sensor服务、WiFi服务、Alarm服务、Telephony服务、Bluetooth服务等等。
+同其它现代操作系统一样，Android也内置了一系列的系统服务。它们都是随着系统启动，并一直处于运行状态，随时可供开发者访问。比如位置服务、传感器服务、WiFi服务、Alarm服务、Telephony服务、Bluetooth服务等等。
 
 % In this chapter, we’ll see how we can use some of the system services to further expand the Yamba application. First we’ll take a look at the Sensor service in a small example in order to demonstrate some of the concepts that are common to most of the system services. Then we’ll add support for location information to our status updates via the Location service.
 
-本章介绍几个常见的系统服务，并思考如何将它们应用到Yamba。我们先在一个小例子里引入Sensor服务，借以观察系统服务的一般特性，然后通过Location服务为Yamba添加地理坐标的功能。
+本章介绍几个常见的系统服务，并思考如何将它们应用到Yamba。我们先在一个小例子里引入传感器服务，借以观察系统服务的一般特性，然后通过位置服务为Yamba添加地理坐标的功能。
 
 % Additionally, we’re going to refactor the Yamba application to take advantage of Intent Service support. This will demonstrate how to use Alarm service and will make our Updater slightly more efficient and simpler.
 
-另外，我们会重构Yamba的代码来获得Intent服务的支持，继而引出Alarm服务，并凭借它们优化Updater的实现。
+另外，我们会重构Yamba的代码来获得``IntentService``的支持，继而引出Alarm服务，并凭借它们优化UpdaterService的实现。
 
 % ==Compass Demo==
-==实例：Compass==
+==实例：指南针==
 
 % To start with system services, we are going to look at a simple, self-contained example of a compass application. This application uses the Sensor service to get updates from the orientation sensor and use its information to rotate a Rose, our custom UI component. The Sensor service is very typical of system services and a relatively easy one to understand.
 
-理解系统服务，我们先从一个简单的样例——指南针(Compass)——开始。它可以通过Sensor服务获得传感器的输出，旋转屏幕上的表盘(Rose)显示方位。Sensor服务是个有代表性的系统服务，也不难懂。
+理解系统服务，我们先从一个简单的样例——指南针(Compass)——开始。它可以通过传感器服务获得传感器的输出，旋转屏幕上的表盘(Rose)显示方位。传感器服务是个有代表性的系统服务，也不难懂。
 
 % To build this example, we’ll create an activity that will get the Sensor service and register for updates from a particular sensor. Next, we’ll build the Rose that will rotate on the screen based on the sensor readings.
 
-在例子中，我们先创建一个Activity，由它来访问Sensor服务，订阅来自传感器的输出。然后自定义一个表盘控件(Rose)，使之可以依据传感器端得到的数据旋转一定的角度。
+在例子中，我们先创建一个Activity，由它来访问传感器服务，订阅来自传感器的输出。然后自定义一个表盘控件(Rose)，使之可以依据传感器端得到的数据旋转一定的角度。
 
 %NOTE: Compass Rose,表盘。翻成“玫瑰”就笑话大了。
 
@@ -49,11 +49,11 @@
 
 % To code our Compass demo application, we get SensorManager, the class that represents the Sensor system service. We make our main activity implement SensorEventListener so that we can register it (i.e. this) to get updates for a specific sensor. We register and unregister the listener in onResume() and onPause() respectively. To implement the sensor listeners, our activity provides onAccuracyChanged() and onSensorChanged(). The former is a requirement, but we’ll leave it empty because the accuracy of the orientation sensor is not expected to change. The latter call is what’s really of interest to us.
 
-表示Sensor系统服务的类是SensorManager，接下来就是跟它打交道了。在Activity中实现一个SensorEventListener，将它注册到SensorManager中即可订阅特定传感器的更新。为了省电，我们将传感器操作安排在``onResume()``与``onPause()``之间。然后实现侦听器(Listener)，在Activity中提供``onAccuracyChanged()``和``onSensorChanged()``两个方法。前者必须，后者可选。不过我们对传感器的精度(Accuracy)并无兴趣——因为方向传感器(Orientation Sensor)的精度在中间并不会发生变化，我们真正感兴趣的是它的数据。所以在这里我们将前者留空，而提供后者的实现。
+表示Sensor系统服务的类是``SensorManager``，接下来就是跟它打交道了。在Activity中实现一个``SensorEventListener``，将它注册到``SensorManager``中即可订阅特定传感器的更新。为了省电，我们将传感器操作安排在``onResume()``与``onPause()``之间。然后实现侦听器(Listener)，在Activity中提供``onAccuracyChanged()``和``onSensorChanged()``两个方法。前者必须，后者可选。不过我们对传感器的精度(Accuracy)并无兴趣——因为方向传感器(Orientation Sensor)的精度在中间并不会发生变化，我们真正感兴趣的是它的数据。所以在这里我们将前者留空，而提供后者的实现。
 
 % When the orientation sensor changes, the Sensor service calls back our sensor listener via onSensorChanged() and reports the new sensor data. The data always comes back as an array of float values that represent degrees and therefore range from 0 to 359. In the case of orientation sensor, the elements represent the following dimensions, illustrated in Figure 13.1, “Axis”:
 
-在方向传感器状态变化时，Sensor服务会回调``onSensorChanged()``，通知侦听器(Listener)得到了新数据。这些数据都是0~359之间的浮点数组成的数组。方位角(azimuth)与磁偏角(pitch与roll)，构成了下边的坐标，如图13.1：
+在方向传感器状态变化时，传感器服务会回调``onSensorChanged()``，通知侦听器(Listener)得到了新数据。这些数据都是0~359之间的浮点数组成的数组。方位角(azimuth)与磁偏角(pitch与roll)，构成了下边的坐标，如 //图13.1//：
 
 %NOTE: 磁偏角：磁针指示的方向并不是正南正北，而是微偏西北和东南，这在科学上称为磁偏角。
 
@@ -76,14 +76,13 @@
 
 
 % ===Compass Main Activity===
-===Compass的主界面===
+===指南针的主界面===
 
 % The main Compass activity sets the Rose as its only widget on the screen. It also registers with SensorManager to listen to sensor events, and updates the Rose orientation accordingly.
 
-指南针的主界面里只有一个控件，那就是表盘(Rose)。它也将自己注册给SensorManager，监听传感器的事件，调整表盘的角度。
+指南针的主界面里只有一个控件，那就是表盘(Rose)。它也将自己注册给``SensorManager``，监听传感器的事件，调整表盘的角度。
 
 **Example 13.1. Compass.java**
-
 {CODE}
 package com.marakana;
 
@@ -174,14 +173,14 @@ public class Compass extends Activity implements SensorEventListener { //#{1}
 % + We are interested in the first element of the array of new values reported.
 % + Once we have the new orientation, we update our Rose widget to rotate accordingly.
 
-+ Compass会监听来自传感器的事件，因此需要提供SensorEventListener接口的实现。
-+ 定义几个私有变量，分别表示传感器对象(sensor)，SensorManager与表盘(rose)。
-+ 初始化sensor是个一次性的操作，因此我们把它放在``onCreate()``中执行。
++ ``Compass``会监听来自传感器的事件，因此需要提供``SensorEventListener``接口的实现。
++ 定义几个私有变量，分别表示传感器对象(sensor)，``SensorManager``与表盘(rose)。
++ 初始化``sensor``是个一次性的操作，因此我们把它放在``onCreate()``中执行。
 + 设置此Activity的状态为全屏。
-+ 创建一个Rose控件的实例，这是我们自定义的控件。
-+ 这个Activity中唯一的控件就是Rose。这算是个特殊情况，一般而言，在这个地方多是引用XML资源表示的Layout。
-+ 获得SensorManager对象。
-+ 通过SensorManager对象，选择我们关心的传感器。
++ 创建一个``Rose``控件的实例，这是我们自定义的控件。
++ 这个Activity中唯一的控件就是``Rose``。这算是个特殊情况，一般而言，在这个地方多是引用XML资源表示的Layout。
++ 获得``SensorManager``对象。
++ 通过``SensorManager``对象，选择我们关心的传感器。
 + 同前面所说，在``onResume()``中将自己注册到系统服务，侦听传感器的输出。
 + 对应``onResume()``，在onPause()``中注销系统服务。
 + 依然提供``onAccuracyChanged()``的实现，因为这对SensorEventListener接口来说是必需的。但是留空，前面已有解释。
@@ -201,11 +200,11 @@ public class Compass extends Activity implements SensorEventListener { //#{1}
 
 % Rose is our custom UI widget showing the rose of a compass that can be rotated like a real compass. Every UI widget in Android needs to be a subclass of View. But since this is an image, we’ll start from a higher starting point, in this case the ImageView class, which is a View. By subclassing ImageView, our Rose inherits some useful methods to load an image and draw it on the screen.
 
-Rose是我们自定义的UI控件，它可以旋转，表示指南针的表盘。Android中的任何UI控件都是View的子类。Rose的主要部分是一个图片，这一来我们可以让它继承自ImageView类，在较高的层面上实现它，从而可以使用原有的方法实现装载并显示图片。
+``Rose``是我们自定义的UI控件，它可以旋转，表示指南针的表盘。Android中的任何UI控件都是``View``的子类。``Rose``的主要部分是一个图片，这一来我们可以让它继承自``ImageView``类，在较高的层面上实现它，从而可以使用原有的方法实现装载并显示图片。
 
 % With any custom UI widget, one of the most important methods is onDraw(), which draws the widget onto a Canvas that is provided to the method. In case of our Rose, we rotate this canvas around its middle point for the same number of degrees as reported by the orientation sensor. Next, we draw the image onto this rotated sensor as it would have normally be drawn by the super class. The result is a rotated compass rose representing the direction we are pointing to.
 
-自定义一个UI控件，``onDraw()``方法最为重要。它负责控件的绘制与显示。我们需要覆盖父类的逻辑，使图片可以按圆心旋转一定的度数，以表示指南针的方位。
+自定义一个UI控件，``onDraw()``算是最重要的方法之一，它负责控件的绘制与显示。在``Rose``这里，图片的绘制可由父类完成，我们需要做的就是添加自己的逻辑，使图片可以按圆心旋转一定的度数，以表示指南针的方位。
 
 **Example 13.2. Rose.java**
 
@@ -253,13 +252,13 @@ public class Rose extends ImageView { //#{1}
 % + setDirection() is called by the Compass activity to update the direction of the rose based on the values that sensor manager reported.
 % + Calling invalidate() on a view marks it for redrawing, which happens later via a call to onDraw().
 
-+ 我们的控件必须是View的子类。它大体就是一张图片，因此可以让它继承自ImageView，得以使用现有的功能。
-+ ImageView本身已有设置图片内容的方法，我们需要做的就是为它指明相应的图片。留意，compassrose.jpg文件在/res/drawable之下。
-+ ``onDraw()``由Layout Manager负责调用。它会传递过来一个Canvas对象，你可以在这里执行自定义的绘制操作。
-+ 已获得Canvas对象，可以计算自身的宽高。
-+ 简单地以中点为圆心，旋转整个Canvas(按度数)。
-+ 通知super将图片绘制到这个旋转了的Canvas上。到这里表盘就显示出来了。
-+ ``setDirection()``由Compass负责调用，它会根据传感器中获得的数据调整Rose的方向。
++ 我们的控件必须是``View``的子类。它大体就是一张图片，因此可以让它继承自``ImageView``，得以使用现有的功能。
++ ``ImageView``本身已有设置图片内容的方法，我们需要做的就是为它指明相应的图片。留意，``compassrose.jpg``文件在``/res/drawable``之下。
++ ``onDraw()``由Layout Manager负责调用，指示控件来绘制自己。它会传递过来一个``Canvas``对象，你可以在这里执行自定义的绘制操作。
++ 已获得``Canvas``对象，可以计算自身的宽高。
++ 简单地以中点为圆心，按度数旋转整个``Canvas``。
++ 通知``super``将图片绘制到这个旋转了的``Canvas``上。到这里表盘就显示出来了。
++ ``setDirection()``由``Compass``负责调用，它会根据传感器中获得的数据调整Rose的方向。
 + 对View调用``invalidate()``，就可以要求它重绘。也就是在稍后调用``onDraw()``。
 
 
@@ -444,7 +443,7 @@ public class WhereAmI extends Activity implements LocationListener { // #{1}
 + 在当前上下文通过``getSystemService()``获取LocationManager的引用。有关//当前上下文//的有关内容，可见``Application Context``一节。
 + 创建一个Geocoder的实例，将当前上下文传递给它。
 + 还需要一段时间才可以获得新的位置信息。因此LocationManager会缓存着上次得到的地址，可以减少用户的等待。
-+ 同前面一样，在进入Running状态之前也就是``onResume`()``时注册到系统服务。在这里，通过``requestLocationUpdates()``订阅Location服务的更新。
++ 同前面一样，在进入Running状态之前也就是``onResume`()``时注册到系统服务。在这里，通过``requestLocationUpdates()``订阅位置服务的更新。
 + 在离开Running状态之后也就是``onPause()``时注销。
 + ``onLocationChanged()``是LocationManager负责调用的一个回调方法，在位置信息发生变化时触发。
 + 得到了Location对象。它里面有不少有用的信息，我们格式化一下，使之容易阅读。
@@ -496,11 +495,11 @@ public class WhereAmI extends Activity implements LocationListener { // #{1}
 
 
 %==Updating Yamba to Use the Location Service==
-==用上Location服务，重构Yamba==
+==用上位置服务，重构Yamba==
 
 % The WhereAmI application was a small standalone test to make sure we can get location information. Now we’ll incorporate location information into our larger Yamba app.
 
-WhereAmI程序只是用来演示Location服务使用方法的小样例。接下来，我们将Location服务应用到Yamba里面。
+WhereAmI程序只是用来演示位置服务使用方法的小样例。接下来，我们将位置服务应用到Yamba里面。
 
 % ===Updating Our Preferences===
 ===更新首选项===
@@ -600,7 +599,7 @@ getter函数准备就绪，接下来重构StatusActivity即可。
 
 % The Status activity is the main place where we use the location information. Just as in the WhereAmI demo, we’re going to get the Location manger by calling getSystemService() and register for location updates. We’re also going to implement the LocationListener interface, which means adding a number of new callback methods to this activity. When the location does change, we’ll update the location object, and next time around when we update our status online, we’ll have proper location information.
 
-StatusActivity是位置信息。同WhereAmI一样，我们仍调用LocationManager的``getSystemService()``，并注册到Location服务订阅其更新。也同样实现一个LocationListener接口，也就意味着需要在Activity里面添加几个回调方法，好在位置变化时得到新的location对象。到下次更新状态的时候，即可在这里看到我们的位置信息。
+StatusActivity是位置信息。同WhereAmI一样，我们仍调用LocationManager的``getSystemService()``，并注册到位置服务，订阅其更新。也同样实现一个LocationListener接口，也就意味着需要在Activity里面添加几个回调方法，好在位置变化时得到新的location对象。到下次更新状态的时候，即可在这里看到我们的位置信息。
 
 **Example 13.8. StatusActivity.java**
 
@@ -791,11 +790,11 @@ public class StatusActivity extends BaseActivity implements OnClickListener,
 
 % Now that we understand how system services work, we can use another service concept to substantially simplify our Updater service. If you recall, our Updater service is an always-on, always-running service that periodically goes to the cloud and pulls down the latest timeline updates. Since by default a service runs in the same thread as the User Interface (i.e., runs on the UI thread), we had to create a separate thread called Updater within the Updater service that is responsible for the actual network connection. We then started this thread in the service’s onCreate() and onStartCommand() methods. We ran it forever until onDestroy() got called. However, our Updater thread would sleep between the updates for some amount of time. All this worked well and we explained it all in Chapter 8, Services. But there’s a simpler way to accomplish this task.
 
-我们已对系统服务的工作方式有所了解，接下来可以利用系统服务的有关特性，简化UpdaterService的实现。回忆下前面的内容：UpdaterService会一直运行，定期从服务端抓取Timeline的更新。由于Service默认与UI在同一个线程(或者说，都在UI线程中执行)中执行，为避免网络操作造成界面的响应不灵，我们需要新建一个Updater线程，并将UpdaterService放在里面独立执行。然后在Service的``onCreate()``与``onStartCommand()``中让线程开始，并一直执行下去，直到``onDestroy()``为止。另外，Updater会在两次更新之间休眠一段时间。这是第八章所讲的内容，但在这里，我们将介绍更简便的实现方法。
+我们已对系统服务的工作方式有所了解，接下来可以利用系统服务的有关特性，简化UpdaterService的实现。回忆下前面的内容：UpdaterService会一直运行，定期从服务端抓取Timeline的更新。由于Service默认与UI在同一个线程(或者说，都在UI线程中执行)中执行，为避免网络操作造成界面的响应不灵，我们需要新建一个Updater线程，并将UpdaterService放在里面独立执行。然后在Service的``onCreate()``与``onStartCommand()``中让线程开始，并一直执行下去，直到``onDestroy()``为止。另外，UpdaterService会在两次更新之间休眠一段时间。这是 //第八章 Service// 中的内容，但在这里，我们将介绍更简便的实现方法。
 
 % An IntentService is a subclass of Service and is also activated by a startService() intent. It differs from a regular service by running on its own worker thread, so it doesn’t block our precious UI thread. Also, once it’s done, it’s done. This means it runs only once, but we will use an Alarm later to run it periodically. Any call to the intent’s startService() will recreate it.
 
-IntentService是Service的一个子类，也是通过``startService()``发出的intent激活。与一般Service的不同在于，它默认在一个独立的工人线程(Worker Thread)中执行，因此不会阻塞UI线程。另一点，它一旦执行完毕，生命周期也就结束了。不过只要接到``startService()``发出的Intent，它就会新建另一个生命周期，从而实现重新执行。在此，我们可以利用Alarm实现定期执行。
+``IntentService``是``Service``的一个子类，也是通过``startService()``发出的intent激活。与一般Service的不同在于，它默认在一个独立的 //工人线程//(//Worker Thread//)中执行，因此不会阻塞UI线程。另一点，它一旦执行完毕，生命周期也就结束了。不过只要接到``startService()``发出的Intent，它就会新建另一个生命周期，从而实现重新执行。在此，我们可以利用Alarm服务实现定期执行。
 
 % Unlike a regular service, we don’t override onCreate(), onStartCommand(), onDestroy(), and onBind(), but rather a new onHandleIntent() method. This method is where we want to put our code that goes online and handles the network updates. Also, unlike a regular Service, an IntentService has a default constructor that needs to be provided.
 
@@ -803,11 +802,11 @@ IntentService是Service的一个子类，也是通过``startService()``发出的
 
 % In short, instead of creating a separate thread and delaying network updates in regular Service, we can simplify our code by using an IntentService to run status updates on its worker thread. Now we just need something to periodically wake up our IntentService so it knows it needs to handle the updating job. For that, we’ll use the Alarm manager, another system service.
 
-简言之，除了创建一个独立线程使用普通的Service之外，我们可以使用IntentService在它自己的工人线程中实现同样的功能，而且更简单。到现在剩下的只是定期唤醒它，这就引出了AlarmManager，另一个系统服务。
+简言之，除了创建一个独立线程使用普通的Service之外，我们可以使用IntentService在它自己的工人线程中实现同样的功能，而且更简单。到现在剩下的只是定期唤醒它，这就引出了``AlarmManager``——另一个系统服务。
 
 % The key to Intent Services is the onHandleIntent() method, a block of code that will run on a separate thread.
 
-以上的原理就在于，IntentService的``onHandleIntent()``会在独立的线程中执行。
+以上的原理就在于，``IntentService``的``onHandleIntent()``会在独立的线程中执行。
 
 % **Example 13.9. UpdaterService.java based on IntentService**
 **Example 13.9. UpdaterService.java，基于IntentService**
@@ -918,7 +917,7 @@ public class BaseActivity extends Activity {
 
 接下来需要做的，就是定时触发UpdaterService。因此引入AlarmManager。
 
-===Alarms===
+===AlarmManager===
 
 % The previous reincarnation of our Updater service had a regular service that was always running in a loop, where it pulled network updates, then slept for some amount of time and and looped again. With IntentService, we turned the process around. Our Updater service now runs only once when fired up by the startService() intent. So, now we need a way to have something fire these intents every so often.
 
@@ -926,7 +925,7 @@ public class BaseActivity extends Activity {
 
 % Android comes with yet another system service just for that. The Alarm service, represented by the AlarmManager class, lets you schedule certain things to happen at certain times. The time can be recurring, so that makes it easy to have our service be started every so often. And the event that happens is an intent, or more precisely a PendingIntent.
 
-这就引出了Android的另一个系统服务——Alarm服务。它由AlarmManager控制，允许你在一定时间之后触发某操作。它可以是一次结束，也可以是周期重复，因此可以利用它来定时启动我们的Service。Alarm服务通知的事件都是以Intent形式发出，或者更准确一点，以PendingIntent的形式。
+这就引出了Android的另一个系统服务——Alarm服务。它由``AlarmManager``控制，允许你在一定时间之后触发某操作。它可以是一次结束，也可以是周期重复，因此可以利用它来定时启动我们的Service。Alarm服务通知的事件都是以Intent形式发出，或者更准确一点，以PendingIntent的形式。
 
 %NOTE: PendingIntent在第四五章似乎提到过，留意。
 
@@ -934,11 +933,11 @@ public class BaseActivity extends Activity {
 
 % A PendingIntent is a combination of an intent with an action to be executed on it. This is typically used for future intents that you are passing to someone else. Create a Pending Intent via one of the static methods in the PendingIntent class. Since there are only handful of ways to send an intent, there are only a handful of static methods to create Pending Intents along with their actions. If you recall, you typically use an intent to start an activity via startActivity(), start a service via startService(), or send a broadcast via sendBroadcast(). So to create a Pending intent that will execute startService() with our intent in the future, we call the getService() static method.
 
-PendingIntent是Intent与某操作的组合。一般是把它交给他人，由他人负责发送，并在未来执行那项操作。发送Intent的方法并不多，创建PendingIntent的方法也是如此——只有PendingIntent类中的几个静态方法，在创建的同时也将相关的操作绑定了。回忆一下，同为发送Intent，启动Activity靠startActivity()，启动Service靠startService()，发送广播靠sendBroadcast()，而创建对应于startService()操作的PendingIntent，靠它的静态方法getService()。
+PendingIntent是Intent与某操作的组合。一般是把它交给他人，由他人负责发送，并在未来执行那项操作。发送Intent的方法并不多，创建PendingIntent的方法也是如此——只有PendingIntent类中的几个静态方法，在创建的同时也将相关的操作绑定了。回忆一下，同为发送Intent，启动Activity靠``startActivity()``，启动Service靠``startService()``，发送广播靠``sendBroadcast()``，而创建对应于``startService()``操作的PendingIntent，则靠它的静态方法``getService()``。
 
 % Now that we know how to leave an intent for someone to execute later and how to tell an Alarm service to do that over and over periodically, we need to choose where to implement this feature. One good place is our existing Boot Receiver. But before we do that, we’ll add another preference option to our preferences
 
-已经知道了如何交代他人发送Intent，也知道了如何通过Alarm服务实现定期执行。接下来就是找个合适的地方，将两者结合起来。而这个地方就是BootReceiver。
+已经知道了如何交代他人发送Intent，也知道了如何通过Alarm服务实现定期执行。接下来就是找个合适的地方，将两者结合起来。而这个地方就是``BootReceiver``。
 
 在编写相关的代码之前，我们先增加一条首选项：
 
@@ -1002,7 +1001,7 @@ PendingIntent是Intent与某操作的组合。一般是把它交给他人，由�
 
 % + This is the list preference. It shows as a list of entities as represented by android:entities. The value associated with it comes from android:entityValues.
 
-+ 这个选项条目是ListPreference。它显示一列单选选项，其中的文本由android:entries表示，对应的值由android:entryValues表示。
++ 这个选项条目是``ListPreference``。它显示一列单选选项，其中的文本由``android:entries``表示，对应的值由``android:entryValues``表示。
 
 %TALK: 原文错误：entityValues该是entryValues，entities该是entries。
 
@@ -1019,7 +1018,7 @@ PendingIntent是Intent与某操作的组合。一般是把它交给他人，由�
 
 % What we can do instead is use the Alarm service to periodically fire intents to start our Updater service. To do that, we’ll get the reference to the Alarm manager, create a Pending intent to be started each time, and set up the interval at which to start the updates. As our Pending intent is to start a service, we’ll use PendingIntent.getService() call, as described in the section called “Pending Intents”.
 
-适用的是，使用Alarm服务定时发送Intent启动UpdaterService。为此，我们需要得到AlarmManager的引用，创建一个PendingIntent负责启动UpdaterService，并设置一个时间间隔。要PendingIntent启动Service，就调用PendingIntent.getService()。
+适用的是，使用Alarm服务定时发送Intent启动UpdaterService。为此，我们需要得到AlarmManager的引用，创建一个PendingIntent负责启动UpdaterService，并设置一个时间间隔。要通过PendingIntent启动Service，就调用``PendingIntent.getService()``。
 
 % **Example 13.14. BootReceiver.java updated with Alarm service calls to periodically start Updater service**
 **Example 13.14. BootReceiver.java，通过Alarm服务定时启动UpdaterService**
@@ -1068,7 +1067,6 @@ public class BootReceiver extends BroadcastReceiver {
 % + We get the reference to AlarmManager via the usual getSystemService() call.
 % + setInexactRepeating() specifies that we’d like this pending intent to be sent repeatedly, but we’re not concerned with being exactly on time. The ELAPSED_REALTIME flag will keep the alarm from waking up the phone just to run the updates. The other parameters are the current time as the start time for this alarm, our desired interval, and the actual Pending intent to execute when the alarm runs.
 
-
 + ``YambaApplication``对象中有个简单的getter方法，可以返回interval选项的值。
 + 检查用户设置，如果interval的值为``INTERVAL_NEVER``(零)，那就不检查更新。
 + 这个Intent负责启动UpdaterService。
@@ -1079,7 +1077,7 @@ public class BootReceiver extends BroadcastReceiver {
 
 % You can now install our application on a device (and thus install the updated Boot Receiver), then reboot the device. Once the device starts, the logcat should indicate that the Boot receiver ran and started the Updater service by posting a Pending intent to the Alarm service.
 
-接下来可以将我们的程序安装在设备上(这就安装了更新BootReceiver)，并重启设备。在设备开机时，logcat即可观察到BootReceiver启动，并通过Alarm服务启动了UpdaterService。
+接下来可以将我们的程序安装在设备上(这就安装了更新的BootReceiver)，并重启设备。在设备开机时，logcat即可观察到BootReceiver启动，并通过Alarm服务启动了UpdaterService。
 
 
 % ==Sending Notifications==
@@ -1091,7 +1089,7 @@ public class BootReceiver extends BroadcastReceiver {
 
 % We’re going to make the Updater service responsible for posting the notifications, since it is the part of the app that knows of new statuses in the first place. To do that, we’ll get the reference to the system Notification service, create a new Notification object, and update it with the latest information. The notification itself will contain a Pending Intent so that when the user clicks on it, it takes the user to Timeline Activity to view the latest status updates.
 
-收到新消息，由UpdaterService首先得知，因此我们把通知的功能加入到UpdaterService里面：先获取Notification服务的引用，创建一个Notification对象，然后将收到消息的相关信息作为通知交给它。而Notification对象本身带有一个PendingIntent，当用户点击通知的时候，可以将界面转到TimelineActivity。
+收到新消息，由UpdaterService首先得知，因此我们把通知的功能加入到``UpdaterService``类里：先获取Notification服务的引用，创建一个Notification对象，然后将收到消息的相关信息作为通知交给它。而Notification对象本身带有一个PendingIntent，当用户点击通知的时候，可以将界面转到Timeline界面。
 
 % **Example 13.15. UpdaterService.java with Notifications**
 **Example 13.15. UpdaterService.java，利用Notification服务**
@@ -1179,16 +1177,16 @@ public class UpdaterService extends IntentService {
 
 % + Finally, we tell the Notification manager to post this notification. In this case, we do not need the ID, so we specify zero. An ID can be used to refer to a notification later, usually in order to cancel it.
 
-+ 指向NotificationManager的私有类成员，也就通过它来访问Notification系统服务。
++ 指向``NotificationManager``的私有类成员，也就通过它来访问Notification系统服务。
 + 创建一个Notification对象供类成员访问，每得到新消息需要发送通知时就更新它。
 + 调用``getSystemService()``获取Notification服务。
-+ 创建Notification对象，在稍后使用。在这里先给它指明一个图标，至于通知的文本和timestamp则暂时留空。
++ 创建Notification对象，在稍后使用。在这里先给它指明一个图标，至于通知的文本和时间戳(timestamp)则暂时留空。
 + 私有方法``sendTimelineNotification()``，在得到新消息时调用它发送通知。
 + 当用户收到通知并点击通知条目时，切换到Timeline界面，这个PendingIntent也随之销毁。 
 + 更新Notification对象的相关信息。这里是最新消息的timestamp。
-+ 要求NotificationManager在用户点击时关闭这项通知，届时通知栏将不再显示这项通知。
++ 要求``NotificationManager``在用户点击时关闭这项通知，届时通知栏将不再显示这项通知。
 + 为Notification对象提供标题(title)与简介(summary)，都是取自``string.xml``中的字符串。留意``R.string.msgNotificationMessage``里面留了一个参数，表示新消息的数目，因此我们可以使用``String.format()``。
-+ 最后，要求NotificationManager发送这条通知。在这里，我们不需要通知的ID，因此留0。ID是引用Notification对象的标识符，通常用来关闭一个通知。
++ 最后，要求``NotificationManager``发送这条通知。在这里，我们不需要通知的ID，因此留0。ID是引用Notification对象的标识符，通常用来关闭一个通知。
 
 
 % ==Summary==
@@ -1196,8 +1194,5 @@ public class UpdaterService extends IntentService {
 
 % At this point you have seen a few system services: Sensor, Location, Alarm, and Notification. There are a few more services provided by Android. You may have noticed that most of them have a lot of similarities, an hopefully you have started extrapolating certain patterns. We have also used this chapter to somewhat simplify our Updater service and introduce IntentServices and PendingIntents.
 
-到这里，我们已经观察了几个系统服务：Sensor服务、Location服务、Alarm服务以及Notification服务。除此之外，Android还提供了很多其它的系统服务，篇幅所限未能提及。但你可以留意到它们之间的共性，有一些自己的总结。另外，我们在重构UpdaterService时，也用到了``IntentService``与``PendingIntent``。
-
-
-
+到这里，我们已经观察了几个系统服务：传感器服务、位置服务、Alarm服务以及Notification服务。除此之外，Android还提供了很多其它的系统服务，篇幅所限未能提及。但你可以留意到它们之间的共性，有一些自己的总结。另外，我们在重构UpdaterService时，也用到了``IntentService``与``PendingIntent``。
 

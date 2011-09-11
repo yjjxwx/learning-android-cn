@@ -5,11 +5,11 @@
 
 % The Native Development Kit, or NDK, is an add-on to SDK that helps you integrate native code—code that uses platform-specific features, generally exposed through C or C++ language APIs—within your Android application. The NDK allows your Android application call some native code and even include some native libraries.
 
-Native Development Kit(简称NDK) ，是Android与本地代码交互的工具集。通过NDK，你可以调用平台相关的本地代码或者一些本地库。而这些库一般都是由C或者C++编写的。
+Native Development Kit(//本地代码开发包//，简称NDK) ，是Android与本地代码交互的工具集。通过NDK，你可以调用平台相关的本地代码或者一些本地库。而这些库一般都是由C或者C++编写的。
 
 % In Gingerbread release of Android, NDK takes support for native code even further with the introduction of NativeActivity class. You can now write your entire activity in C or C++. However, NativeActivity is not subject of this chapter. Here, we’ll look at integrating C native code within your Java Android application.
 
-在Android的Gingerbread版本中，NDK引入了NativeActivity，允许你使用纯C/C++来编写Activity。不过，NativeActivity 并不是本章的主题。在本章，我们将主要介绍如何在应用程序中集成原生的C代码。
+在Android的Gingerbread版本中，NDK引入了``NativeActivity``，允许你使用纯C/C++来编写Activity。不过，``NativeActivity`` 并不是本章的主题。在本章，我们将主要介绍如何在应用程序中集成原生的C代码。
 
 (译者注：Gingerbread即Android 2.3)
 
@@ -22,7 +22,7 @@ Native Development Kit(简称NDK) ，是Android与本地代码交互的工具集
 
 % Note that any native code accessible from your app via JNI still runs inside your application’s Dalvik VM. So it’s subject to the same security sand-boxing rules that Android application lives by. Writing parts of your application in C or C++ just so you can do something that may not be possible to do in Java is usually not a good reason for NDK. Keep in mind that most of the low level hardware features are already elegantly exposed via the Android framework in Java and are usually what you want to use anyhow.
 
-通过JNI调用的本地代码也同样在Dalvik VM中执行，与Java代码共处于同一个沙盒。因此，试图通过C/C++来完成一些"Java无法做到的"破坏性工作是不被推荐的。Android已经提供了一套完整且优雅的API，底层的硬件也得到了很好的封装。身为应用开发者，一般并没有干涉底层的必要。
+通过JNI调用的本地代码也同样在Dalvik VM中执行，与Java代码共处于同一个沙盒，遵循同样的安全策略。因此，试图通过C/C++来完成一些"Java无法做到的"破坏性工作是不被推荐的。Android已经提供了一套完整且优雅的API，底层的硬件也得到了很好的封装。身为应用开发者，一般并没有干涉底层的必要。
 
 
 % == Problems Solved by the NDK ==
@@ -93,7 +93,7 @@ NDK拥有完善的文档和充分的样例，也附带有标准的C/C++头文件
 
 % == NDK Example - Fibonacci ==
 
-== NDK实例： 计算Fibonacci数列 ==
+== NDK实例： 计算菲波那契数列 ==
 
 % Because the NDK is well-suited for computationally intensive applications, I wanted to find an example where we can implement a relatively simple algorithm in both native code and Java to compare their relative speed.
 
@@ -101,11 +101,11 @@ NDK拥有完善的文档和充分的样例，也附带有标准的C/C++头文件
 
 % So I picked a Fibonacci algorithm as the example. It’s a fairly simple algorithm that can be easily implemented in both C and Java. We can also implement it recursively as well as iteratively.
 
-于是，我选择了//Fibonacci数列//的算法作为实例。它足够简单，通过C和Java实现都不困难。另外在实现方式上，也有递归和迭代两种方式可供选择。
+于是，我选择了计算 //菲波那契数列//的算法作为实例。它足够简单，通过C和Java实现都不困难。另外在实现方式上，也有递归和迭代两种方式可供选择。
 
 % As a quick refresher, the Fibonacci series is defined as:
 
-在编写代码之前，先了解下//Fibonacci数列//的定义：
+在编写代码之前，先了解下//菲波那契数列//的定义：
 
 {CODE}
 fib(0)=0
@@ -127,7 +127,7 @@ fib(n)=fib(n-1)+fib(n-2)
 % 	 - Compile everything and build a shared library.
 % 	 - Use this native code inside Android activity.
 
-- 新建一个 Java 类来表示Fibonacci库。
+- 新建一个 Java 类来表示菲波那契库。
 - 生成本地代码的头文件。
 - 使用 C 来实现算法。
 - 编译并创建共享库。
@@ -138,7 +138,7 @@ fib(n)=fib(n-1)+fib(n-2)
 
 % FibLib is where we declare our algorithms for computing the Fibonacci sequence. We have a total of four versions of the Fibonacci algorithm:
 
-FibLib 中定义了//Fibonacci数列//的4种算法：
+FibLib 中定义了//菲波那契数列//的4种算法：
 
 % 	 + Java recursive version
 % 	 + Java iterative version
@@ -201,8 +201,8 @@ public class FibLib {
 %  + We declare the native Fibonacci method, but don’t implement it. Notice the use of the ``native`` keyword here. It tells the Java VM that the implementation of this method is in a shared library. The library should be loaded prior to this method call.
 %  + The previous declaration is for the recursive native implementation. This one is for the iterative version.
 
-+ Java 递归版本的 Fibonacci 算法
-+ Java 迭代版本的 Fibonacci 算法，与迭代相比省去了递归的开销。
++ Java 递归版本的菲波那契算法
++ Java 迭代版本的菲波那契算法，与迭代相比省去了递归的开销。
 + 本地版本将在共享库中实现，这里只是告诉 JVM 在需要时加载这个库。
 + 定义了对应的函数，但是并不实现他们。注意这里使用了 ``native`` 关键字。它告诉 JVM 该函数的代码在共享库中实现。在调用这个函数前应该加载对应的库。
 + 这是迭代的版本。
@@ -284,7 +284,7 @@ JNIEXPORT jlong JNICALL Java_com_marakana_FibLib_fibNI
 
 % Their input parameters are also interesting: ``JNIEnv``, ``jclass`` and ``jlong``. The first two are always part of a Java class created to interface with native code: the ``JNIEnv`` points back to the virtual machine environment, and the next parameter points back to the class or object where this method is from; the parameter is ``jclass`` for a class method or ``jobject`` for an instance method. The third parameter, ``jlong`` is just our input into the Fibonacci algorithm, our ``n``.
 
-这些参数也同样有意思：``JNIEnv``、``jclass``、``jlong``。所有的JNI函数都至少有着前两个参数：第一个参数``JNIEnv``指向Java VM的运行环境，第二个参数则表示着函数属于的类或者实例。如果属于类，则类型为``jclass``，表示它是一个类方法；如果属于实例，则类型为``jobject``，表示它是一个实例方法。第三个参数``jlong``，则表示Fibonacci算法的输入，也就是参数``n``。
+这些参数也同样有意思：``JNIEnv``、``jclass``、``jlong``。所有的JNI函数都至少有着前两个参数：第一个参数``JNIEnv``指向Java VM的运行环境，第二个参数则表示着函数属于的类或者实例。如果属于类，则类型为``jclass``，表示它是一个类方法；如果属于实例，则类型为``jobject``，表示它是一个实例方法。第三个参数``jlong``，则表示菲波那契算法的输入，也就是参数``n``。
 
 % Now that we have this header file, it is time to provide its implementation in C.
 
@@ -307,7 +307,7 @@ JNIEXPORT jlong JNICALL Java_com_marakana_FibLib_fibNI
 
 % Next, we provide the implementation of the Fibonacci algorithm in C in this fib.c file. The C versions of our algorithms are almost identical to the Java versions:
 
-C版本的Fibonacci算法与Java版本差异不大。下面就是``fib.c``中的代码：
+C版本的菲波那契算法与Java版本差异不大。下面就是``fib.c``中的代码：
 
 **Example 15.2. jni/fib.c**
 {CODE}
@@ -354,15 +354,15 @@ JNIEXPORT jlong JNICALL Java_com_marakana_FibLib_fibNI
 %  + Same for the iterative signature of the method.
 
 + 导入头文件``com_marakana_FibLib.h``。这个文件是前面通过 ``javah -jni com.marakana.FibLib`` 命令生成的。
-+ Fibonacci 算法的递归实现，与 Java 中的版本很相似。
-+ Fibonacci 算法的迭代实现。
++ 菲波那契算法的递归实现，与 Java 中的版本很相似。
++ 菲波那契算法的迭代实现。
 + JNI中定义的接口函数，与``com_marakana_FibLib.h``的函数签名相对应。在这里我们为它加上变量名，然后调用前面定义的C函数。
 + 同上。
 
 
 % Now that we have implemented C versions of Fibonacci, we want to build the shared library. To that, we need an appropriate Makefile.
 
-Fibonacci算法的C部分已经实现，接下来就是构建共享库了。为此，我们需要一个合适的Makefile。
+菲波那契算法的C部分已经实现，接下来就是构建共享库了。为此，我们需要一个合适的Makefile。
 
 % === The Makefile ===
 === Makefile ===
@@ -419,7 +419,7 @@ include $(BUILD_SHARED_LIBRARY)
 
 % The Fibonacci Activity asks the user to input a number. Then it runs the four algorithms to compute Fibonacci value of that number. It also times the results and prints them to the screen. This activity basically uses the ``FibLib`` class that in turn uses //libfib.so// for its native part.
 
-FibActivity允许用户输入一个数字，分别运行四种算法计算这个值对应的Fibonacci数，并将不同算法花费的时间输出，供我们比较。这个Activity需要调用到``FibLib``和``linfib.so``。
+FibActivity允许用户输入一个数字，分别运行四种算法计算这个值对应的菲波那契数，并将不同算法花费的时间输出，供我们比较。这个Activity需要调用到``FibLib``和``linfib.so``。
 
 **Example 15.4. FibActivity.java**
 {CODE}
@@ -503,7 +503,7 @@ public class Fibonacci extends Activity implements OnClickListener {
 
 + 将字符串转换为数字。
 + 在计算前，记录当前时间。
-+ 通过 ``FibLib`` 的方法计算 Fibonacci 数，这里调用的是 Java 递归版本。
++ 通过 ``FibLib`` 的方法计算菲波那契数，这里调用的是 Java 递归版本。
 + 将当前时间减去先前记录的时间，即可得到算法花费的时间，以毫秒为单位。
 + 使用 Java 的迭代算法执行计算。
 + 使用本地的递归算法。
@@ -516,13 +516,13 @@ public class Fibonacci extends Activity implements OnClickListener {
 
 % At this point, we can fire up the Fibonacci application and run some tests on it. Keep in mind that larger values for //n// take quite a bit longer to process, especially using the recursive algorithms. One suggestion would be to keep //n// in the 25-30 range. Also keep in mind that we are doing all this processing on Activity’s main UI thread, and blocking that thread for a long period of time will lead to the Application Not Responding (ANR) error we talked about in __Figure 6.9, “Application Not Responding”__ . As an exercise, you may want to move the actual calculation into an AsyncTask as described in the section called  __“AsyncTask”__ to prevent blocking the main thread.
 
-到这里就可以做些测试了。需要留意的是，如果``n``的值比较大，那可能会消耗很长的计算时间，尤其是递归算法。另外计算是在主线程中进行，期间会影响到界面的响应，如果没有响应的时间过长，就有可能出现 //图6.9// 那样的``Application Not Responding``，影响测试结果。因此我建议将``n``的值设在25~30之间。
+到这里就可以做些测试了。需要留意的是，如果``n``的值比较大，那可能会消耗很长的计算时间，尤其是递归算法。另外计算是在主线程中进行，期间会影响到界面的响应，如果没有响应的时间过长，就有可能出现 //图6.9// 那样的``Application Not Responding``，影响测试结果。因此我建议将``n``的值设在25~30之间。此外，为了避免主线程的阻塞，你完全可以将计算的过程交给一个异步任务(AsyncTask，参见 //第六章// 的 //AsynTask//一节)来执行，这将作为一个小练习留给读者。
 
 % As you run some tests, you may notice that the native version of the algorithm runs about one [order of magnitude http://en.wikipedia.org/wiki/Order_of_magnitude] faster than the Java implementation (__Figure 15.1, “Fibonacci of 33”__).
 
 经过一些试验以后，你会发现本地版本的算法几乎比 Java 版本快了一个量级(//图 15.1//)。
 
-	**图 15.1. 33的Fibonacci数**
+	**图 15.1. 33的菲波纳契数**
 		[images/15-Fibonacci.png]
 
 %TALK: 此图坑爹。
