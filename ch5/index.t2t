@@ -79,7 +79,7 @@
 {TRAN}== 项目设计 ==
 
 {ORGI}If you remember from __Chapter 4, Main Building Blocks__, an Android application is a loose collection of Activities, Services, Content Providers, and Broadcast Receivers. These are the components from which we put together an application. __Figure 5.4, “Yamba Design Diagram”__ shows the design of the entire Yamba application, which incorporates most of the main Android building blocks.
-{TRAN}在[第4章 #ch4]中有提及，Android应用就是Activity、Service、Content Provider、Broadcast Receiver的松散组合。它们作为Android的基本构件(main Building Blocks)，在开发中扮演着不可或缺的角色。 //图5.4// 给出了Yamba的设计架构，不妨留意其中基本构件与应用之间的关系。
+{TRAN}在[第4章 #ch4]中有提及，Android应用就是Activity、Service、Content Provider、Broadcast Receiver的松散组合。它们作为Android的基本构件(main Building Blocks)，在开发中扮演着不可或缺的角色。 //图5.4 Yamba设计图// 给出了Yamba的设计架构，不妨留意其中基本构件与应用之间的关系。
 
 	**图 5.4. Yamba设计图**
 		[images/05-Yamba.png]
@@ -99,7 +99,7 @@
 {TRAN}我们先来熟悉一下 Android 的用户界面(UI)模型。Android的UI模型可能与你接触过的其它UI模型有所不同，其最大特点即它的 UI既可以通过Java描述，也可以通过XML描述。
 
 {ORGI}In this chapter, you will learn how to develop the user interface for __Figure 5.2, “Screen where the user can enter a status message”__, where the user updates the status. Through this process, you will use XML and Java to put together a working UI. You will learn about Layouts and Views, units in Android, how to work with images, and how to make the UI look pretty.
-{TRAN}在这一章中，我们将尝试开发一个如//图5.2//那样允许用户发布消息的界面。在此过程中，我们配合使用Java与XML完成UI 的设计。在此，读者将了解到Android中Layout与View的概念，以及图片的使用方法与美化UI的窍门。
+{TRAN}在这一章中，我们将尝试开发一个如 //图5.2 "用户输入消息时屏幕的样子"// 那样允许用户发布消息的界面。在此过程中，我们配合使用Java与XML完成UI 的设计。在此，读者将了解到Android中Layout与View的概念，以及图片的使用方法与美化UI的窍门。
 
 {ORGI}Our approach will focus on best practices in UI development so that your application looks good and works well on any Android device, regardless of screen size and resolution.
 {TRAN}在此，我们将贯彻 UI 设计的最佳实践，使你的应用程序能够适应任何尺寸和分辨率，而不失美观和实用。

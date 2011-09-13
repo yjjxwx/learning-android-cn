@@ -53,7 +53,7 @@
 
 % When the orientation sensor changes, the Sensor service calls back our sensor listener via onSensorChanged() and reports the new sensor data. The data always comes back as an array of float values that represent degrees and therefore range from 0 to 359. In the case of orientation sensor, the elements represent the following dimensions, illustrated in Figure 13.1, “Axis”:
 
-在方向传感器状态变化时，传感器服务会回调``onSensorChanged()``，通知侦听器(Listener)得到了新数据。这些数据都是0~359之间的浮点数组成的数组。方位角(azimuth)与磁偏角(pitch与roll)，构成了下边的坐标，如 //图13.1//：
+在方向传感器状态变化时，传感器服务会回调``onSensorChanged()``，通知侦听器(Listener)得到了新数据。这些数据都是0~359之间的浮点数组成的数组。方位角(azimuth)与磁偏角(pitch与roll)，构成了下边的坐标，如 //图13.1 "坐标轴"/：
 
 (译者注: 磁偏角：磁针指示的方向并不是正南正北，而是微偏西北和东南，这在科学上被称作磁偏角。)
 
@@ -487,7 +487,7 @@ public class WhereAmI extends Activity implements LocationListener { // #{1}
 
 % At this point, your WhereAmI application is complete. It illustrates how to use LocationManager to get the actual location via a specific location provider and how to convert that location into known addresses via Geocoder. An example of the result is shown in Figure 13.2, “WhereAmI”.
 
-到这里，WhereAmI程序就已经完工了。它演示了通过LocationManager获取位置信息，并通过Geocoder将它转换为地理地址的方法。成品图如下：
+到这里，WhereAmI程序就已经完工了。它演示了通过LocationManager获取位置信息，并通过Geocoder将它转换为地理地址的方法。成品如 //图 13.2. WhereAmI//：
 
 **图 13.2. WhereAmI**
 

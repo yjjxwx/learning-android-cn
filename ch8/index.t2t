@@ -265,10 +265,10 @@ class PostToTwitter extends AsyncTask<String, Integer, String> {
 
 % You may recall from the section called "Services" that a typical service goes through this lifecycle [增加 illustrated in Figure 8.1, “Service life cycle”.]:
 
-回忆一下，在 "Service" 一节有提到过一般的 Service 的生存周期：
+回忆一下，在 "Service" 一节有提到过一般的 Service 的生存周期，如图 //8.1 "Service的生命周期"//：
 
 %**Figure 8.1. Service Lifecycle**
-**图8.1. Service的生存周期**
+**图8.1. Service的生命周期**
 		[images/08-ServiceLifeCycle.png]
 
 % Next, we want to override some of the main lifecycle methods:
@@ -464,9 +464,9 @@ public boolean onOptionsItemSelected(MenuItem item) {
 
 % Another way to verify that the service is running is to go to the Android Settings app and see it listed. To do that, go to Home screen, press Menu, and choose Settings. Then go to Applications→Running services. You should see your service listed, as shown in Figure 8.2, “Running Services”.
 
-检验Service正常执行的另一条途径是，进入//Android Settings//查看它是否出现在里面：回到主屏幕，点击``Menu``，选择``Setting``，然后进入``Applications``→``Running services``。正常的话，你的Service就会显示在里面。如 //图8.2//。
+检验Service正常执行的另一条途径是，进入//Android Settings//查看它是否出现在里面：回到主屏幕，点击``Menu``，选择``Setting``，然后进入``Applications``→``Running services``。正常的话，你的Service就会显示在里面。如 //图8.2 执行中的Service//。
 
-**图 8.2. 执行中的Services**
+**图 8.2. 执行中的Service**
 
 	[images/08-RunningServices.png]
 
@@ -817,7 +817,7 @@ D/UpdaterService(  310): Marko Gargenta: right!
 
 % Figure 8.3, “Yamba Completion” illustrates what we have done so far as part of the design outlined in Figure 5.4, “Yamba Design Diagram”:
 
-//图8.3//展示了目前为止我们已完成的部分。完整图参见 //图5.4//。
+//图8.3 "Yamba完成图"//展示了目前为止我们已完成的部分。完整图参见 //图5.4 "Yamba设计图"//。
 
 **图 8.3. Yamba完成图**
 

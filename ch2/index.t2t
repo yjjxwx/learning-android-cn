@@ -17,7 +17,7 @@
 {TRAN}Android 系统就像一个多层的蛋糕。每一层都有自己的特性和用途，不过这些层之间并没有一个明确的界限，而通常是相互渗透的。
 
 {ORGI}When you read through this, keep in mind that I am only concerned with the big picture of the entire system and will get into the nitty-gritty details of particular parts of the system later on. Figure 2.1, “Android Stack” shows the parts of the Android stack.
-{TRAN}在你阅读本章时，要注意本章仅仅是整个系统的概览，至于各部分的细节，我们将放在后面讨论。//图2.1// 展示了 Android 系统架构的各部分。
+{TRAN}在你阅读本章时，要注意本章仅仅是整个系统的概览，至于各部分的细节，我们将放在后面讨论。//图2.1 Android架构// 展示了 Android 系统架构的各部分。
 
 	图 2.1. Android架构
 		[images/02-AndroidStack.png]
@@ -106,7 +106,7 @@
 		[images/02-DalvikJava.png]
 
 {ORGI}In Java, you write your Java source file, you compile it into a Java byte code using Java compiler [,] and [then] you run this byte code on the Java Virtual Machine [Java VM]. In Android [,] things are different. You still write the Java source file [,] and you still compile it to Java byte code using the same Java compiler. But at that point, you recompile it once again using Dalvik compiler to Dalvik byte code. It is Dalvik byte code that is then executed on Dalvik virtual machine. [增加 It is this Dalvik byte code that is then executed on the Dalvik VM. Figure 2.2, “Java versus Dalvik” illustrates this comparison between standard Java (on the left) in Android using Dalvik (on the right).]
-{TRAN}平常的Java开发都是先编写Java代码，然后通过Java编译器编译成字节码，最后在JVM上运行。但在Android中并非如此。相同的是仍需编写Java代码然后编译为字节码，但Dalvik编译器在执行前，会将Java字节码重新编译为Dalvik字节码。到最后真正执行的是Dalvik字节码。
+{TRAN}平常的Java开发都是先编写Java代码，然后通过Java编译器编译成字节码，最后在JVM上运行。但在Android中并非如此。相同的是仍需编写Java代码然后编译为字节码，但Dalvik编译器在执行前，会将Java字节码重新编译为Dalvik字节码。到最后真正执行的是Dalvik字节码。//图2.2 JVM和Dalvik//展示了标准Java(左侧)与Android的Dalvik(右侧)之间的区别。
 
 {NOTE}
 {ORGI}It may sound like you have to do a lot more work with Android when it comes to Java. However, all these compilation steps are automated by tools such as Eclipse or ant and you never notice the additional steps.
@@ -169,7 +169,7 @@
 {TRAN}=== 应用程序签名 ===
 
 {ORGI}Android applications must be signed before they can be installed on a device. For development purposes, we’ll be signing applications with a debug key - a key that you already have on your development platform. However, when you want to distribute your application commercially, you’ll want to sign it with your own key. [删去 The details how to do that are at [Signing Your Application http://developer.android.com/guide/publishing/app-signing.html] page. We’ll also discuss it in Going Live chapter.] [增加 The Android developer document titled “Signing Your Application” has the details.]
-{TRAN}Android 程序在安装前必须进行签名。在开发时，我们可以使用开发者密钥(debug key)作为临时签名——这个密钥已经包含在开发环境中。 但作为商品发布时，你就必须使用自己的密钥进行签名。关于签名的具体步骤可以在 Android 网站的 [Signing Your Application http://developer.android.com/guide/publishing/app-signing.html] ( //// )页面找到。在后面我们将具体地讨论这个话题。
+{TRAN}Android 程序在安装前必须进行签名。在开发时，我们可以使用开发者密钥(debug key)作为临时签名——这个密钥已经包含在开发环境中。 但作为商品发布时，你就必须使用自己的密钥进行签名。关于签名的具体步骤可以在 Android 网站的 [Signing Your Application http://developer.android.com/guide/publishing/app-signing.html] 页面找到。在后面我们将具体地讨论这个话题。
 
 %NOTE: Going Live意思似乎是“待发布”的意思，猜该是一个遗忘的占位符号。在书写本章时，作者的连载才刚刚开始。
 

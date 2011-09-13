@@ -92,7 +92,7 @@ Android 通过 Layout 与 View 机制组织UI中元素的显示方式。View 就
 
 % A layout is responsible for allocating space for each child. Different layouts use different approach to laying out their child widgets. [增加 as shown in Figure 6.1, “Layouts and Views relationship”.]
 
-Layout负责为子元素安排位置，不同的Layout提供不同的安置方法。
+Layout负责为子元素安排位置，不同的Layout提供不同的安置方法。如//图 6.1 "Layout与View"//
 
 %NOTE: 当心，这个allocating space不是“申请内存”，而是老老实实的“申请(放置的)空间”。 -fleuria
 
@@ -100,52 +100,54 @@ Layout负责为子元素安排位置，不同的Layout提供不同的安置方�
 
 Android框架中内置的Layout各种各样，不过常用的大约也就这几个：LinearLayout, TableLayout, FrameLayout, RelativeLayout和AbsoluteLayout。
 
-=== 线性布局：LinearLayout ===
+=== LinearLayout ===
+
+(to 编辑:这里LinearLayout若直接翻译成中文并不合适，因为它们在指代某种布局的同时，更是特指Android框架中的某个类。)
 
 % LinearLayout is one of the simplest and most common layouts. It simply lays out its children next to each other, either horizontally or vertically. The order of children matters. As LinearLayout asks its children for how much space they need, it allocates desired space to each child in the order they are added. So, if an "older" child comes along and asks for all the space on the screen, there won’t be much left for the subsequent widgets in this layout.
 
-LinearLayout(线性布局)是最简单的Layout之一，只是简单地纵向或者横向排列它的子元素。它会按顺序计算每个子元素需要的空间，如果一个“较早加入的”元素占据了整个屏幕大小，后面的元素就显示不出来了。因此子元素的顺序很重要。
+``LinearLayout``(线性布局)是最简单的Layout之一，只是简单地纵向或者横向排列它的子元素。它会按顺序计算每个子元素需要的空间，如果一个“较早加入的”元素占据了整个屏幕大小，后面的元素就显示不出来了。因此子元素的顺序很重要。
 
 % An important property for LinearLayout are layout_orientation and valid options are vertical or horizontal.
 
-LinearLayout的一个重要属性是layout_orientation。可用的选项有Vertical和Horizontal，用以指示它是水平排列还是垂直排列。
+``LinearLayout``的一个重要属性是layout_orientation。可用的选项有Vertical和Horizontal，用以指示它是水平排列还是垂直排列。
 
 {TIP}
 % 	While Linear Layout is probably the simplest and most commonly used layout, it is not always the best choice. A good rule of thumb is that if you start to nest multiple Linear Layouts, you should probably be using another layout, such as Relative Layout. Too many nested layouts can have big consequences on the time to inflate the UI and overall CPU and battery consumption.
 
-LinearLayout可能是最简单也最常用的Layout，但它并不总是最好的选择。一条经验是，一旦你想嵌套多个LinearLayout，那就换用别的Layout吧，比如RelativeLayout之类。Layout如果嵌套的太深，会浪费较多的CPU时间，电池的续航也会因此而受到影响。
+``LinearLayout``可能是最简单也最常用的Layout，但它并不总是最好的选择。一条经验是，一旦你想嵌套多个``LinearLayout``，那就换用别的Layout吧，比如RelativeLayout之类。Layout如果嵌套的太深，会浪费较多的CPU时间，电池的续航也会因此而受到影响。
 
 %NOTE: “a good rule of thumb”是个俚语， "经验之谈."的意思
 
 {/TIP}
 
-=== 表格布局：TableLayout===
+===TableLayout===
 
 % TableLayout lays out its children in a table. TableLayout consists of only other TableRow widgets. TableRow represents a row in a table and can contain other UI widgets. TableRow widgets are laid out next to each other horizontally, sort of like LinearLayout with horizontal orientation.
 
-TableLayout(表格布局)将其子元素布局在一个表格之中。TableLayout只接纳TableRow作为自己的子元素，表示表格中的一行，下面可以容纳其它子元素。TableRow水平地排列它的子元素，这同水平排列的LinearLayout很像。
+``TableLayout``(表格布局)将其子元素布局在一个表格之中。``TableLayout``只接纳``TableRow``作为自己的子元素，表示表格中的一行，下面可以容纳其它子元素。TableRow水平地排列它的子元素，这同水平排列的``LinearLayout``很像。
 
 % For those familiar with HTML, Table Layout is similar to <table> element, while Table Row is similar to the <tr> element. Where as in HTML we also have <td> to represent each cell in the table, in Android the columns are determined dynamically based on the number of views we add to a table row.
 
-熟悉HTML的同学可能会有同感，TableLayout接近于<table>标签，而TableRow接近于<tr>标签。不过Android中并没有<td>的对应物，每一行的列数由TableRow的子元素的个数动态决定。
+熟悉HTML的同学可能会有同感，``TableLayout``接近于``<table>``标签，而``TableRow``接近于``<tr>``标签。不过Android中并没有``<td>``的对应物，每一行的列数由``TableRow``的子元素的个数动态决定。
 
 % An important property for TableLayout is stretch_columns indicating index of column to stretch to fill out available space. You can also use * to stretch all columns.
 
-TableLayout的一个重要属性是stretch_columns，可以用它来展开列号对应的列来占据可用的空间。也可以通过*来展开所有的列。
+``TableLayout``的一个重要属性是stretch_columns，可以用它来展开列号对应的列来占据可用的空间。也可以通过*来展开所有的列。
 
-=== 帧布局：FrameLayout ===
+=== FrameLayout ===
 
 % FrameLayout places its children on top of each other so that latest child is covering the previous, like a deck of cards. This layout policy is useful for tabs, for example. FrameLayout is also used as placeholder for other widgets to be added to it programmatically at some later point in time.
 
 FrameLayout(帧布局)将其下的子元素相互覆盖起来，就像一副扑克牌，只留一个显示在外面。它可以用于标签的实现，也可以作为以后要用的控件的临时存放地。
 
-=== 相对布局：RelativeLayout ===
+=== RelativeLayout ===
 
 % RelativeLayout lays out its children relative to each other. As such, it is very powerful as it doesn’t require you to nest unnecessary layouts in order to achieve certain look. At the same time, using RelativeLayout can minimize total number of widgets that need to be drawn thus improving the overall performance of you application. Having said that, RelativeLayout requires each of its child views to have an ID set so that we can position it relatively to other children.
 
 RelativeLayout(相对布局)用于指明子元素之间的相对位置。它十分强大，不需要嵌套就可以实现复杂的布局，同时还可以减少使用的控件的数量，从而提高程序的整体性能。RelativeLayout需要我们为它的每个子元素提供一个ID，你可以单独设置它们的相对位置。
 
-=== 绝对布局：AbsoluteLayout ===
+=== AbsoluteLayout ===
 
 % AbsoluteLayout positions its children at absolute coordinates on the screen. It is the favorite layout for WYSIWYG tools that automatically generate your UI. While very simple, it is not very flexible. Your user interface would look good on one particular screen but as soon as the screen size, orientation, or density changes, AbsoluteLayout would not be able to adjust.
 
@@ -160,7 +162,7 @@ AbsoluteLayout(绝对布局)可以为它的子元素设置一个屏幕上的绝�
 
 % You will get a dialog window asking you about your new Android project [增加 (see Figure 6.2, “New project dialog”)]. Let’s explain again all the different fields that are significant.
 
-然后出现一个对话框，要求你输入有关新项目的各种信息。其中重要的条目如下：
+然后出现一个对话框(如 //图 6.2 "New Project 对话框"//)，要求你输入有关新项目的各种信息。其中重要的条目如下：
 
 //Project Name//
 % The name under which Eclipse organizes our project. Is is a good idea if the project name doesn’t have any spaces in it - makes it easier to access from the command line later. Enter Yamba here.
@@ -269,9 +271,9 @@ StatusActivity的源码大致如下：
 
 % This code was generated by Eclipse Graphical Layout [增加 , shown in Figure 6.3, “Graphical Layout mode for status.xml”.]. This is the part of Android Development Tools (ADT) for Eclipse plugin that helps you work with Android-specific XML files. Since ADT knows that you are working on a UI layout, it opens status.xml in Graphical Layout mode. You can also view the raw XML by choosing status.xml tab at the bottom of this window. That will give you the XML source code for this screen, as displayed above.
 
-以上代码由Eclipse Graphical Layout自动生成，它是作为Eclipse插件的Android Development Tools(ADT)的一部分，即编辑Android中XML文件的辅助工具。ADT可以辨认出这是在编辑用户界面的Layout，因此按照Graphical Layout模式打开status.xml，很方便就可以生成上述的代码。
+以上代码由Eclipse Graphical Layout自动生成，它是作为Eclipse插件的Android Development Tools(ADT)的一部分，即编辑Android中XML文件的辅助工具，如 //图 6.3. Graphical Layout模式下的status.xml//。ADT可以辨认出这是在编辑用户界面的Layout，因此按照Graphical Layout模式打开status.xml，很方便就可以生成上述的代码。
 
-**图 6.3. status.xml的Graphical Layout**
+**图 6.3. Graphical Layout模式下的status.xml**
 	[images/06-GraphicalLayout.png]
 
 % Although we discussed the basic meaning of these XML resources in a previous chapter, there are some details in the code that you should know more about, which we’ll examine in the following section.
@@ -476,7 +478,7 @@ public class StatusActivity1 extends Activity implements OnClickListener { // #{
 
 % Java errors are typically easy to find since the little red x in the code navigates you straight down to the line number where the error occurred [增加 (see Figure 6.4, “Tracing Java errors”)]. By putting your mouse right on that error, Eclipse will tell you what the error is and it will also offer you some possible fixes. This feature of Eclipse is very useful and is analogous to spell checker in a word processor.
 
-有代码中红色的x标志在，Java中的错误一般还比较容找到。只要将鼠标移向那个错误标志，Eclipse即可告诉你错误的类型、位置，以及可能的修复方法。Eclipse的这一功能堪比文字处理工具中的拼写检查，十分有用。
+有代码中红色的x标志在，Java中的错误一般还比较容找到(如 //图6.4 "跟踪Java的错误"//)。只要将鼠标移向那个错误标志，Eclipse即可告诉你错误的类型、位置，以及可能的修复方法。Eclipse的这一功能堪比文字处理工具中的拼写检查，十分有用。
 
 	**图 6.4. 跟踪Java的错误**
 		[images/06-TracingJavaErrors.png]
@@ -505,9 +507,9 @@ public class StatusActivity1 extends Activity implements OnClickListener { // #{
 
 % Java searches for all the classes in its classpath. To add it to the classpath, right-click on your project, select Properties and you will get a Properties for Yamba dialog window [增加 (see Figure 6.5, “Properties for Yamba dialog window in Eclipse, where we add the jtwitter.jar file”). ]. Select Java Build Path and choose Libraries tab. In there, click on Add JARs… and locate your jtwitter.jar file. This will add this JAR file to your projects classpath.
 
-Java在classpath中搜索它所有的类。要让我们的代码可以访问这个三方库，就需要将他的地址添加到classpath。右击你的项目，选择Properties打开Yamba的属性对话框。找到Java Build Path，选择Libraries页面。在这里单击Add JARs…，找到jtwitter.jar文件，加入即可。
+Java在classpath中搜索它所有的类。要让我们的代码可以访问这个三方库，就需要将他的地址添加到classpath。右击你的项目，选择Properties打开Yamba的属性对话框，如 //图6.5. "Eclipse中Properties for Yamba对话框中的属性"//。找到Java Build Path，选择Libraries页面。在这里单击Add JARs…，找到jtwitter.jar文件，加入即可。
 
-**图 6.5. Yamba的属性**
+**图 6.5. Eclipse中Properties for Yamba对话框中的属性**
 	[images/06-PropertiesForYamba.png]
 
 
@@ -595,7 +597,7 @@ Android系统中的日志都是输出到LogCat。它是一套标准的系统日�
 
 % To view logcat in Eclipse, you need to open the LogCat View. [增加 (see Figure 6.6, “LogCat in Eclipse”).] It is typically available in DDMS perspective to which you can switch by clicking on DDMS in top-right corner of Eclipse [images/icon_ddms.png] or by going to Window→Open Perspective→DDMS in the Eclipse menu.
 
-在Eclipse中访问LogCat，需要打开LogCat View，它一般在DDMS中。单击右上角的DDMS按钮[images/06-icon_ddms.png]，或者选择菜单Window→Open Perspective→DDMS。
+在Eclipse中访问LogCat，需要打开LogCat View，如//图6.6. "Eclipse的LogCat"//，它一般在DDMS中。单击右上角的DDMS按钮[images/06-icon_ddms.png]，或者选择菜单Window→Open Perspective→DDMS。
 
 % DDMS stands for Dalvik Debug Monitor Server. DDMS is the connection between your application running on the device and your development environment, such as Eclipse.
 
@@ -606,7 +608,7 @@ DDMS指Dalvik Debug Monitor Server，它可以将运行于设备上的应用程�
 
 % You can define filters for LogCat as well. Click on the little green plus button and LogCat Filter dialog will come up.[增加 (see Figure 6.7, “LogCat Filter”)] You can define a filter based on TAG, severity, or process id. This will create another window within LogCat showing you only the log entries that match your filter.
 
-可以在LogCat中设置过滤规则。单击绿色加号按钮，调出LogCat Filter对话框，然后就可以根据TAG、日志等级或进程id设置过滤规则了。过滤所得的结果显示在另一个窗口中。
+可以在LogCat中设置过滤规则。单击绿色加号按钮，调出LogCat Filter对话框，然后就可以根据TAG、日志等级或进程id设置过滤规则了，如 //图6.7. "LogCat Filter"//。过滤所得的结果显示在另一个窗口中。
 
 **图 6.7. LogCat Filter**
 	[images/06-logcat-filter.png]
@@ -665,7 +667,7 @@ Android程序默认运行在单线程之下。单线程顺序执行所有的操�
 
 % This single thread is also known as the UI (as in User Interface) thread since that’s the thread that processes all the user interface commands as well. The UI thread is responsible for drawing all the elements on the screen as well as processing all the user events, such as touches of the screen, clicks on the button, and so on. [增加  Figure 6.8, “Single-threaded execution” shows the execution of our code on a single UI thread.]
 
-这个线程也被称作UI线程，意思是程序中用户界面的相关操作都在这里执行。除处理所有UI元素的渲染之外，事件的响应也由它负责。比如触摸屏幕、点击按钮等等。
+这个线程也被称作UI线程，意思是程序中用户界面的相关操作都在这里执行。除处理所有UI元素的渲染之外，事件的响应也由它负责。比如触摸屏幕、点击按钮等等。//图6.8 "单线程执行"//展示了在只有一个UI线程时，代码的执行过程。
 
 % The problem with running StatusActivity on the single thread is our network call to update the our status. As with all network calls, the time it takes to execute is outside of our control. Our call to twitter.updateStatus() is subject to all the network availability and latency issues. We don’t know if the user is on the super fast WiFi connection, or is using a much slower protocol to connect to the cloud. In other words, our application cannot respond until the network call is completed.
 
@@ -674,7 +676,7 @@ Android程序默认运行在单线程之下。单线程顺序执行所有的操�
 {NOTE}
 %Android system will offer to kill any application that is not responding within a certain time period, typically around five seconds for activities. This is known as Application Not Responding dialog, or ANR for short.[增加 (see Figure 6.9, “Application Not Responding dialog”).]
 
-程序若长时间无响应(一般是五秒)，Android系统会自动弹出一个对话框，询问是否将该程序所在的进程杀死。这个对话框就是Application Not Responding(//应用程序无响应//)，简称ANR。
+程序若长时间无响应(一般是五秒)，Android系统会自动弹出一个对话框，询问是否将该程序所在的进程杀死。这个对话框就是Application Not Responding(//应用程序无响应//)，简称ANR。如 //图6.9 "Application Not Responding对话框"//。
 {/NOTE}
 
 **图 6.9. Application Not Responding对话框**
@@ -692,7 +694,7 @@ Android程序默认运行在单线程之下。单线程顺序执行所有的操�
 
 % In our example, we could put the actual network call of updating our status in the cloud in a separate thread. That way our main UI thread will not block while we’re waiting for the network and the application will appear much more responsive. We tend to talk of the main thread as running in the foreground and the additional threads as running in the background. They’re really all equal in status, alternating execution on the device’s CPU, but from the point of view of the user, the main thread is in the foreground because it deals with the UI. [增加 Figure 6.10, “Multithreaded execution” shows the execution of our code’s two threads—the main UI thread, as well as the auxiliary thread we use to perform potentially long-running network calls.]
 
-在例子中，我们将网络操作的相关代码放到独立的线程里面。这样我们的主线程可以避免阻塞在网络操作上，用户界面不会响应不灵。按惯例，我们一般认为主线程是运行于前台，而其它的线程都是运行于后台。这是因为前端的用户界面运行于主线程。但在调度上，它们都是平等的。
+在例子中，我们将网络操作的相关代码放到独立的线程里面。这样我们的主线程可以避免阻塞在网络操作上，用户界面不会响应不灵。按惯例，我们一般认为主线程是运行于前台，而其它的线程都是运行于后台。这是因为前端的用户界面运行于主线程。但在调度上，它们都是平等的。//图 6.10 "多线程执行"// 展示了拥有两个线程——UI线程和一个辅助线程——的时候，代码的执行过程。
 
 % There are multiple ways of accomplishing multithreading. Java has a class Thread that allows for many of these operations. We could certainly use any of the regular Java features to handle putting the network call in the background.
 
@@ -811,7 +813,7 @@ public class StatusActivity2 extends Activity implements OnClickListener {
 
 % At this point, when user clicks on Update Status button, our activity will create a separate thread using AsyncTask and place the actual network operation on that thread. When done, the AsyncTask will update the main UI thread by popping up a Toast message to tell the user that operation either succeeded or failed. This approach makes our application much more responsive and user should never get "Application Not Responding: Force Close or Wait" message again, as shown in Figure 6.9, “Application Not Responding”. [增加 At this point, our application looks like Figure 6.11, “StatusActivity, part 1” when running.]
 
-到这里用户只要单击``Upate Status``按钮，Activity即可隐式地创建出一个独立的线程，在里面执行异步任务中的网络操作。到任务结束时，``AsyncTask``会弹出一个Toast显示任务的成功与否。这样可以避免应用程序长时间的阻塞，也可以避免用户见到讨厌的``Application Not Responding: Force Close or Wait``对话框。
+到这里用户只要单击``Upate Status``按钮，Activity即可隐式地创建出一个独立的线程，在里面执行异步任务中的网络操作。到任务结束时，``AsyncTask``会弹出一个Toast显示任务的成功与否。这样可以避免应用程序长时间的阻塞，也可以避免用户见到讨厌的``Application Not Responding: Force Close or Wait``对话框，如 //图6.9 "Application Not Responding对话框"//。到现在，我们程序的执行效果如 //图 6.11 "StatusActivity, 1"//。
 
 
 **图 6.11. StatusActivity, 1**
@@ -1058,7 +1060,11 @@ PNG官方的全称是``Portable Network Graphics``。它也常常被人称作``P
 
 % One way is to do it using the WYSIWYG tool that Eclipse provides [增加  as shown in Figure 6.13, “Eclipse Graphical Layout Editor”]. In this tool, we need to first select the main layout. We may have hard time selecting it since many other components are in front of it. The red border tells you what view or layout is selected at a time.
 
-第一种方法是使用Eclipse的所见即所得工具。使用它，我们需要先选择主布局。其中列的组件比较多，因此选起来可能会费些力气。红色边框表示当前选择的Layout或者View。
+第一种方法是使用Eclipse的所见即所得工具，如 //图6.13 "Eclipse的所见即所得工具"//。使用它，我们需要先选择主布局。其中列的组件比较多，因此选起来可能会费些力气。红色边框表示当前选择的Layout或者View。
+
+% **图 6.13. Eclipse Graphical Layout Editor**
+**图 6.13. Eclipse的所见即所得工具**
+	[images/06-LayoutWYSIWYGEditor.png]
 
 % Another way of selecting it is to open up your Outline view in Eclipse and selecting the top element there. This view may or may not be currently visible in your Eclipse, depending on how you arranged many windows that are available. One sure way to get Outline view is to go to Window→Show View→Outline and open it up that way. Once you get this view opened, you can select the top layout, in this case our LinearLayout. You will know it’s selected if a red border is around your entire activity.
 
@@ -1070,9 +1076,9 @@ PNG官方的全称是``Portable Network Graphics``。它也常常被人称作``P
 
 % The property we want to modify is background. You can now click on the little … button which will bring up Reference Chooser dialog [增加 (see Figure 6.14, “Reference Chooser”)]. In this dialog, choose Drawable→background.
 
-我们想要修改的属性是background。你可以点击``…``按钮打开Reference Chooser对话框，然后选择``Drawable→background``。
+我们想要修改的属性是background。你可以点击``…``按钮打开Reference Chooser对话框，如 //图6.14 "Reference Chooser"//。然后选择``Drawable→background``。
 
-**图 6.13. Reference Chooser**
+**图 6.14. Reference Chooser**
 	[images/06-ReferenceChooser.png]
 
 % This will set the background of your top layout to @drawable/background. As you recall, this is the way that one XML resource refers to another resource. In this case, our status.xml layout is referring to the background.png drawable. Notice that we do not use extensions when referring to other file resources. Android figures out best file format automatically, in case there are files with same name but of different extension.
@@ -1081,8 +1087,6 @@ PNG官方的全称是``Portable Network Graphics``。它也常常被人称作``P
 
 设置顶层布局的``background``属性为``@drawable/background``。回想下，这正是在资源文件中引用其它资源文件的方式。放在这里，就是``status.xml``引用了drawable中的``background.png``文件。留意在引用其它文件的时候，我们不需要写扩展名。遇到名字相同但扩展名不同时，Android会自动检查出最合适的扩展名。
 
-**图 6.14. Eclipse Graphical Layout Editor**
-	[images/06-LayoutWYSIWYGEditor.png]
 
 % === Updating Directly in XML Code ===
 ====直接修改XML代码====
@@ -1197,9 +1201,9 @@ Android允许你提供多种资源文件。比如你可以提供不同版本的`
 
 % Using qualifiers you can create alternative resources for languages and regions, screen sizes and orientations, device input modes (touch screen, stylus), keyboard or no keyboard, and so on. But how do you know what this naming convention for resource folder names is? The easiest tool is to use the New Android XML File dialog in Eclipse [增加  (see Figure 6.15, “Alternative resources with New Android XML File dialog”).]. To open New Android File dialog, choose File→New…→Android XML File from the Eclipse menu.
 
-通过这些标志符，你可以针对不同的语言、地域、屏幕尺寸与角度、设备交互模式(触摸屏、手写笔)、是否使用键盘等等情景，提供特定的资源文件。但是我们又怎么知道它们对应的命名规范呢？可以参照Eclipse的New Android XML File对话框，选择`` File→New…→Android XML File ``菜单即可。
+通过这些标志符，你可以针对不同的语言、地域、屏幕尺寸与角度、设备交互模式(触摸屏、手写笔)、是否使用键盘等等情景，提供特定的资源文件。但是我们又怎么知道它们对应的命名规范呢？可以参照Eclipse的New Android XML File对话框，如//图 6.15 "通过New Android XML File对话框设置特定的资源"//。选择`` File→New…→Android XML File ``菜单即可。
 
-**图 6.15. New Android XML File 对话框**
+**图 6.15. 通过New Android XML File对话框设置特定的资源**
 	[images/06-AlternativeResources.png]
 
 
@@ -1224,7 +1228,7 @@ Android允许你提供多种资源文件。比如你可以提供不同版本的`
 
 % There’s a very useful tool that ships with Android SDK called Hierarchy Viewer [增加  (see Figure 6.16, “Hierarchy Viewer”)]. Go ahead and start it - it is in your SDK/tools directory.
 
-Android SKD提供了一个非常有用的工具，那就是Hierarchy Viewer。它在你的``SDK/tools``目录下，启动即可。
+Android SKD提供了一个非常有用的工具，那就是Hierarchy Viewer，如//图 6.16 "Hierarchy Viewer"//。它在你的``SDK/tools``目录下，启动即可。
 
 % Hierarchy Viewer allows you to attach to any Android device, emulator or physical phone. You can then introspect the structure of the current view. It shows you all the widgets currently loaded in memory, their relationship to each other, and all their properties. You can introspect not just your screens but screens of any application on your device. This is also a good way to see how some other applications are structured.
 
@@ -1239,14 +1243,14 @@ Hierarchy View可以用到任何Android设备、仿真器或者真机上。它�
 
 % By the end of this section, you should have your application run and look like Figure 6.17, “StatusActivity”. It should also successfully post your tweets to your twitter account. You can verify it is working by logging into the online service of your choice that supports Twitter API, such as yamba.marakana.com using the same username/password as hard coded in the application.
 
-到这里你可以运行Yamba，尝试向twitter发送消息，效果如 //图6.17// 所示。如果发送成功，即可在twitter的网站上见到这条消息。
+到这里你可以运行Yamba，尝试向twitter发送消息，效果如 //图6.17 "StatusActivity"// 所示。在这里，我们暂时硬编码了用户名与密码，如果发送成功，即可在twitter网站的对应帐号上查看到这条消息。
 
 **图 6.17. StatusActivity**
 	[images/06-StatusActivity-3.png]
 
 % The following [修改为 Figure 6.18, “Yamba completion”] illustrates what we have done so far as part of the design outlined in Figure 5.4, “Yamba Design Diagram”:
 
-下图展示了我们目前的完成部分，完整图参见//图5.4//。
+下图展示了我们目前的完成部分，完整图参见//图5.4 "Yamba设计图"//。
 
 **图 6.18. Yamba 完成图**
 	[images/06-Yamba-1.png]
