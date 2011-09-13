@@ -520,7 +520,7 @@ public class Fibonacci extends Activity implements OnClickListener {
 
 % As you run some tests, you may notice that the native version of the algorithm runs about one [order of magnitude http://en.wikipedia.org/wiki/Order_of_magnitude] faster than the Java implementation (__Figure 15.1, “Fibonacci of 33”__).
 
-经过一些试验以后，你会发现本地版本的算法几乎比 Java 版本快了一个量级(//图 15.1//)。
+经过一些试验以后，你会发现本地版本的算法几乎比 Java 版本快了一个量级(//图 15.1 "33的菲波那契数"//)。
 
 	**图 15.1. 33的菲波纳契数**
 		[images/15-Fibonacci.png]

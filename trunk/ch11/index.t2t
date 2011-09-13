@@ -67,7 +67,7 @@ public class BootReceiver extends BroadcastReceiver { // #{1}
 
 + ``BootReceiver``继承自``BroadcastReceiver`` ，它是所有Receiver的基类。
 + 我们只需实现一个方法，那就是``onReceive()``。它将在收到符合过滤规则的Intent时触发。
-+ 通过Intent启动UpdaterService。``onReceive()``在触发时可以得到一个Context对象，我们将它原样传给UpdaterService。对现在的UpdaterService而言，这个Context对象并不是必需的，但稍后我们就能够发现它的重要性。
++ 通过Intent启动``UpdaterService``。``onReceive()``在触发时可以得到一个``Context``对象，我们将它原样传给``UpdaterService``。对现在的``UpdaterService``而言，这个``Context``对象并不是必需的，但稍后我们就能够发现它的重要性。
 
 
 % At this point, we have our boot receiver. But, in order for it to get called - in order for the activity to start at boot - we must register it with the system.
@@ -579,7 +579,7 @@ public class TimelineActivity extends BaseActivity {
 
 % __Figure 11.1, “Yamba Completion”__ illustrates what we have done so far as part of the design outlined in __Figure 5.4, “Yamba Design Diagram”__.
 
-//图 11.1// 展示了我们目前已完成的部分。完整图参见 //图 5.4//。
+//图 11.1 "Yamba完成图"// 展示了我们目前已完成的部分。完整图参见 //图 5.4 "Yamba设计图"//。
 
 	**图 11.1. Yamba完成图**
 		[images/11-Yamba-6.png]

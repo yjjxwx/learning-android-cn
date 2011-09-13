@@ -257,7 +257,7 @@ public class PrefsActivity extends PreferenceActivity { // #{1}
 
 % + Defines the new PrefsActivity.
 
-+ 新加入的PrefsActivity的声明。
++ 新加入的``PrefsActivity``的声明。
 
 
 % We now have a new preference activity, but no good way of getting to it yet. We need a way to launch this new activity. For that, we use options menu.
@@ -450,7 +450,7 @@ public boolean onOptionsItemSelected(MenuItem item) {
 
 % You should be able to run your application at this point and and see the new PrefsActivity by clicking on Menu→Prefs in StatusActivity [增加 (see Figure 7.4, “PrefsActivity”)]. Try changing your username and password, then reboot your phone, restart the app, and verify that the information is still there.
 
-到这里，你已经可以查看新的选项界面了。打开程序，在消息界面中选择Menu→Prefs即可。不妨尝试更改用户名与密码的设置再重启应用程序，查看选项数据是否依然存在。
+到这里，你已经可以查看新的选项界面了。打开程序，在消息界面中选择Menu→Prefs即可，如 //图 7.4. PrefsActivity//。不妨尝试更改用户名与密码的设置再重启应用程序，查看选项数据是否依然存在。
 
 **图 7.4. PrefsActivity**
 
@@ -587,7 +587,7 @@ Eclipse中提供了一个File Explorer工具供我们访问文件系统。要打
 
 % There are three main parts of the file system on every Android device. [增加 As shown in Figure 7.5, “The filesystem as seen via File Explorer in Eclipse”,] They are:
 
-Android设备主要有三个分区，即：
+Android设备主要有三个分区，参见 //图 7.5. "通过Eclipse的File Explorer查看文件系统"//，即：
 
 % - System partition at /system/
 % - SDCard at /sdcard/
@@ -718,7 +718,7 @@ adb shell是adb的另一个重要命令，它允许你访问设备(真机或者�
 
 % Figure 7.6, “Yamba Completion” illustrates what we have done so far as part of the design outlined in Figure 5.4, “Yamba Design Diagram”:
 
-//图7.6// 展示了目前我们已完成的部分。完整图参见 //图5.4//。
+//图7.6 "Yamba完成图"// 展示了目前我们已完成的部分。完整图参见 //图5.4 "Yamba设计图"//。
 
 **图 7.6. Yamba完成图**
 

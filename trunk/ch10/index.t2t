@@ -685,7 +685,7 @@ protected void onCreate(Bundle savedInstanceState) {
 
 % As one approach, we could copy and paste the code we already have from the Status activity, but that’s rarely a good strategy. Instead, we’ll do what we usually do: refactor the code. In this case, we can take out the common functionality from the Status activity and place it in another activity that will serve as the base. See Figure 10.2, “BaseActivity Refactor”.
 
-要实现上述功能，我们可以把``StatusActivity``中相关的代码都复制粘贴过来，但这不是好办法。相反，我们应该优先考虑的是重构。在这里，我们可以将``StatusActivity``中相应的功能放在另一个``Activity``中，并使其作为基类。
+要实现上述功能，我们可以把``StatusActivity``中相关的代码都复制粘贴过来，但这不是好办法。相反，我们应该优先考虑的是重构。在这里，我们可以将``StatusActivity``中相应的功能放在另一个``Activity``中，并使其作为基类。参见 //图 10.2. "重构BaseActivity"//。
 
 **图 10.2. 重构BaseActivity**
 
@@ -948,7 +948,7 @@ public class TimelineActivity extends BaseActivity { // #{1}
 
 % **Figure 10.3, “TimelineActivity” shows what the final Timeline activity screen looks like.**
 
-//图 10.3// 展示了Timeline界面的成品图。
+//图 10.3 "TimelineActivity"// 展示了Timeline界面的成品图。
 
 **图 10.3. TimelineActivity**
 
@@ -962,7 +962,7 @@ public class TimelineActivity extends BaseActivity { // #{1}
 
 % Figure 10.4, “Yamba Completion” illustrates what we have done so far as part of the design outlined in Figure 5.4, “Yamba Design Diagram”.
 
-//图 10.4// 展示了目前为止我们已完成的部分。完整图参见 //图 5.4//。
+//图 10.4 "Yamba完成图"// 展示了目前为止我们已完成的部分。完整图参见 //图 5.4 "Yamba设计图"//。
 
 **图 10.4. Yamba完成图**
 

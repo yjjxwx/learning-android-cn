@@ -833,7 +833,7 @@ private class Updater extends Thread {
 
 %The following [修改为 Figure 9.1, “Yamba completion”] illustrates what we have done so far as part of the design outlined in __Figure 5.4, “Yamba Design Diagram”__:
 
-下图展示了目前为止我们已经完成的部分。完整图参见 //图5.4//。
+下图展示了目前为止我们已经完成的部分。完整图参见 //图5.4 "Yamba设计图"//。
 
 	**图 9.1. Yamba完成图**
 		[images/09-Yamba-4.png]
