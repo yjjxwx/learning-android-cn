@@ -93,7 +93,7 @@ ScrollView中只能存放单独一个子元素。要让多个View一起滚动，
 % + ScrollView that is wrapping our TextView and adding scroll bars as needed.
 % + TextView that shows the actual text, in this case statuses of our friends coming from the database.
 
-+ 在Activity屏幕顶部显示的标题。留意字符串``titleTimeline``的定义在``/res/values/strings.xml``文件中，具体参见``String Resource``一节。
++ 在Activity屏幕顶部显示的标题。留意字符串``titleTimeline``的定义在``/res/values/strings.xml``文件中，具体参见第六章的 //字符串资源// 一节。
 + ScrollView包含TextView，在需要时添加滚动条。
 + TextView用以显示文本，在这里就是从数据库中读取的用户消息。
 
@@ -111,7 +111,7 @@ ScrollView中只能存放单独一个子元素。要让多个View一起滚动，
 
 % The method we almost universally override in any activity is onCreate(). This is a great place for us to initialize the database. The flip side of the coin is onDestroy(), a good place to clean up anything that we create in onCreate(). In this case, we close the database in onDestroy(). Since we’d like to have the data as fresh as possible, we put the code for querying the database and outputting the data in onResume(), the method called every time this activity is brought up front. Here’s what our code looks like:
 
-我们通常会为每个 Activity 实现一个 ``onCreate()`` ，这是初始化数据库的好地方。与之对应，我们在 ``onDestroy()`` 中清理 ``onCreate()`` 中创建的资源，也就是关闭数据库。我们希望显示的消息尽可能最新，因此把查询数据库的代码放在 ``onResume()`` 中，这样在界面每次显示时都会执行。代码如下：
+我们通常会为每个 Activity 实现一个 ``onCreate()``方法 ，这是初始化数据库的好地方。与之对应，我们在 ``onDestroy()`` 方法 中清理 ``onCreate()`` 中创建的资源，也就是关闭数据库。我们希望显示的消息尽可能最新，因此把查询数据库的代码放在 ``onResume()`` 方法中，这样在界面每次显示时都会执行。代码如下：
 
 {CODE}
 package com.marakana.yamba5;
@@ -183,7 +183,7 @@ public class TimelineActivity1 extends Activity { // #{1}
 
 + 这是个Activity，因此继承自Android框架提供的``Activity``类。
 + 我们需要访问数据库以得到Timeline的相关数据，而``onCreate()``正是连接数据库的好地方。
-+ 通过dbHelper打开数据库文件之后，我们需要它的``getReadableDatabase()``或``getWritableDatabase()``才可以得到实际的数据库对象。在这里我们只需读取Timeline的相关数据，因此按只读方式打开数据库。
++ 通过``dbHelper``打开数据库文件之后，我们需要它的``getReadableDatabase()``或``getWritableDatabase()``才可以得到实际的数据库对象。在这里我们只需读取Timeline的相关数据，因此按只读方式打开数据库。
 + 我们得记着关闭数据库并释放资源。数据库是在``onCreate()``中打开，因此可以在``onDestroy()``中关闭。注意``onDestroy()``只有在系统清理资源时才被调用。
 + 调用``query()``方法从数据库中查询数据，返回一个Cursor对象作为迭代器。参数似乎多的过了头，不过几乎都是对应着SQL的SELECT语句的各个部分。在这里也就相当与``SELECT * FROM timeline ORDER BY created_at DESC``。这些``null``表示我们并没有使用SQL语句中相应的部分，比如``WHERE``, ``GROUPING``, 与 ``HAVING``等。
 + ``startManagingCursor()``用于提示Activity自动管理Cursor的生命周期，使之同自己保持一致。“保持一致”的意思是，它能保证在Activity销毁时，同时释放掉Cursor关联的数据，这样有助于优化垃圾收集的性能。如果没有自动管理，那就只能在各个方法中添加代码，手工地管理Cursor了。
@@ -250,11 +250,11 @@ public class TimelineActivity1 extends Activity { // #{1}
 
 % We could have also used ListActivity as the parent class for our TimelineActivity. ListActivity is an activity that has a ListView. Either approach would work, but we choose to subclass Activity and create ListView separately to provide step-by-step, incremental learning.
 
-ListActivity就是含有一个ListView的Activty，我们完全可以拿它作为TimelineActivity的基类。在此我们独立实现自己的Activity，再给它加上ListView，是出于学习的考虑。
+``ListActivity``就是含有一个``ListView``的Activty，我们完全可以拿它作为``TimelineActivity``的基类。在此我们独立实现自己的Activity，再给它加上``ListView``，是出于便于学习的考虑。
 
 % ListActivity is slightly easier to use in cases where there the builtin ListView is the only widget in the activity. ListActivity also makes it really easy to assign an existing array of elements to its list via the XML binding. However, since we are using a Cursor for data and not an array (because our data comes from the database), and since we do have an additional TextView for the scrollview’s title, the simplicity of ListActivity in this case is outweighed by customization we require.
 
-如果Activity里只有一个ListView，使用ListActivity可以稍稍简化下代码。有XML绑定，为ListActivity添加元素也轻而易举。不过，在这里使用的数据源是Cursor而不是数组(因为我们的数据来自数据库)，先前也曾添加过一个TextView作为ScrollView的标题——已经有了一定程度的自定义，再换用ListActivity就前功尽弃了。
+如果Activity里只有一个``ListView `` ，使用``ListActivity``可以稍稍简化下代码。有XML绑定，为``ListActivity``添加元素也轻而易举。不过，在这里使用的数据源是Cursor而不是数组(因为我们的数据来自数据库)，先前也曾添加过一个``TextView``作为``ScrollView``的标题——已经有了一定程度的自定义，再换用``ListActivity``就前功尽弃了。
 
 %TALK: "ListActivity also makes it really easy to assign an existing array of elements to its list via the XML binding."有疑问，为它绑定一个数组，为什么是"via the XML binding"?
 
@@ -272,7 +272,7 @@ ListActivity就是含有一个ListView的Activty，我们完全可以拿它作�
 
 % For this layout, we chose one LinearLayout going vertically and having two lines. The first line consists of the user and timestamp, and the second contains the actual status message. Notice that the first line uses another LinearLayout to position the user and timestamp horizontally next to each other.
 
-我们在这里选择LinearLayout，让它垂直布局，分两行。第一行包含用户名与时间戳，第二行包含消息的内容。留意第一行中用户名与时间戳的位置是水平分布的。
+我们在这里选择``LinearLayout``，让它垂直布局，分两行。第一行包含用户名与时间戳，第二行包含消息的内容。留意第一行中用户名与时间戳的位置是水平分布的。
 
 % The row of data in the ListView is represented by a custom layout defined in row.xml file.
 
