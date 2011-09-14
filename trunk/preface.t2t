@@ -75,11 +75,11 @@
 
 % Chapter 14, Android Interface Definition Language (AIDL), covers building an inter-process communication mechanism to allow for remote access to a service from another application.  
 
-第十四章，**Android接口描述语言(AIDL)**，介绍进程间通信机制的使用，以及访问远程Service的方法。
+第十四章，**Android接口描述语言(AIDL)**，介绍进程间通信机制的使用，以及如何访问其它应用程序中的远程Service。
 
 % Chapter 15, Native Development Kit (NDK), introduces how to write native C code as part of your Android application.
 
-第十五章，**Native Development Kit(NDK)**，介绍在应用程序中使用原生C代码的方法。
+第十五章，**Native Development Kit(NDK)**，介绍在应用程序中使用本地C代码的方法。
 
 % === Conventions Used in This Book ===
 === 排版约定 ===

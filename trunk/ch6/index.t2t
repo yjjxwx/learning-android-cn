@@ -219,7 +219,7 @@ AbsoluteLayout(绝对布局)可以为它的子元素设置一个屏幕上的绝�
 % By default, Eclipse created a file called main.xml under res/layout folder. For consistency purposes, we should rename this file to status.xml to match our StatusActivity. To rename a file in Eclipse, right-click on it, choose Refactor→Rename… and enter new name. Eclipse is somewhat smart about renaming files and does more than just change the name. It also offers to lookup all the places where this file is referred from and update those references as well. While this feature works well when renaming a Java file, it is not fully automatic with XML files. So, renaming this file requires us to change the line in Java where we refer to it via the R class. To do that, in your StatusActivity’s onCreate(), change setContentView(R.layout.main); to setContentView(R.layout.status);.
 
 
-Eclipse默认会在``res/layout``下创建一个``main.xml``文件。出于一致性的考虑，我们将把它的名字改为``status.xml``以对应StatusActivity。在Eclipse中重命名一个文件，就右键点击它，选择//Refactor→Rename…//，输入新名字即可。Eclipse在重命名时会智能地做些同步工作，使所有引用到这个文件的地方保持一致。这在更新Java文件时可以做到完全自动，但对XML文件就不那么尽善尽美了。修改一个XML文件名，我们还需要手工修改Java代码中引用R类的相关部分。比如在这里，就需要将``onCreate()``里的``setContentView(R.layout.main)``修改为``setContentView(R.layout.status)``。
+Eclipse默认会在``res/layout``下创建一个``main.xml``文件。出于一致性的考虑，我们将把它的名字改为``status.xml``以对应StatusActivity。在Eclipse中重命名一个文件，就右键点击它，选择//Refactor→Rename…//，输入新名字即可。Eclipse在重命名时会智能地做些同步工作，使所有引用到这个文件的地方保持一致。这在更新Java文件时可以做到完全自动，但对XML文件就不那么尽善尽美了。修改一个XML文件名，我们还需要手工修改Java代码中引用R类的相关部分。比如在这里，就需要将``onCreate()``方法中的``setContentView(R.layout.main)``修改为``setContentView(R.layout.status)``。
 
 %TALK: "So, renaming this file requires us to change the line in Java where we refer to it via the R class." 很绕的一句。
 
@@ -459,11 +459,11 @@ public class StatusActivity1 extends Activity implements OnClickListener { // #{
 % + The method that is called when button is clicked, as part of OnClickListener interface.
 % + Make the web service API call to the cloud to update our status.
 
-+ 要让StatusActivity捕获按钮的事件，因此为它实现一个OnClickListener接口。
++ 要让StatusActivity捕获按钮的事件，因此为它实现一个``OnClickListener``接口。
 + 找到对应的View。
 + 将这个按钮注册，使它按下时能够通知到StatusActivity。
 + 连接到Twitter API的服务端。在这里，我们硬编码了用户名与密码。
-+ OnClickListener接口的实现部分，表示按钮按下时调用的方法。
++ ``OnClickListener``接口的实现部分，表示按钮按下时调用的方法。
 + 调用Twitter的API，将消息更新到服务端。
 
 
@@ -528,7 +528,7 @@ Java在classpath中搜索它所有的类。要让我们的代码可以访问这�
 
 % In this case, we want to ask user to grant this application the use of INTERNET permission. We need internet in order to connect to the online service. So, open up AndroidManifest.xml file by double-clicking on it. Note that Eclipse typically opens this file in a WYSIWYG editor with many tabs on the bottom. As always, you can make most of the changes to this file via this interface, but since Eclipse tools are limited and sometimes buggy, we prefer to go straight into the XML view of this file. So, choose the right-most tab in the bottom that says AnddroidManifest.xml and add <uses-permission android:name="android.permission.INTERNET" /> element within the <manifest> block. [增加  (see Example 6.4, “AndroidManifest.xml”).]
 
-在这里，我们要求访问网络服务，因此需要用户为它授予INTERNET的访问权限。双击打开AndroidManifest.xml文件，Eclipse通常会按照WYSIWYG的形式打开它。同前面一样，在这个界面中即可完成绝大部分的工作，但是Eclipse的这一功能并不完整，灵活性也差强人意，我们不如直接修改源文件。因此，选择最右边显示"AndroidManifest.xml"的标签，将``<uses-permission android:name="android.permission.INTERNET" />``加入``<manifest>``元素之下。
+在这里，我们要求访问网络服务，因此需要用户为它授予INTERNET的访问权限。双击打开``AndroidManifest.xml``文件，Eclipse通常会按照WYSIWYG的形式打开它。同前面一样，在这个界面中即可完成绝大部分的工作，但是Eclipse的这一功能并不完整，灵活性也差强人意，我们不如直接修改源文件。因此，选择最右边显示"AndroidManifest.xml"的标签，将``<uses-permission android:name="android.permission.INTERNET" />``加入``<manifest>``元素之下。
 
 **例 6.4. AndroidManifest.xml**
 {CODE}
