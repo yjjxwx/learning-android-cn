@@ -377,7 +377,7 @@ TimelineAdapter就是我们自定义的Adapter。虽说SimpleCursorAdapter映射
 
 % Typically, if you are not sure what method to override, look at the online documentation for that particular system class that you are modifying. In this case, that’d be http://developer.android.com/reference/android/widget/SimpleCursorAdapter.html.
 
-一般来讲，若不清楚类里需要覆盖的函数是哪个，查阅相关的官方文档即可。在这里，可以参阅http://developer.android.com/reference/android/widget/SimpleCursorAdapter.html。
+一般来讲，若不清楚类里需要覆盖的方法是哪个，查阅相关的官方文档即可。在这里，可以参阅http://developer.android.com/reference/android/widget/SimpleCursorAdapter.html。
 
 **例 10.6. TimelineAdapter.java**
 {CODE}

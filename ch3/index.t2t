@@ -350,5 +350,5 @@ AVD中也有一个SD卡，你能以MB为单位指明它的大小。Skin表示虚
 
 % Setting up Android development environment breaks down to [basically involves ] setting up Android SDK and Eclipse. Once you have set you [set up] your development environment, a good test [way] that everything is working is to use Eclipse to create a simple Hello World project and run it in the Emulator. If that runs fine, you are almost certain that your system is setup and ready for further development.
 
-Android开发环境的搭建，几乎就是对付Android SDK和Eclipse了。 开发环境设置完毕，不妨动手搞个简单的Hello World实验一下。运行良好的话，也就证明环境已经搭建完毕，为往后正式的开发做好了准备。
+Android开发环境的搭建，几乎就是对付Android SDK和Eclipse了。开发环境设置完毕，不妨动手用Eclipse创建一个简单的Hello World项目实现一下，看看是否一切都能正常工作。运行良好的话，也就证明环境已经搭建完毕，为往后正式的开发做好了准备。
 

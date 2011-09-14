@@ -61,7 +61,7 @@ public class StatusProvider extends ContentProvider {
 
 % Objects within a single app can refer to each other simply by variable names, because they share an address space. But objects in different apps don’t recognize the different address spaces, so they need some other mechanism just to find each other. Android uses a A Uniform Resource Identifier, a string that identifies a specific resource, to locate a Content Provider. A URI has three or four parts, shown in Parts of a URI.
 
-程序内部的不同对象可以通过变量名相互引用，因为它们共享着同一个地址空间。但是不同程序的地址空间是相互隔离的，要引用对方的对象，就需要某种额外的机制。Android对此的解决方案就是全局资源标识符(URI)，使用一个字符串来表示Content Provider以及其中资源的位置。每个URI由三个或四个部分组成，如下：
+程序内部的不同对象可以通过变量名相互引用，因为它们共享着同一个地址空间。但是不同程序的地址空间是相互隔离的，要引用对方的对象，就需要某种额外的机制。Android对此的解决方案就是全局资源标识符(URI)，使用一个字符串来表示Content Provider以及其中资源的位置。每个URI由三或四个部分组成，如下：
 
 **URI的各个部分**
 {CODE}
@@ -394,7 +394,7 @@ Yamba小部件不会太复杂，仅仅展示最近的消息更新即可。为创
 
 % YambaWidget is the main class for our widget. It is a subclass of AppWidgetProvider, a special system class that makes widgets. This class itself is a subclass of BroadcastReceiver, so our Yamba Widget is automatically a broadcast receiver. Basically, whenever our widget is updated, deleted, enabled, or disabled, we’ll get a broadcast intent with that information. So this class inherits the onUpdate(), onDeleted(), onEnabled(), onDisabled(), and onReceive() callbacks. We can override any of these, but typically we care mostly about the updates and general broadcasts we receive.
 
-``YambaWidget``就是这个小部件所对应的类，它以AppWidgetProvider为基类。后者是Android框架为创建小部件所专门提供的一个类，它本身是``BroadcastReceiver``的子类，因此``YambaWidget``自然也算是一个Broadcast Receiver。在小部件更新、删除、启动、关闭时，我们都会相应地收到一条广播的Indent。因此，这个类继承着``onUpdate()``、``onDeleted()``、``onEnabled()``、``onDisabled()``和``onReceive()``几个回调方法，我们可以覆盖它们。在这里，只覆盖``onUpdate()``和``onReceive()``即可。
+``YambaWidget``就是这个小部件所对应的类，它以AppWidgetProvider为基类。后者是Android框架为创建小部件所专门提供的一个类，它本身是``BroadcastReceiver``的子类，因此``YambaWidget``自然也算是一个Broadcast Receiver。在小部件更新、删除、启动、关闭时，我们都会相应地收到一条广播的Indent。同时，这个类也继承着``onUpdate()``、``onDeleted()``、``onEnabled()``、``onDisabled()``和``onReceive()``几个回调方法，我们可以随意覆盖它们。在这里，只覆盖``onUpdate()``和``onReceive()``两个方法即可。
 
 % Now that we understand the overall design of the widget framework, here’s how we implement it.
 
