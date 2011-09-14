@@ -75,7 +75,7 @@ Android 通过 Layout 与 View 机制组织UI中元素的显示方式。View 就
 
 % [增加 If you have prior experience with Java AWT or Swing, layouts are similar to Java containers and views are similar to Java components. Views in Android are sometimes referred to as widgets.]
 
-如果你有 AWT 或者 Swing 的编程经验，那就不难发现 Layout 对应 Java 的//容器( Container )//， View 对应 Java 的//组件( Component )//，都是很相似的东西。另外， Android 中的 View 有时也被称作// Widget (控件)//。
+如果你有 AWT 或者 Swing 的编程经验，那就不难发现 Layout 对应 Java 的//容器( Container )//， View 对应 Java 的//组件( Component )//，都是很相似的东西。另外， Android 中的 View 有时也被称作// 控件(Widget)//。
 
 **图 6.1. Layout与View**
 	[images/06-LayoutsAndViews.png]
@@ -211,7 +211,7 @@ AbsoluteLayout(绝对布局)可以为它的子元素设置一个屏幕上的绝�
 
 
 %== StatusActivity Layout ==
-== StatusActivity的Layout ==
+== StatusActivity的布局 ==
 
 % Let’s start by designing the user interface for our screen where we’ll enter the new status and click a button to update it.
 接下来开始设计一个用户界面，用户可以在里面输入新消息并发布。
@@ -632,7 +632,7 @@ DDMS指Dalvik Debug Monitor Server，它可以将运行于设备上的应用程�
 
 % This will give you the tail of current logcat and will be updated as your device keeps generating log entries. You can also filter log entries on command line, but the syntax is not the most intuitive. To only see StatusActivity-tagged entries, you specify StatusActivity:*, meaning you want all severity levels for this tag. However, you also have to specify what you don’t want to see. To do that, you add *:S, meaning silence all other tags. The following command line illustrates that:
 
-它可以显示出LogCat的最新输出，并在收到新日志时实时更新。你也可以过滤日志，只是它的语法可能没那么直观。比如想查看标记为StatusActivity的日志条目，就用``StatusActivity:*``作为过滤，其中的``*``表示接受所有级别的日志。当然也可以设置过滤将不希望见到的部分忽略，如``*:S``，表示不显示其它标志的日志。命令如下：
+它可以显示出LogCat的最新输出，并在收到新日志时实时更新。你也可以过滤日志，只是它的语法可能没那么直观。比如想查看标记为``StatusActivity``的日志条目，就用``StatusActivity:*``作为过滤，其中的``*``表示接受所有级别的日志。当然也可以设置过滤将不希望见到的部分忽略，如``*:S``，表示不显示其它标志的日志。命令如下：
 
 {CODE}
 [user:~]> adb logcat StatusActivity:* *:S
