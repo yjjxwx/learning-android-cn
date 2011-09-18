@@ -164,7 +164,7 @@
 {/NOTE}
 
 	**图 4.3. Service 的生命周期**
-		[images/05-ServiceLifeCycle.png]
+		[images/04-ServiceLifeCycle.png]
 
 {ORGI}Services have a much simpler lifecycle than activities [增加 (see Figure 4.3, “Service life cycle”). ]. You start a service, or stop it. Also, the service lifecycle is more or less controlled by the developer, and not so much by the system. So, we as developers have to be mindful to run our services so that they don’t unnecessarily consume shared resources, such as CPU and battery.
 
