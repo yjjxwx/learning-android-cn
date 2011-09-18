@@ -19,7 +19,7 @@
 
 {ORGI}So, if you’re on Windows, just change ~ to C:\Users\YourUserName and / to \. Other than that, everything should be pretty much the same no matter whether you are on Mac, Linux, or Windows.
 
-{TRAN}因此，如果你是 Windows 用户，只需要把 ``~`` 替换成 ``C:\Users\YourUserName`` ，并把 ``/`` 换成 ``\`` 。除此，Mac 、 Linux 和 Windows 也就大同小异了。
+{TRAN}因此，如果你是 Windows 用户，只需要把 ``~`` 替换成 C:\Users\**YourUserName** ，并把 ``/`` 换成 ``\`` 。除此，Mac 、 Linux 和 Windows 也就大同小异了。
 {/NOTE}
 
 % == Installing the Android SDK ==
@@ -161,12 +161,12 @@ Eclipse以项目为单位管理用户的工作，项目又都位于工作区(Wor
 % + Finally, click on Finish button and Eclipse will create your project. Let’s look at the various files that this process created:[Let’s look at the various files that this process created in Figure 3.2, “HelloWorld new project window”.]
 
 + 填写"Project name"。这是个Eclipse概念：Eclipse把一切皆组织为项目(project)，而项目名只能是一个单词。在命名上，我个人比较喜欢[CamelCase http://en.wikipedia.org/wiki/Camel_case]风格。在此输入：``HelloWorld``。
-+ 选择"build target"，它为构建工具指明目标平台的版本。其中罗列了所有可用的目标平台，以及SDK中附带的扩展。在这里可以选择一个较新的版本，比如Android 2.2（留意不要选择Google APIs，它们是Google在Android平台的专有扩展）。
-+ 接下来设置project属性。其中的application name也就是你应用的英文名字，随便写上就好，比如"Hello, World!!!"。
++ 选择"build target"，它为构建工具指明目标平台的版本。其中罗列了所有可用的目标平台，以及SDK中附带的扩展。在这里可以选择一个较新的版本，比如Android 2.2（留意不要选择Google APIs，它们是Google的Web服务在Android平台上的专有扩展）。
++ 接下来设置project属性。其中的"application name"也就是你应用的英文名字，随便写上就好，比如"Hello, World!!!"。
 + "package name"是个Java中的概念。在Java中，源码都是组织为一个个的package，用以表示Java对象在不同类中的可见性，是个很重要的概念。在Android开发中，package作为应用程序签名的基本单位，也是很重要的。它的命名规范为逆序的域名，后跟可选的子域名。比如我有个域名是example.com，要编写一个计算器（caculator）的应用，那么package的名字就可以是com.example.caculator。
 + "activity"一项是可选的。目前我们还没讲到Activity（参见[第六章，Android用户界面 #ch6]），姑且把它看作是程序的界面即可。Activity通过Java的类来表示，因此它的名字也同样遵循Java中类的命名规范：首字母大写，对多个单词使用CamelCase命名规范。在此输入``HelloWorld``作为Activity的名字。
 + "minimum SDK version"是这一应用所支持目标平台的最低版本，以API Level为单位。若想要得到较高的兼容性，就选择一个较低的版本。在这里我们不需要考虑兼容性，因此选择8，对应Android 2.2。
-+ 如 //图3.2. New Android Project窗口// 最后单击Finish按钮，Eclipse就会新建出一个项目。接下来，我们依次观察一下在这一环节中新建出来的文件。
++ 如 //图3.2. "New Android Project窗口"// 最后单击Finish按钮，Eclipse就会新建出一个项目。接下来，我们依次观察一下在这一环节中新建出来的文件。
 
 	**图 3.2. New Android Project窗口**
 		[images/03-NewProject.png]
@@ -315,7 +315,7 @@ public class HelloWorld extends Activity {
 
 % To create a new AVD, start the tool called Android SDK and AVD Manager. You can start this tool from Eclipse by clicking on icon [images/03-icon_android.png] or via command line by starting tool called android in your SDK/tools directory.
 
-打开Android SDK and AVD Manager：可以在Eclipse中单击[images/03-icon_android.png]，也可以在SDK的tools目录中执行``android``命令。
+打开Android SDK and AVD Manager：可以在Eclipse中单击[images/03-icon_android.png]，也可以在SDK的``tools``目录中执行``android``命令。
 
 	**图 3.3. Android SDK与AVD Manager**
 		[images/03-AndroidSDKandADVManager.png]

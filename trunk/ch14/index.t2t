@@ -11,11 +11,11 @@ Android中的每个应用程序都运行于独立的进程中。出于安全考�
 
 % Every once in a while we need a more direct, synchronous access to another process. There are many ways to implement this across process boundaries, and collectively they are called Interprocess Communication, or IPC for short.
 
-不过有时我们需要更直接一些，同步地访问其它进程中的数据。这类通信机制就叫做 //进程间通信(Interprocess Communication)// ，简称IPC。
+不过有时我们需要更直接一些，同步地访问其它进程中的数据。这类通信机制就叫做 //进程间通信([Interprocess Communication http://en.wikipedia.org/wiki/Inter-process_communication])// ，简称IPC。
 
 % To allow cross-application communication, Android provides its own version of an IPC protocol. One of the biggest challenges in IPC is passing data around, such as when passing parameters to method calls on the remote systems. IPC protocols tend to get complicated because they have to convert data from its in-memory format to a format that’s convenient for sending to another process. This is called marshaling, and the unpacking at the receiver is called unmarshaling.
 
-为实现进程间通信，Android设计了自己的IPC协议。由于许多细节需要考虑，因此IPC机制在设计上总是趋于复杂，其中的难点就在于数据的传递。比如在远程方法调用的参数传递，需要将内存中的数据转化成易于传递的格式，这被称作 //序列化(Marshaling) //，反过来，接收参数的一方也需要将这种格式转换回内存中的数据，这被称作 //反序列化(Unmarshaling)// 。
+为实现进程间通信，Android设计了自己的IPC协议。由于许多细节需要考虑，因此IPC机制在设计上总是趋于复杂，其中的难点就在于数据的传递。比如在远程方法调用的参数传递，需要将内存中的数据转化成易于传递的格式，这被称作 //序列化(Marshaling)//，反过来，接收参数的一方也需要将这种格式转换回内存中的数据，这被称作 //反序列化(Unmarshaling)// 。
 
 % To help with this, Android provides the Android Interface Definition Language, or AIDL. It is a lightweight implementation of IPC using a syntax that is very familiar to Java developers, and a tool that automatically creates the hidden code required to connect a client and a remote service.
 

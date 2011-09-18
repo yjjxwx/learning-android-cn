@@ -49,8 +49,6 @@
 {ORGI}An activity is usually a single screen that the user sees on the device at one time. An application typically has multiple activities and the user flips back and forth among them. As such, activities are the most visible part of your application.
 {TRAN}Activity 即设备在某一时刻所显示的界面。一个程序通常含有多个界面，用户可在其间切换。对用户而言，这就是程序的外观部分。
 
-(译者注: 在表示“程序的外观”时，我们将Activity译作“界面”；在表示构件或者某个类的时候，我们将保留原文。)
-
 {ORGI}I usually use a website as an analogy for activities. Just like a website consists of multiple pages, so does an Android application consists of multiple activities. Just like a website has a "home page", an Android app has a "main" activity. It is usually the one that is shown first when you launch the application. And just like a website has to provide some sort of navigation among various pages, an Android app should do the same.
 {TRAN}我通常喜欢拿网页来类比Activity：就像一个网站含有多个网页，Android程序也含有多个界面(Activity)；网站有主页，Android程序有主界面(main Activity)——也就是启动程序时显示的第一个界面；为了方便用户在多个页面之间跳转，网站会提供导航功能，Android也一样。 
 
@@ -187,14 +185,14 @@
 
 {ORGI}Content Providers are interfaces for sharing data between applications. Android by default runs each application in its own sandbox so that all data that belongs to an application is totally isolated from other applications on the system. While small amounts of data can be passed between applications via Intents, Content Providers are much better suited for sharing persistent data between possibly large datasets. As such, Content Provider API nicely adheres to CRUD principle. [增加 Figure 4.4, “Content provider” illustrates how the content provider’s CRUD interface pierces the application boundaries and allows other apps to connect to it to share data.]
 
-{TRAN}Content Provider是应用程序之间共享数据的接口。Android默认使每个应用程序都运行在沙盒(sandbox)里面，自己的数据与外面的程序完全隔离，要传递数据则必须依赖一些特定的接口。少量数据通过Intent传递即可，大量的数据就需要Content Provider了。为此，Content Provider提供了一套很好的按照[CRUD原则 http://en.wikipedia.org/wiki/Create,_read,_update_and_delete]设计的接口，如 //图4.4 Content Provider//。
+{TRAN}Content Provider是应用程序之间共享数据的接口。Android默认使每个应用程序都运行在沙盒(sandbox)里面，自己的数据与外面的程序完全隔离，要传递数据则必须依赖一些特定的接口。少量数据通过Intent传递即可，要传递大量的持久化数据就需要Content Provider了。为此，Content Provider提供了一套很好的按照[CRUD原则 http://en.wikipedia.org/wiki/Create,_read,_update_and_delete]设计的接口，以供不同程序之间共享数据，如 //图4.4 Content Provider//。
 
 {ORGI}Android system uses this mechanism all the time. For example, Contacts Provider is a content provider that exposes all users contacts data to various applications. Settings Provider exposes system settings to various applications including the built-in Settings application. Media Store is responsible for storing and sharing all various media, such as photos, and music across various applications. [增加 Figure 4.5, “Contacts application using Contacts Provider to get the data” illustrates how the Contacts app uses Contacts Provider, a totally separate application, to retrieve data about users’ contacts. The Contacts app itself doesn’t have any contacts data, and Contacts Provider doesn’t have any user interface.]
 {TRAN}Android将这种机制应用到了方方面面。比如Contacts Provider专为不同的应用程序提供联系人数据，Settings Provider专为不同的应用程序提供系统的配置信息，Media Store为不同的应用程序提供多媒体信息(比如图片、音乐)的存储与分享，等等。
 
 以联系人应用来说，应用程序本身并没有联系人数据，Contacts Provider则没有用户界面。如 //图 4.5. 从Contacts Provider获取数据的联系人应用//，可见联系人应用通过Contacts Provider，从另一个应用程序中获取联系人数据的方法。
 
-	**图4.5 从Contacts Provider获取数据的联系人应用 **
+	**图4.5 从Contacts Provider获取数据的联系人应用**
 		[images/04-Contacts-Provider.png]
 
 {ORGI}This separation of data storage and the actual user interface application offers greater flexibility to mash up various parts of the system. For example, a user could install an alternative Address Book application that uses the same data as the default Contacts app. Or, install widgets on the Home Screen that allow for easy changes in the System Settings, such as turning on or off the Wifi, Bluetooth or GPS features. Many phone manufactures take advantage of Content Providers to add their own applications on top of standard Android to improve overall user experience, such as HTC Sense.
@@ -212,7 +210,7 @@
 
 
 {ORGI}Broadcast Receivers is an Android implementation of system-wide publish/subscribe mechanism (more precisely, this is an Observer pattern). The receiver is simply a dormant code that gets activated once an event it is subscribed to happens.
-{TRAN}Broadcast Receiver是Android整个系统中通用的发布/订阅机制(或者说Observer模式)的实现。意思是接收者(Receiver)订阅一些事件，在事件发生时做出一定响应。
+{TRAN}Broadcast Receiver是Android整个系统中通用的[发布/订阅机制 http://en.wikipedia.org/wiki/Publish/subscribe](更确切地说，[Observer模式 http://en.wikipedia.org/wiki/Observer_pattern])的实现。意思是接收者(Receiver)订阅一些事件，在事件发生时做出一定响应。
 
 
 {ORGI}The system itself broadcasts events all the time. For example, when an SMS arrives, or call comes in, or battery runs low, or system gets booted, all those events are broadcasted and any number of receivers could be triggered by them.

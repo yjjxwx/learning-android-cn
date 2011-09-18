@@ -61,7 +61,7 @@ public class StatusProvider extends ContentProvider {
 
 % Objects within a single app can refer to each other simply by variable names, because they share an address space. But objects in different apps don’t recognize the different address spaces, so they need some other mechanism just to find each other. Android uses a A Uniform Resource Identifier, a string that identifies a specific resource, to locate a Content Provider. A URI has three or four parts, shown in Parts of a URI.
 
-程序内部的不同对象可以通过变量名相互引用，因为它们共享着同一个地址空间。但是不同程序的地址空间是相互隔离的，要引用对方的对象，就需要某种额外的机制。Android对此的解决方案就是全局资源标识符(URI)，使用一个字符串来表示Content Provider以及其中资源的位置。每个URI由三或四个部分组成，如下：
+程序内部的不同对象可以通过变量名相互引用，因为它们共享着同一个地址空间。但是不同程序的地址空间是相互隔离的，要引用对方的对象，就需要某种额外的机制。Android对此的解决方案就是//全局资源标识符//(//Uniform Resource Identifier//, [URI http://en.wikipedia.org/wiki/Uniform_Resource_Identifier])，使用一个字符串来表示Content Provider以及其中资源的位置。每个URI由三或四个部分组成，如下：
 
 **URI的各个部分**
 {CODE}
@@ -100,7 +100,7 @@ public static final String MULTIPLE_RECORDS_MIME_TYPE =
 
 % In the section called “Getting the Data Type” we’ll explore the reason for two MIME types. We are also going to define the status data object in a class-global variable so that we can refer to it:
 
-关于这两个MIME类型，我们将在后面“获取数据类型”一节中详细讨论。还要在类里定义一个statusData对象，方便以后引用它。
+关于这两个[MIME http://en.wikipedia.org/wiki/MIME]类型，我们将在后面“获取数据类型”一节中详细讨论。还要在类里定义一个statusData对象，方便以后引用它。
 
 %NOTE: "获取数据类型"为本章的一个小节。
 

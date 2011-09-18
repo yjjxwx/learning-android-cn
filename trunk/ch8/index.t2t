@@ -144,7 +144,7 @@ public class YambaApplication1 extends Application implements
 + ``Twitter`` 和 ``SharedPreferences`` 在这里都成为了共享对象的一部分，而不再为 ``StatusActivity`` 所私有。
 + ``onCreate()`` 在 Application 对象第一次创建的时候调用。只要应用的任何一个部分启动(比如 Activity 或者 Service )， Application 对象都会随之创建。
 + ``onTerminate()`` 调用于应用结束之前，在里面可以做些清理工作。在这里我们只用来记录log。
-+ 我们也把 ``StatusActivity`` 的 ``getTwitter()`` 方法移动到这里，因为它会为程序的其它部分所调用，这一来有利于提高代码的重用。留意下这里的 ``synchronized`` 关键字， Java 中的 ``synchronized`` 方法表示此方法在同一时刻只能由一个线程执行。这很重要，因为我们的应用会在不同的线程里用到这个函数。
++ 我们也把 ``StatusActivity`` 的 ``getTwitter()`` 方法移动到这里，因为它会为程序的其它部分所调用，这一来有利于提高代码的重用。留意下这里的 ``synchronized`` 关键字， Java 中的 [synchronized方法 http://download.oracle.com/javase/tutorial/essential/concurrency/syncmeth.html] 表示此方法在同一时刻只能由一个线程执行。这很重要，因为我们的应用会在不同的线程里用到这个函数。
 + ``onSharedPreferenceChanged()`` 也从 ``StatusActivity`` 移动到了 ``YambaApplication``。
 
 % Now that we have YambaApplication and that we have moved some responsibilities from StatusActivity to it, we can simplify StatusActivity even further [增加 as shown in Example 8.2, “StatusActivity using YambaApplication”]:

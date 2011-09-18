@@ -9,7 +9,7 @@ Native Development Kit(//本地代码开发包//，简称NDK) ，是Android与�
 
 % In Gingerbread release of Android, NDK takes support for native code even further with the introduction of NativeActivity class. You can now write your entire activity in C or C++. However, NativeActivity is not subject of this chapter. Here, we’ll look at integrating C native code within your Java Android application.
 
-在Android的Gingerbread版本中，NDK引入了``NativeActivity``，允许你使用纯C/C++来编写Activity。不过，``NativeActivity`` 并不是本章的主题。在本章，我们将主要介绍如何在应用程序中集成原生的C代码。
+在Android的Gingerbread版本中，NDK引入了[NativeActivity http://developer.android.com/reference/android/app/NativeActivity.html]，允许你使用纯C/C++来编写Activity。不过，``NativeActivity`` 并不是本章的主题。在本章，我们将主要介绍如何在应用程序中集成原生的C代码。
 
 (译者注：Gingerbread即Android 2.3)
 
@@ -520,7 +520,7 @@ public class Fibonacci extends Activity implements OnClickListener {
 
 % As you run some tests, you may notice that the native version of the algorithm runs about one [order of magnitude http://en.wikipedia.org/wiki/Order_of_magnitude] faster than the Java implementation (__Figure 15.1, “Fibonacci of 33”__).
 
-经过一些试验以后，你会发现本地版本的算法几乎比 Java 版本快了一个量级(//图 15.1 "33的菲波那契数"//)。
+经过一些试验以后，你会发现本地版本的算法几乎比 Java 版本快了一个[数量级 http://en.wikipedia.org/wiki/Order_of_magnitude](//图 15.1 "33的菲波那契数"//)。
 
 	**图 15.1. 33的菲波纳契数**
 		[images/15-Fibonacci.png]
