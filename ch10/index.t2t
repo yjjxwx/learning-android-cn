@@ -185,7 +185,7 @@ public class TimelineActivity1 extends Activity { // #{1}
 + 我们需要访问数据库以得到Timeline的相关数据，而``onCreate()``正是连接数据库的好地方。
 + 通过``dbHelper``打开数据库文件之后，我们需要它的``getReadableDatabase()``或``getWritableDatabase()``才可以得到实际的数据库对象。在这里我们只需读取Timeline的相关数据，因此按只读方式打开数据库。
 + 我们得记着关闭数据库并释放资源。数据库是在``onCreate()``中打开，因此可以在``onDestroy()``中关闭。注意``onDestroy()``只有在系统清理资源时才被调用。
-+ 调用``query()``方法从数据库中查询数据，返回一个Cursor对象作为迭代器。参数似乎多的过了头，不过几乎都是对应着SQL的SELECT语句的各个部分。在这里也就相当与``SELECT * FROM timeline ORDER BY created_at DESC``。这些``null``表示我们并没有使用SQL语句中相应的部分，比如``WHERE``, ``GROUPING``, 与 ``HAVING``等。
++ 调用``query()``方法从数据库中查询数据，返回一个Cursor对象作为[迭代器 http://en.wikipedia.org/wiki/Iterator]。参数似乎多的过了头，不过几乎都是对应着SQL的SELECT语句的各个部分。在这里也就相当与``SELECT * FROM timeline ORDER BY created_at DESC``。这些``null``表示我们并没有使用SQL语句中相应的部分，比如``WHERE``, ``GROUPING``, 与 ``HAVING``等。
 + ``startManagingCursor()``用于提示Activity自动管理Cursor的生命周期，使之同自己保持一致。“保持一致”的意思是，它能保证在Activity销毁时，同时释放掉Cursor关联的数据，这样有助于优化垃圾收集的性能。如果没有自动管理，那就只能在各个方法中添加代码，手工地管理Cursor了。
 + cursor——回忆下``Cursors``一节的内容——即通过``query()``方法查询数据库所得的结果。按照表的形式，暂存多行多列的数据。每一行都是一条独立的记录——比如Timeline中的一条消息——而其中的列则都是预先定义的，比如 ``_id``, ``created_at``, ``user``以及``txt``。前面提到Cursor是个迭代器，我们可以通过它在每次迭代中读取一条记录，而在没有剩余数据时退出迭代。
 + 对于 cursor 的当前记录，我们可以通过类型与列号来获取其中的值。由此，``cursor.getString(3)`` 返回一个字符串，表示消息的内容； ``cursor.getLong(1)`` 返回一个数值，表示消息创建时的时间戳。但是，把列号硬编码在代码中不是个好习惯，因为数据库的原型一旦有变化，我们就不得不手工调整相关的代码，而且可读性也不好。更好的方法是，使用列名——回想下，我们曾在 //第九章//中定义过 ``C_USER`` 与 ``C_TEXT`` 等字符串——调用 ``cursor.getColumnIndex()`` 得到列号，然后再取其中的值。
@@ -373,7 +373,7 @@ public class TimelineActivity2 extends Activity {
 
 % TimelineAdapter is our custom adapter. Although SimpleCursorAdapter did a straightforward mapping of data in the database to views on the screen, we had an issue with the timestamp. The job of TimelineAdapter is to inject some business logic to convert Unix timestamp to relative time. We can discover that the method in SimpleCursorAdapter`that creates a displayable view from input data is `bindView(), so we’ll override that method and ask it to massage the data before it is displayed.
 
-TimelineAdapter就是我们自定义的Adapter。虽说SimpleCursorAdapter映射起数据来倒也直白，但是我们在这里还有个时间戳（timestamp）需要特殊处理。这也属于TimelineAdapter的工作：加入业务逻辑，将Unix时间戳转换为相对时间。可知``SimpleCursorAdapter``是在``bindView()``里面处理View的显示，因此覆盖这个方法，在数据显示之前处理一下即可。
+TimelineAdapter就是我们自定义的Adapter。虽说SimpleCursorAdapter映射起数据来倒也直白，但是我们在这里还有个[Unix时间戳（timestamp） http://en.wikipedia.org/wiki/Unix_time]需要特殊处理。这也属于TimelineAdapter的工作：加入业务逻辑，将Unix时间戳转换为相对时间。可知``SimpleCursorAdapter``是在``bindView()``里面处理View的显示，因此覆盖这个方法，在数据显示之前处理一下即可。
 
 % Typically, if you are not sure what method to override, look at the online documentation for that particular system class that you are modifying. In this case, that’d be http://developer.android.com/reference/android/widget/SimpleCursorAdapter.html.
 

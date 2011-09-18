@@ -43,7 +43,7 @@ SQLite是一个开源的数据库，经过一段时间的发展，它已经非�
 
 % The Android framework offers several ways to use SQLite easily and effectively, and we’ll look at the basic usage in this chapter. You may be pleased to find that, although SQLite uses SQL, Android provides a higher-level library with an interface that is much easier to integrate into an application.
 
-Android 框架提供了几套不同的接口，允许开发者简单高效地访问 SQLite 数据库。本章我们将关注最基本的那套接口。SQLite 的默认接口是SQL，不过一个好消息是 Android 提供了更高层的封装来简化开发者的工作。
+Android 框架提供了几套不同的接口，允许开发者简单高效地访问 SQLite 数据库。本章我们将关注最基本的那套接口。SQLite 的默认接口是[SQL http://en.wikipedia.org/wiki/SQL]，不过一个好消息是 Android 提供了更高层的封装来简化开发者的工作。
 
 {NOTE}
 % Although SQLite support is built into Android, it is by no means your only option when it comes to data persistence for your app. You can always use another database system, such as JavaDB or MongoDB, but you’d have to bundle the required libraries with you app and would not be able to rely on Android’s built-in support for database. SQLite is not an alternative to a full SQL server, instead it is an alternative to using a local file with an arbitrary format.
@@ -708,7 +708,7 @@ public class StatusData { //#{1}
 % + In this case, we use ``insertWithOnConflict()`` and pass ``SQLiteDatabase.CONFLICT_IGNORE`` as the final parameter to indicate that if there’s a conflict, the exception should be ignored. Remember that we did have conflict with the duplicate IDs, as explained [in the section called “Database Constraints” http://ofps.oreilly.com/titles/9781449390501/ch09.html#Database_Constraints].
 + 在这里，我们调用``insertWithOnConflict()``，并将``SQLiteDatabase.CONFLICT_IGNORE``作为最后一个参数，表示如果有数据重复，则忽略异常。原因在前文的“数据库约束”一节已有说明。
 % + Notice that we also close the database right after we are done. We also do this in [finally http://en.wikipedia.org/wiki/Exception_handling] section of our exception handling. This ensures the database is shut down properly regardless if something went wrong or not. This theme is something we repeat in ``getLatestStatusCreatedAtTime()`` and ``getStatusTextById()``.
-+ 不要忘记关闭数据库。我们把它放在finally子句中，这就可以保证无论出现何种错误，数据库都可以正确地关闭。同样的风格还可以在``getLatestStatusCreatedAtTime()``和``getStatusTextById()``中见到。
++ 不要忘记关闭数据库。我们把它放在[finally http://en.wikipedia.org/wiki/Exception_handling]子句中，这就可以保证无论出现何种错误，数据库都可以正确地关闭。同样的风格还可以在``getLatestStatusCreatedAtTime()``和``getStatusTextById()``中见到。
 % + This method simply returns all the statuses in the database, latest first.
 + 返回数据库中的所有消息数据，按时间排序。
 % + ``getLatestStatusCreatedAtTime()`` returns the timestamp of the latest status we have in the database. Having a way to know what is the newest status we have cached locally is useful later to ensure we only add new statuses into the database.
@@ -719,7 +719,7 @@ public class StatusData { //#{1}
 
 % Now that we have a new common place to handle status data, we can have it hang off of our common Application object so that any part of the application can easily access it [增加 (see Example 9.4, “YambaApplication.java”)]. So the UpdaterService and TimelineActivity classes are in a has-a relationship to StatusData via YambaApplication object.
 
-到这里，数据库的相关操作已都独立到了StatusData中。接下来把它放到``Application``对象里面，随后就可以让其它构件(比如``UpdaterService``与``TimelineActivity``)访问了。
+到这里，数据库的相关操作已都独立到了StatusData中。接下来把它放到``Application``对象里面，这一来即可令其它构件(比如``UpdaterService``与``TimelineActivity``)与StatusData建立起[has-a http://en.wikipedia.org/wiki/Has-a]关系，方便访问。
 
 **例 9.4. YambaApplication.java**
 {CODE}

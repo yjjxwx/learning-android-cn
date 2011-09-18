@@ -466,8 +466,8 @@ public class NetworkReceiver extends BroadcastReceiver { // #{1}
 + 权限的名字，作为引用权限的标识符。在这里，我们通过它来保护Timeline更新事件的广播。
 + 权限的标签(Label)。它会在安装应用程序的授权步骤显示给用户，作为一个人类可读的权限名称，其内容应尽量做到言简意赅。留意，我们将它的值定义在了``string.xml``文件中。
 + 关于这项权限的描述，用以简介权限的含义与作用。
-+ 权限组。此项可选，但很有用。通过它，可以将我们的权限归类到系统定义的权限组。也可以定义自己的权限组，但不常见。
-+ 权限的安全等级，表示这项权限的危险程度，等级越高越危险。其中``'normal'``表示最低的安全等级。
++ 权限组。此项可选，但很有用。通过它，可以将我们的权限归类到系统定义的[权限组 http://d.android.com/reference/android/Manifest.permission_group.html]。也可以定义自己的权限组，但不常见。
++ 权限的[安全等级 http://developer.android.com/reference/android/R.styleable.html#AndroidManifestPermission_protectionLevel]，表示这项权限的危险程度，等级越高越危险。其中``'normal'``表示最低的安全等级。
 + 定义另一项权限，用于保护Timeline更新事件的接收。步骤与上相同。
 + 给出了这些定义之后，我们仍需为应用程序申请这些权限。这里就同申请系统权限一样了，通过<uses-permissions>标签。
 

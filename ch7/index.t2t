@@ -17,7 +17,7 @@
 
 % From user interface point of view preferences can be simple text values, checkboxes, selections from a pull-down menu, or similar. From data point of view, preferences is a collection of name-value pairs, also known as key-value or attribute-value pairs. The values are basic data types, such as integers, booleans, strings, and similar.
 
-在用户看来，首选项就是一些文本框、复选框、下拉菜单等等组成的集合体；而在程序员看来，首选项是一组键值对构成的数据集，其中的值可以是整型、布尔型、字符串等等。
+在用户看来，首选项就是一些文本框、复选框、下拉菜单等等组成的集合体；而在程序员看来，首选项是一组[键值对 http://en.wikipedia.org/wiki/Attribute-value_pair]构成的数据集，其中的值可以是整型、布尔型、字符串等等。
 
 % Our micro-blogging applications needs to connect to specific server in the cloud using specific user account information. For that, Yamba needs to know username and password for that account as well as the URL of the server it’s connecting to. This URL is also knowns as API root. So, in our case, we’ll have three fields where user can enter and edit username, password and API root. This data will be stored as strings.
 
@@ -576,7 +576,7 @@ public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
 
 % In Eclipse, we use File Explorer view to access the file system. To open up the File Explorer view, go to Window→Show View→Other…→Android→File Explorer. You can also access File Explorer view via DDMS Perspective. Select DDMS Perspective in the top-right corner of your Eclipse [images/07-icon_ddms.png] or go to Window→Open Perspective→Other…→DDMS. If you have multiple devices connected to your workstation, make sure you select which one you are working with in the Devices view. You should now be able to navigate through the file system of the device.
 
-Eclipse中提供了一个File Explorer工具供我们访问文件系统。要打开它，可以选择``Window→Show View→Other…→Android→File Explorer``，也可以单击右上角的DDMS 中访问它。要打开DDMS，可以单击右上角的DDMS Perspective[images/07-icon_ddms.png]，也可以选择``Window→Open Perspective→Other…→DDMS``。如果在工作台上连接着多台设备，选择出正确的设备，然后就可以访问它的文件系统了。
+Eclipse中提供了一个File Explorer工具供我们访问文件系统。要打开它，可以选择``Window→Show View→Other…→Android→File Explorer``，也可以单击右上角的[DDMS http://developer.android.com/guide/developing/tools/ddms.html]中访问它。要打开DDMS，可以单击右上角的DDMS Perspective[images/07-icon_ddms.png]，也可以选择``Window→Open Perspective→Other…→DDMS``。如果在工作台上连接着多台设备，选择出正确的设备，然后就可以访问它的文件系统了。
 
 % If you prefer the command line, you can always use adb shell to get to the shell of the device. From there you can explore the file system like you would on any other Unix platform.
 
@@ -634,7 +634,7 @@ SDCard分区是个通用的存储空间。你的程序只要拥有WRITE_TO_EXTER
 
 % This partition typically corresponds to sdcard.img in your Android Virtual Device (AVD) directory. This directory is in you ~/.android/avd/ folder and will have a subdirectory for each specific virtual device. On the physical device, it is an actual SD card.
 
-这个分区的镜像文件一般是sdcard.img，位于对应设备的AVD目录之下，也就是``~/.android/avd``之下的某个子目录。对真机而言，它就是一个SD卡。
+这个分区的镜像文件一般是sdcard.img，位于对应设备的AVD目录之下，也就是``~/.android/avd``之下的某个子目录。对真机而言，它就是一个[SD卡 http://en.wikipedia.org/wiki/Secure_Digital]。
 
 % ===User Data Partition===
 === 用户数据分区 ===
@@ -649,7 +649,7 @@ SDCard分区是个通用的存储空间。你的程序只要拥有WRITE_TO_EXTER
 
 % Android framework provides number of handy methods as part of context that help you access user data file system from within your application. Take a look at getFilesDir() for example.
 
-Android框架提供了许多相关的辅助函数，允许应用程序访问文件系统，比如``getFilesDir()``。
+Android框架提供了许多相关的辅助函数，允许应用程序访问文件系统，比如[getFilesDir() http://developer.android.com/reference/android/content/ContextWrapper.html]。
 
 % This partition typically corresponds to user-data.img in your Android Virtual Device (AVD) directory. As before, this directory is in your ~/.android/avd/ folder and will have a subdirectory for each specific virtual device.
 

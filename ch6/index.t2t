@@ -370,7 +370,7 @@ Java部分对应的文件是``StatusActivity.java``，Eclipse New Project对话�
 
 % As with all Main Building Blocks in Android, such as Activities, Services, BroadcastReceivers and ContentProviders, you usually start by subclassing a base class provided by the Android framework, and overriding certain inherited methods. In this case, we subclass Android’s Activity class and override its onCreate() method. As you recall, activities have a certain lifecycle the section called “Activity Lifecycle” [增加 Example 6.2, “res/values/strings.xml” shows what our strings.xml file looks like at this point.], or state machine through which they go. We as developers do not control what state the activity is in, but we do get to say what happens at a transition to a particular state. In this case, the transition we want to override is onCreate() method that is invoked by the system’s ActivityManager when the activity is first created (i.e. it goes from Starting the section called “Starting State” to Running the section called “Running State” state). This sort of programming when we subclass a system class and fill out the blanks is also known as Template pattern.
 
-Android程序中所有的构件(如``Activity``、``Service``、``BroadcastReceiver``、``ContentProvider``)都是继承一个Android框架中提供的基类，然后覆盖特定的方法。在这里，我们继承Activity类，覆盖了``onCreate()``方法。前面曾提到，Activity有个精心设计的生命周期，作为指导Activity行为的一台状态机。身为开发者，我们通常不会主动地干涉Activity的状态，而是跟踪Activity状态的变更，被动地对事件做处理。在这里，我们的``onCreate()``会在Activity第一次创建时由系统的ActivityManager负责调用。像这样继承一个基类然后覆盖特定的方法的编程范式，被称作Template模式。
+Android程序中所有的构件(如``Activity``、``Service``、``BroadcastReceiver``、``ContentProvider``)都是继承一个Android框架中提供的基类，然后覆盖特定的方法。在这里，我们继承Activity类，覆盖了``onCreate()``方法。在第四章的 //"Activity的生命周期"// 一节 曾提到，Activity有个精心设计的生命周期，作为指导Activity行为的一台状态机。身为开发者，我们通常不会主动地干涉Activity的状态，而是跟踪Activity状态的变更，被动地对事件做处理。在这里，我们的``onCreate()``会在Activity第一次创建时由系统的ActivityManager负责调用(参见第四章中 //"Starting状态"// 和 //"Running状态"// 两小节)。像这样继承一个基类然后覆盖特定的方法的编程范式，被称作[Template模式 http://en.wikipedia.org/wiki/Template_method_pattern]。
 
 %TALK:  (i.e. it goes from Starting the section called “Starting State” to Running the section called “Running State” state). 很诡异的一句。
 
@@ -380,7 +380,7 @@ Android程序中所有的构件(如``Activity``、``Service``、``BroadcastRecei
 
 % Notice that onCreate() take a Bundle as a parameter. This is a small amount of data that can be passed into the activity via the Intent that started it. The data provided in a Bundle is typically limited to basic data types and more complex ones need to be specially encoded. For the most part, we’re not going to be using Bundle in Yamba example as there’s no real need for us.
 
-留意``onCreate()``有个Bundle类型的参数。它表示启动这一Activity的Intent所附带的少量数据。Bundle只能存储基本类型，复杂的数据需要自己编码。不过话说回来，在Yamba中我们并无使用Bundle的特殊需求，也就没有使用它。
+留意``onCreate()``有个``Bundle``类型的参数。它表示启动这一Activity的Intent所附带的少量数据。Bundle只能存储基本类型，复杂的数据需要自己编码。不过话说回来，在Yamba中我们并无使用``Bundle``的特殊需求，也就没有使用它。
 
 % Keep in mind that whenever you override a method, you first want to make a call to the original method provided by the parent. That’s why we have super.onCreate() call here.
 
@@ -488,11 +488,11 @@ public class StatusActivity1 extends Activity implements OnClickListener { // #{
 
 % We are connecting to the the online service that implements Twitter-compatible API in our application. This connection is done via a series of web service calls. Since Android uses standard Java networking capabilities, there’s not much new in Android with respect to web services than we already have in Java. So, as such, there’s little value in reinventing the wheel.
 
-我们的程序需要连接到服务端访问Twitter的API服务，免不了一系列的网络操作。Android拥有Java标准的网络编程接口，因此Java中的许多网络服务可以直接拿来，而没有重复发明轮子的必要。
+我们的程序需要连接到服务端来访问[兼容Twitter的API http://status.net/wiki/Twitter-compatible_API]，自然也就免不了一系列的[网络服务 http://en.wiktionary.org/wiki/web_service](Web Service)调用。Android拥有Java标准的网络编程接口，因此在Java中可用的许多网络服务都可以直接拿来，而没有重复发明轮子的必要。
 
 % To make our life with web services and Twitter API easier, we’re going to use a third-party library, jtwitter.jar, provided by Winterwell Associates. This library provides a simple Java class to interact with the online service and abstracts all the intricacies of making network calls and passing the data back and forth. If no one has been kind enough to provide a high-level library like jtwitter for what we want to do, we could always use standard Java networking libraries to get the job done. It would just have been more work.
 
-为更方便地使用网络服务和Twitter API，我们选用了Winterwell Associaties的三方库jtwitter.jar。它提供了一个简单的类，使得与Twitter服务端之间的交互变得十分方便。不过，如果没有jtwitter这样的三方库怎么办？我们大可使用Java内置的网络库来封装一个自己的实现，只是稍麻烦些罢了。
+为更方便地使用网络服务和Twitter API，我们选用了[Winterwell Associaties http://www.winterwell.com/index.php]的三方库[jtwitter.jar http://www.winterwell.com/software/jtwitter.php]。它提供了一个简单的类，使得与Twitter服务端之间的交互变得十分方便。不过，如果没有jtwitter这样的三方库怎么办？我们大可使用Java内置的网络库来封装一个自己的实现，只是稍麻烦些罢了。
 
 {NOTE}
 % 	The jtwitter.jar library provided with this code has been slightly modified from the official Winterwell version to make it work in Yamba project.
@@ -507,7 +507,7 @@ public class StatusActivity1 extends Activity implements OnClickListener { // #{
 
 % Java searches for all the classes in its classpath. To add it to the classpath, right-click on your project, select Properties and you will get a Properties for Yamba dialog window [增加 (see Figure 6.5, “Properties for Yamba dialog window in Eclipse, where we add the jtwitter.jar file”). ]. Select Java Build Path and choose Libraries tab. In there, click on Add JARs… and locate your jtwitter.jar file. This will add this JAR file to your projects classpath.
 
-Java在classpath中搜索它所有的类。要让我们的代码可以访问这个三方库，就需要将他的地址添加到classpath。右击你的项目，选择Properties打开Yamba的属性对话框，如 //图6.5. "Eclipse中Properties for Yamba对话框中的属性"//。找到Java Build Path，选择Libraries页面。在这里单击Add JARs…，找到jtwitter.jar文件，加入即可。
+Java在[classpath http://en.wikipedia.org/wiki/Classpath_(Java)]中搜索它所有的类。要让我们的代码可以访问这个三方库，就需要将他的地址添加到classpath。右击你的项目，选择Properties打开Yamba的属性对话框，如 //图6.5. "Eclipse中Properties for Yamba对话框中的属性"//。找到Java Build Path，选择Libraries页面。在这里单击Add JARs…，找到jtwitter.jar文件，即可将这个[JAR http://en.wikipedia.org/wiki/Jar_file]文件加入项目。
 
 **图 6.5. Eclipse中Properties for Yamba对话框中的属性**
 	[images/06-PropertiesForYamba.png]
@@ -601,14 +601,14 @@ Android系统中的日志都是输出到LogCat。它是一套标准的系统日�
 
 % DDMS stands for Dalvik Debug Monitor Server. DDMS is the connection between your application running on the device and your development environment, such as Eclipse.
 
-DDMS指Dalvik Debug Monitor Server，它可以将运行于设备上的应用程序与Eclipse这样的开发环境连接起来。
+[DDMS http://developer.android.com/guide/developing/tools/ddms.html]指Dalvik Debug Monitor Server，它可以将运行于设备上的应用程序与Eclipse这样的开发环境连接起来。
 
 **图 6.6. Eclipse的LogCat**
 	[images/06-logcat.png]
 
 % You can define filters for LogCat as well. Click on the little green plus button and LogCat Filter dialog will come up.[增加 (see Figure 6.7, “LogCat Filter”)] You can define a filter based on TAG, severity, or process id. This will create another window within LogCat showing you only the log entries that match your filter.
 
-可以在LogCat中设置过滤规则。单击绿色加号按钮，调出LogCat Filter对话框，然后就可以根据TAG、日志等级或进程id设置过滤规则了，如 //图6.7. "LogCat Filter"//。过滤所得的结果显示在另一个窗口中。
+可以在LogCat中设置过滤规则。单击绿色加号按钮，调出LogCat Filter对话框，然后就可以根据TAG、日志等级或进程id设置过滤规则了(如 //图6.7. "LogCat Filter"//)。过滤所得的结果显示在另一个窗口中。
 
 **图 6.7. LogCat Filter**
 	[images/06-logcat-filter.png]
@@ -656,7 +656,7 @@ DDMS指Dalvik Debug Monitor Server，它可以将运行于设备上的应用程�
 Android操作系统建基于Linux，这就获得了多线程的支持。作为开发者要开发正确的程序，就需要对应用程序使用线程的方法有所了解。
 
 % === Single Thread ===
-===单线程===
+===单线程执行===
 
 % By default, an Android application runs on a single thread. Single threaded application run all commands in serially, meaning the next command is not completed until the previous one is done. Another way of saying the same thing is that each call is blocking.
 
@@ -687,7 +687,7 @@ Android程序默认运行在单线程之下。单线程顺序执行所有的操�
 
 % A much better solution is to have the potentially long operations run on a separate thread. When multiple tasks run on multiple threads at the same time, the operating system slices the available CPU so that no one task dominates the execution. The result is that appears that multiple tasks are running in parallel at the same time.
 
-与在单线程中阻塞相比，更好的做法是让程序运行在多个线程之中。有系统负责分配CPU时间，几个线程仿佛在同一时刻同时运行。这样可以避免某线程独占计算资源。
+与在单线程中阻塞相比，更好的做法是让程序运行在多个线程之中。系统负责分配CPU时间，几个线程仿佛在同一时刻同时运行。这样可以避免某线程独占计算资源。
 
 **图 6.10. 多线程执行**
 	[images/06-Threads-Multi.png]
@@ -804,11 +804,11 @@ public class StatusActivity2 extends Activity implements OnClickListener {
 % + onPostExecute() is called when our task is completed. This is our callback method to update the user interface and tell the user that task is done. In this particular case, we are using Toast feature of Android UI to show a quick message on the screen. Notice that Toast uses makeText() static method to make the actual toast message. Also, do not forget the call show() on the toast, otherwise your message will never be displayed and there won’t even be any errors - a hard bug to find. The argument that this method gets is the value that doInBackground() returns, in this case a String. This also corresponds to the third generics datatype in the class definition.
 % + Once we have out AsyncTask setup, we can use it. To use it, we simply instantiate it and call execute() on it. The argument that we pass in is what goes into doInBackground() call. Note that in this case we are passing a single String that is being converted into a String array in the actual method later on. This is the use of Java’s variable number of arguments feature.
 
-+ ``PostToTwitter``是``StatusActivity``的内部类，也是``AsyncTask``的子类。留意后面的三个类型参数，它们决定着下面函数的类型：第一个类型参数与``doInBackground()``相关，第二个与``onPostExecute()``相关，第三个与``onPostExecute()``相关。
++ ``PostToTwitter``是``StatusActivity``的内部类，也是``AsyncTask``的子类。留意其中对[泛型 http://en.wikipedia.org/wiki/Generics_in_Java]的使用，通过三个类型参数，决定了后面函数的类型：第一个类型参数与``doInBackground()``相关，第二个与``onPostExecute()``相关，第三个与``onPostExecute()``相关。
 + ``doInBackground()``是个回调方法，表示异步执行的网络操作，就像执行在后台一样。它的参数``String...``来自前面声明中的第一个类型参数，后面的三个``.``表示它接纳多个字符串作为参数，即使只用到一个字符串也必须如此。
 + ``onProgressUpdate()``在任务进度更新时触发，其中的“进度”由``doInBackground()``负责更新。一个应用样例是，下载工具显示已完成的百分比。但在这里没有显示进度信息的必要，因此留空。
 + ``onPostExecute()``在任务完成时触发。我们可以在这个回调方法里面更新用户界面，显示任务完成。这里使用了Android的Toast机制，在屏幕上弹出一条消息。创建Toast的静态方法是``makeText()``，但在创建一条Toast消息之后，还需要调用``show()``才能显示出来，对这点需要小心。另外``onPostExecute()``方法参数的类型与前面的第三个类型参数相关。
-+ 设置``AsyncTask``完毕，接下来使用它：简单创建一个实例，然后调用``execute()``即可。它的参数会原样传给``doInBackground()``。留意，这是个可变参数，因此单个字符串会被转化为字符串数组的形式。
++ 设置``AsyncTask``完毕，接下来使用它：简单创建一个实例，然后调用``execute()``即可。它的参数会原样传给``doInBackground()``。留意，这是个[可变参数 http://en.wikipedia.org/wiki/Variadic_function]，因此单个字符串会被转化为字符串数组的形式。
 
 
 % At this point, when user clicks on Update Status button, our activity will create a separate thread using AsyncTask and place the actual network operation on that thread. When done, the AsyncTask will update the main UI thread by popping up a Toast message to tell the user that operation either succeeded or failed. This approach makes our application much more responsive and user should never get "Application Not Responding: Force Close or Wait" message again, as shown in Figure 6.9, “Application Not Responding”. [增加 At this point, our application looks like Figure 6.11, “StatusActivity, part 1” when running.]
@@ -1039,7 +1039,7 @@ public class StatusActivity extends Activity implements OnClickListener,
 
 % We are going to create another drawable folder called just /res/drawable. To do that, right-click on the res folder and choose New→Folder. For name, enter drawable. You can now put your graphics that are independent of screen density in this folder. We’re going to assume you found some cool background graphics and that you saved it in there under the name background.png. While Android supports many different file formats, PNG is preferred since to the once-controversial GIF standard because PNG is lossless and doesn’t require any patent licenses.
 
-我们新建另一个目录，名为``/res/drawable``。右键单击``res``目录，选择``New→Folder``，输入名称为``drawable``。然后把分辨率无关的图片都放在这里即可。假定你已经找到了不错的背景图，并保存为``background.png``。Android支持多种图片格式，但我们在这里优先选择PNG格式而非GIF，这是因为PNG是无损格式，而且不需要专利许可。
+我们新建另一个目录，名为``/res/drawable``。右键单击``res``目录，选择``New→Folder``，输入名称为``drawable``。然后把分辨率无关的图片都放在这里即可。假定你已经找到了不错的背景图，并保存为``background.png``。Android支持多种图片格式，但我们在这里优先选择[PNG http://en.wikipedia.org/wiki/Portable_Network_Graphics]格式而非GIF，这是因为PNG是无损格式，而且不需要专利许可。
 
 {TIP}
 % 	While PNG officially stands for Portable Network Graphics, it is also commonly known as PNG’s Not Gif to reflect its departure from controversial GIF standard.
@@ -1114,11 +1114,11 @@ PNG官方的全称是``Portable Network Graphics``。它也常常被人称作``P
 
 % Android uses the standard RGB color set but it also optionally expands it with an Alpha channel. So, you can express color as RGB or ARGB where A is the amount of transparency, R is the amount of red, G is for green and B stands for blue color. The combination of these three colors and optional transparency gives you every conceivable color from white to black, and from opaque to fully transparent! That’s the whole point of ARGB. Of course, the granularity isn’t exactly what Monet would be happy with; each value has only 256 possibilities.
 
-Android使用标准的RGB颜色，加上可选的Alpha项，你可以使用RGB或ARGB两种方式描述颜色。其中A表示透明度，R表示红色，G表示绿色，B表示蓝色。每个值都在0~255之间，通过它们的混合，即可调和出各种不同的颜色以及不同的透明度。颜色的数目是有限的，这一点可能会让莫奈这样的大画家不高兴，但对电子设备来说，这已经绰绰有余了。
+Android使用标准的[RGB http://en.wikipedia.org/wiki/Rgb]颜色，加上可选的[Alpha项 http://en.wikipedia.org/wiki/alpha_channel]，你可以使用RGB或ARGB两种方式描述颜色。其中A表示透明度，R表示红色，G表示绿色，B表示蓝色。每个值都在0~255之间，通过它们的混合，即可调和出各种不同的颜色以及不同的透明度。颜色的数目是有限的，这一点可能会让莫奈这样的大画家不高兴，但对电子设备来说，这已经绰绰有余了。
 
 % Amounts of each can be represented either as values between 0 and 255, or using Hexadecimal system as values between 0 and FF. So, the actual values values can be AARRGGBB where each letter can be replaced with a value between 0 and F. There’s also a shorter version ARGB where for each value, it is repeated so that each two digits are the same. For example, #3A9F is the same as #33AA99FF and corresponds to #33 for alpha, #AA for red, #99 for green and #FF for blue. Notice that we use # symbol in front of hexadecimal values to distinguish them from decimal values.
 
-0到255之间的值，换成十六进制就是0到FF。表示颜色的话，一般还是十六进制用的多。格式是AARRGGBB，其中的每个字符都是0到F之间的数字。这一格式有一种简化形式，那就是ARGB，其中每个字符表示重复的两个字符。比如#3A9F与#33AA99FF相同，对应的Alpha为#33、红为#AA、绿为#99、蓝为#FF。可以留意这里的``#``号，它用来表示这是个十六进制数，与十进制做区别。
+0到255之间的值，换成[十六进制 http://en.wikipedia.org/wiki/Hexadecimal]就是0到FF。表示颜色的话，一般还是十六进制用的多。格式是AARRGGBB，其中的每个字符都是0到F之间的数字。这一格式有一种简化形式，那就是ARGB，其中每个字符表示重复的两个字符。比如#3A9F与#33AA99FF相同，对应的Alpha为#33、红为#AA、绿为#99、蓝为#FF。可以留意这里的``#``号，它用来表示这是个十六进制数，与十进制做区别。
 
 % So, we could update the background of our EditText element to be #cfff, which is somewhat transparent white color.
 
@@ -1195,7 +1195,7 @@ Android允许你提供多种资源文件。比如你可以提供不同版本的`
 
 % As you see from these couple of examples, the way alternative resources work is by specifying the qualifiers in the name of the resource folder. In case of French Canadian strings, Android knows that the first qualifier -fr refers to language and second qualifier -rCA specifies that the region is Canada. In both cases, we use Two-letter ISO codes to specify the country. So in this case, if the user is in Quebec for instance, and her device is configured to favor French language, Android will look for string resources in /res/values-fr-rCA/strings.xml file. If it doesn’t find a specific resource, it will fall back to default /res/values/strings.xml file. Also, if the user in France, Android in this case will use default resource since our French Canadian qualifiers do not match French for France.
 
-从上可知，备用资源文件以它的目录名作为标识。比如加拿大的法语版本那个例子，Android可以认出第一个标志符``-fr``指"法语"，第二个标志符``-rCA``指"加拿大"，而这两个标志符都是表示地区的ISO代码。这样，加拿大魁北克省的用户只要把语言设置为法语，Android就会选用``/res/values-fr-rCA/strings.xml``文件作为字符串资源。如果没有找到这个文件，则选用默认的``/res/values/strings.xml``文件。不过，即使用户在法国且语言是法语，它仍选用默认资源文件，因为标识符中的"加拿大"与"法国"不匹配。
+从上可知，备用资源文件以它的目录名作为标识。比如加拿大的法语版本那个例子，Android可以认出第一个标志符``-fr``指"法语"，第二个标志符``-rCA``指"加拿大"，而这两个标志符都是表示地区的[ISO代码 http://www.loc.gov/standards/iso639-2/php/code_list.php]。这样，加拿大魁北克省的用户只要把语言设置为法语，Android就会选用``/res/values-fr-rCA/strings.xml``文件作为字符串资源。如果没有找到这个文件，则选用默认的``/res/values/strings.xml``文件。不过，即使用户在法国且语言是法语，它仍选用默认资源文件，因为标识符中的"加拿大"与"法国"不匹配。
 
 (译者注：魁北克是加拿大唯一的法语省。)
 

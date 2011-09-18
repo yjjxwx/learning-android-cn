@@ -17,7 +17,7 @@
 
 % Android is a comprehensive open source platform designed for mobile devices. It is championed by Google and owned by Open Handset Alliance. The goal of the alliance is to "accelerate innovation in mobile and offer consumers richer, less expensive, and better mobile experience". Android is the vehicle to do so.
 
-Android是一个为移动设备设计的开源系统。它由Google主导的开放手持设备联盟（Open Handset Alliance）维护，该组织的口号是：“助力移动设备的变革，以更低廉的价格，为用户提供更强大的功能和更好的体验”，而Android正是其理念的核心。
+Android是一个为移动设备设计的开源系统。它由Google主导的[开放手持设备联盟（Open Handset Alliance） http://www.openhandsetalliance.com/]维护，该组织的口号是：“助力移动设备的变革，以更低廉的价格，为用户提供更强大的功能和更好的体验”，而Android正是其理念的核心。
 
 % As such, Android is revolutionizing the mobile space. For the first time, it is a truly open platform that is separating [separates] hardware from software that runs on it. This allows for a much larger number of devices to run same applications and creates a much richer ecosystem for developers and consumers to enjoy [creates a much richer ecosystem for developers and consumers].
 
@@ -160,7 +160,7 @@ Android的背后不只是Google，更有开放手持设备联盟（Open Handset 
 
 同任何软件一样，Android也在不断的改进之中，其间的变化就在版本号上得以呈现。但是容易使人迷惑的是，不同版本号之间又是什么关系？在表格里看会更直观些，如下：
 
-|| 表格 1.1. 截至Android 2.3的Android各版本
+|| 表格 1.1. 截至Android 3.0的Android各版本
 
 | Android 版本号 | API Level | 代号 |
 | Android 1.0 | 1 |   |
@@ -185,7 +185,7 @@ Android版本号差不多就是标志了它大版本和小版本发布的轨迹�
 
 % Your objective is typically to have your application run on as many devices as possible. So, with that in mind, try to shoot for an API level that is as low as possible. Keep in mind this distribution of Android versions on real devices out there. Figure 1.1, “Historical Android version distribution through January 2011” shows a snapshot of the Android Device Dashboard from mid-2010.
 
-你一般希望自己的应用能够兼容尽可能多设备，因此应留意Android的版本在诸多现存设备上的分野，选择较低的API Level。图1.1“//截至2011年1月Android现存版本的分布//”展示了来自[Android Device Dashboard http://developer.android.com/resources/dashboard/platform-versions.html]的一段统计信息：
+一般来说，你会希望自己的应用能够兼容尽可能多设备，因此应留意Android的版本在诸多现存设备上的分野，选择较低的API Level。//图1.1“截至2011年1月Android现存版本的分布//”展示了来自[Android Device Dashboard http://developer.android.com/resources/dashboard/platform-versions.html]的一段统计信息：
 
 **图1.1，“截至2011年1月Android现存版本的分布”**
 
