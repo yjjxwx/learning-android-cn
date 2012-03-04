@@ -1,0 +1,28 @@
+%
+%
+%
+% == Colophon ==
+= 封面动物 = 
+
+% The animal on the cover of <emphasis>Learning Android</emphasis> is a Little Owl.
+
+//Leaning Android// 的封面动物是纵纹腹小鸮(Little Owl)。
+
+% The Little Owl is part of the taxonomic family Strigdae, which is informally known as “typical owl” or “true owl” (the other taxonomic family includes barn owls). True to its name, the Little Owl is small, measuring between 23 and 27.5 centimeters in length. It is native to the warmer areas of east Asia (particularly Korea), Europe, and North Africa and has been introduced and naturalized in Great Britain and the South Island of New Zealand.
+
+纵纹腹小鸮属于鸮形目中的鸱鸮科(另一科为草鸮科)，俗称"Typical Owl"或者“True Owl“。形如其名，纵纹腹小鸮很小，体长23到27.5厘米。它们原生于东亚(主要在韩国)、欧洲与北非的温带地区，在英国与新西兰南岛也有引进。
+
+(To 编辑: Typical Owl和True Owl在词典中的释义一样，如需译为中文，可考虑“俗称"猫头鹰"或者"夜猫子"”)
+
+% The Little Owl is characterized by long legs and a round head with yellow eyes and white eyebrows; the eyebrows are said to give the owl a serious expression. The most widespread species, <emphasis>Athene noctua</emphasis> , is white and speckled brown on top and white-and-brown streaked on bottom. A species commonly found in the Middle East, <emphasis> A. n.  <phrase role="keep-together">lilith</phrase> </emphasis> , or the Syrian Little Owl, is a pale grayish-brown.  </para>
+
+纵纹腹小鸮的特征为腿长，面圆，眼为黄色，眉为白色；它的眉毛通常给人一种表情严肃的感觉。其最大的一支，//Athene noctua//，上体为白色而有棕色斑点，下体为白色与棕色的条纹。另外在中东地区广为分布的一支，//A. n. lilith//(又称叙利亚小鸮)，则是浅灰色与棕色的条纹。
+
+% The sedentary Little Owl typically makes its home in open country, such as parkland and farmland. It preys on amphibians, earthworms, insects, and even smaller mammals and birds; despite its diminutive stature, the Little Owl is able to attack many game birds. Unlike many of its true owl family members, the Little Owl is diurnal, or active during the day, during which it often perches openly. Depending on the habitat, the Little Owl builds nests in cliffs, rocks, holes in trees, river banks, and buildings. Little Owls that live in areas with human activity tend to get used to people and may perch in full view when humans are present.
+
+纵纹腹小鸮主要栖息于空旷地带，如草场或者农场。食物主要以蜥蜴、蚯蚓、昆虫，甚至小型的哺乳动物和鸟类为主；纵纹腹小鸮生性凶猛，虽身型小巧，仍敢于攻击许多猛禽。与鸱鸮科其它的许多物种不同的是，纵纹腹小鸮为昼行性动物，主要在白天行动，并在其间休息。取决于栖息地的不同，它们通常会在悬崖、礁石、树洞、河畔或者建筑物上筑巢。在接近人类活动的地方居住的纵纹腹小鸮，一般都已习惯了人类，在人类接近时并不怕人。
+
+% The cover image is from Cassell’s <emphasis>Natural History</emphasis> . The cover font is Adobe ITC Garamond. The text font is Linotype Birka; the heading font is Adobe Myriad Condensed; and the code font is LucasFont’s TheSansMonoCondensed.
+
+封面图片取自Cassell的//自然历史//。封面的字体为Adobe ITC Garamond；正文的字体为Linotype Birka；标题字体为Adobe Myriad Condensed；代码的字体为LucasFont的TheSansMonoCondensed。
+
