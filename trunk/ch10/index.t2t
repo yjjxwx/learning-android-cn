@@ -70,17 +70,20 @@ ScrollView中只能存放单独一个子元素。要让多个View一起滚动，
   android:orientation="vertical" android:layout_height="fill_parent"
   android:layout_width="fill_parent" android:background="@drawable/background">
 
-  <!-- Title #{1} -->
+% <!-- Title #{1} -->
+  <!-- 标题 #{1} -->
   <TextView android:layout_width="wrap_content"
     android:layout_height="wrap_content" android:layout_gravity="center"
     android:layout_margin="10dp" android:text="@string/titleTimeline"
     android:textColor="#fff" android:textSize="30sp" />
 
-  <!-- Text output wrapper #{2} -->
+% <!-- Text output wrapper #{2} -->
+  <!-- 将输出的文本包起来 #{2} -->
   <ScrollView android:layout_height="fill_parent"
     android:layout_width="fill_parent">
 
-    <!-- Text output #{3} -->
+%   <!-- Text output #{3} -->
+    <!-- 文本输出 #{3} -->
     <TextView android:layout_height="fill_parent"
       android:layout_width="fill_parent" android:id="@+id/textTimeline"
       android:background="#6000" />
@@ -133,10 +136,12 @@ public class TimelineActivity1 extends Activity { // #{1}
     super.onCreate(savedInstanceState);
     setContentView(R.layout.timeline);
 
-    // Find your views
+%    // Find your views
+    // 获取对View的引用
     textTimeline = (TextView) findViewById(R.id.textTimeline);
 
-    // Connect to database
+%   // Connect to database
+    // 连接到数据库
     dbHelper = new DbHelper(this);  // #{2}
     db = dbHelper.getReadableDatabase();  // #{3} 
   }
@@ -145,7 +150,8 @@ public class TimelineActivity1 extends Activity { // #{1}
   public void onDestroy() {
     super.onDestroy();
 
-    // Close the database
+%   // Close the database
+    // 关闭数据库
     db.close(); // #{4}
   }
 
@@ -153,12 +159,14 @@ public class TimelineActivity1 extends Activity { // #{1}
   protected void onResume() {
     super.onResume();
 
-    // Get the data from the database
+%   // Get the data from the database
+    // 从数据库中读取数据
     cursor = db.query(DbHelper.TABLE, null, null, null, null, null,
         DbHelper.C_CREATED_AT + " DESC"); // #{5}
     startManagingCursor(cursor);  // #{6}
 
-    // Iterate over all the data and print it out
+%   // Iterate over all the data and print it out
+    // 遍历所得的数据并输出
     String user, text, output;
     while (cursor.moveToNext()) {  // #{7}
       user = cursor.getString(cursor.getColumnIndex(DbHelper.C_USER));  // #{8}
@@ -317,10 +325,12 @@ public class TimelineActivity2 extends Activity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.timeline);
 
-    // Find your views
+%   // Find your views
+    // 获取对View的引用
     listTimeline = (ListView) findViewById(R.id.listTimeline);  // #{6}
 
-    // Connect to database
+%   // Connect to database
+    // 连接到数据库
     dbHelper = new DbHelper(this);
     db = dbHelper.getReadableDatabase();
   }
@@ -329,7 +339,8 @@ public class TimelineActivity2 extends Activity {
   public void onDestroy() {
     super.onDestroy();
 
-    // Close the database
+%   // Close the database
+    // 关闭数据库
     db.close();
   }
 
@@ -337,12 +348,14 @@ public class TimelineActivity2 extends Activity {
   protected void onResume() {
     super.onResume();
 
-    // Get the data from the database
+%   // Get the data from the database
+    // 从数据库中读取数据
     cursor = db.query(DbHelper.TABLE, null, null, null, null, null,
         DbHelper.C_CREATED_AT + " DESC");
     startManagingCursor(cursor);
 
-    // Setup the adapter
+%   // Setup the adapter
+    // 设置Adapter
     adapter = new SimpleCursorAdapter(this, R.layout.row, cursor, FROM, TO);  // #{7}
     listTimeline.setAdapter(adapter); // #{8}
   }
@@ -395,17 +408,20 @@ public class TimelineAdapter extends SimpleCursorAdapter { // #{1}
       DbHelper.C_TEXT }; // #{2}
   static final int[] TO = { R.id.textCreatedAt, R.id.textUser, R.id.textText }; // #{3}
 
-  // Constructor
+% // Constructor
+  // 构造函数
   public TimelineAdapter(Context context, Cursor c) { // #{4}
     super(context, R.layout.row, c, FROM, TO);
   }
 
-  // This is where the actual binding of a cursor to view happens
+% // This is where the actual binding of a cursor to view happens
+  // 在这里Cursor将绑定到对应的View
   @Override
   public void bindView(View row, Context context, Cursor cursor) { // #{5}
     super.bindView(row, context, cursor);
 
-    // Manually bind created at timestamp to its view
+%   // Manually bind created at timestamp to its view
+    // 手工将表示创建时间的时间戳绑定到对应的View
     long timestamp = cursor.getLong(cursor
         .getColumnIndex(DbHelper.C_CREATED_AT)); // #{6}
     TextView textCreatedAt = (TextView) row.findViewById(R.id.textCreatedAt); // #{7}
@@ -460,10 +476,12 @@ public class TimelineActivity3 extends Activity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.timeline);
 
-    // Find your views
+%   // Find your views
+    // 获取对View的引用
     listTimeline = (ListView) findViewById(R.id.listTimeline);
 
-    // Connect to database
+%   // Connect to database
+    // 连接到数据库
     dbHelper = new DbHelper(this);
     db = dbHelper.getReadableDatabase();
   }
@@ -473,6 +491,7 @@ public class TimelineActivity3 extends Activity {
     super.onDestroy();
 
     // Close the database
+    // 关闭数据库
     db.close();
   }
 
@@ -480,12 +499,14 @@ public class TimelineActivity3 extends Activity {
   protected void onResume() {
     super.onResume();
 
-    // Get the data from the database
+%   // Get the data from the database
+    // 从数据库中读取数据
     cursor = db.query(DbHelper.TABLE, null, null, null, null, null,
         DbHelper.C_CREATED_AT + " DESC");
     startManagingCursor(cursor);
 
-    // Create the adapter
+%   // Create the adapter
+    // 创建Adapter
     adapter = new TimelineAdapter(this, cursor);  // #{2}
     listTimeline.setAdapter(adapter); // #{3}
   }
@@ -531,15 +552,16 @@ public class TimelineActivity3 extends Activity {
     ...
   }
 
-  // View binder constant to inject business logic that converts a timestamp to
-  // relative time
+%  // View binder constant to inject business logic that converts a timestamp to relative time
+  // 定义常量VIEW_BINDER，由它实现将时间戳转化为相对时间的业务逻辑
   static final ViewBinder VIEW_BINDER = new ViewBinder() { // #{2}
 
     public boolean setViewValue(View view, Cursor cursor, int columnIndex) { // #{3}
       if (view.getId() != R.id.textCreatedAt)
         return false; // #{4}
 
-      // Update the created at text to relative time
+%     // Update the created at text to relative time
+      // 将创建时间转换为相对时间
       long timestamp = cursor.getLong(columnIndex); // #{5}
       CharSequence relTime = DateUtils.getRelativeTimeSpanString(view
           .getContext(), timestamp); // #{6}
@@ -747,6 +769,7 @@ import android.widget.Toast;
 /**
  * The base activity with common features shared by TimelineActivity and
  * StatusActivity
+ * TimelineActivity与StatusActivity共有的基类，将需要重用的代码放在这里
  */
 public class BaseActivity extends Activity { // #{1}
   YambaApplication yamba; // #{2}
@@ -758,6 +781,7 @@ public class BaseActivity extends Activity { // #{1}
   }
 
   // Called only once first time menu is clicked on
+  // 仅在第一次点击菜单时触发
   @Override
   public boolean onCreateOptionsMenu(Menu menu) { // #{4}
     getMenuInflater().inflate(R.menu.menu, menu);
@@ -765,6 +789,7 @@ public class BaseActivity extends Activity { // #{1}
   }
 
   // Called every time user clicks on a menu item
+  // 在每次点击菜单项时触发
   @Override
   public boolean onOptionsItemSelected(MenuItem item) { // #{5}
 
@@ -798,6 +823,7 @@ public class BaseActivity extends Activity { // #{1}
   }
 
   // Called every time menu is opened
+  // 在菜单打开时触发
   @Override
   public boolean onMenuOpened(int featureId, Menu menu) { // #{6}
     MenuItem toggleItem = menu.findItem(R.id.itemToggleService); // #{7}
@@ -872,6 +898,7 @@ public class TimelineActivity extends BaseActivity { // #{1}
     }
 
     // Find your views
+    // 获取对View的引用
     listTimeline = (ListView) findViewById(R.id.listTimeline);
   }
 
@@ -880,6 +907,7 @@ public class TimelineActivity extends BaseActivity { // #{1}
     super.onResume();
 
     // Setup List
+    // 设置消息列表
     this.setupList(); // #{3}
   }
 
@@ -888,12 +916,14 @@ public class TimelineActivity extends BaseActivity { // #{1}
     super.onDestroy();
 
     // Close the database
+    // 关闭数据库
     yamba.getStatusData().close(); // #{4}
   }
 
   // Responsible for fetching data and setting up the list and the adapter
   private void setupList() { // #{5}
     // Get the data
+    // 读取数据
     cursor = yamba.getStatusData().getStatusUpdates();
     startManagingCursor(cursor);
 
@@ -905,6 +935,7 @@ public class TimelineActivity extends BaseActivity { // #{1}
 
   // View binder constant to inject business logic for timestamp to relative
   // time conversion
+  // 定义常量VIEW_BINDER，由它实现将时间戳转化为相对时间的业务逻辑
   static final ViewBinder VIEW_BINDER = new ViewBinder() { // #{7}
 
     public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
@@ -912,6 +943,7 @@ public class TimelineActivity extends BaseActivity { // #{1}
         return false;
 
       // Update the created at text to relative time
+      // 将创建时间转换为相对时间
       long timestamp = cursor.getLong(columnIndex);
       CharSequence relTime = DateUtils.getRelativeTimeSpanString(view
           .getContext(), timestamp);

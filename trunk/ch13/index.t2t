@@ -98,26 +98,31 @@ import android.view.Window;
 import android.view.WindowManager;
 
 // implement SensorListener
+// 实现SensorListener
 public class Compass extends Activity implements SensorEventListener { //#{1}
   SensorManager sensorManager; //#{2}
   Sensor sensor;
   Rose rose;
 
-  /** Called when the activity is first created. */
+%  /** Called when the activity is first created. */
+  /** 在Activity第一次创建时触发 **/
   @Override
   public void onCreate(Bundle savedInstanceState) { //#{3}
     super.onCreate(savedInstanceState);
 
     // Set full screen view #{4}
+    // 设置为全屏显示 #{4}
     getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
         WindowManager.LayoutParams.FLAG_FULLSCREEN);
     requestWindowFeature(Window.FEATURE_NO_TITLE);
 
     // Create new instance of custom Rose and set it on the screen
+    // 创建自定义的Rose类实例，并将它显示在屏幕上
     rose = new Rose(this); //#{5}
     setContentView(rose); // #{6}
 
     // Get sensor and sensor manager
+    // 获取sensor与sensorManager对象的引用
     sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE); // #{7}
     sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION); // #{8}
 
@@ -125,6 +130,7 @@ public class Compass extends Activity implements SensorEventListener { //#{1}
   }
 
   // Register to listen to sensors
+  // 将侦听器对象注册到sensorManager
   @Override
   public void onResume() {
     super.onResume();
@@ -133,6 +139,7 @@ public class Compass extends Activity implements SensorEventListener { //#{1}
   }
 
   // Unregister the sensor listener
+  // 取消侦听器对象的注册
   @Override
   public void onPause() {
     super.onPause();
@@ -140,10 +147,12 @@ public class Compass extends Activity implements SensorEventListener { //#{1}
   }
 
   // Ignore accuracy changes
+  // 忽略精度的变化
   public void onAccuracyChanged(Sensor sensor, int accuracy) { // #{11}
   }
 
   // Listen to sensor and provide output
+  // 侦听传感器的变化并输出
   public void onSensorChanged(SensorEvent event) { // #{12}
     int orientation = (int) event.values[0]; // #{13}
     Log.d("Compass", "Got sensor event: " + event.values[0]);
@@ -225,6 +234,7 @@ public class Rose extends ImageView { //#{1}
   }
 
   // Called when component is to be drawn
+  // 在组件绘制时触发
   @Override
   public void onDraw(Canvas canvas) { // #{3}
     int height = this.getHeight();  // #{4}
@@ -235,9 +245,11 @@ public class Rose extends ImageView { //#{1}
   }
 
   // Called by Compass to update the orientation
+  // 由Compass对象调用，来更新方向
   public void setDirection(int direction) { // #{7}
     this.direction = direction;
-    this.invalidate(); // request to be redrawn #{8}
+%    this.invalidate(); // request to be redrawn #{8}
+    this.invalidate(); // 请求重绘 #{8}
   }
 
 }
@@ -369,6 +381,7 @@ public class WhereAmI extends Activity implements LocationListener { // #{1}
     geocoder = new Geocoder(this); // #{6}
 
     // Initialize with the last known location
+    // 按照上个已知位置初始化
     Location lastLocation = locationManager
         .getLastKnownLocation(LocationManager.GPS_PROVIDER); // #{7}
     if (lastLocation != null)
@@ -389,6 +402,7 @@ public class WhereAmI extends Activity implements LocationListener { // #{1}
   }
 
   // Called when location has changed
+  // 在位置变化时触发
   public void onLocationChanged(Location location) { // #{10}
     String text = String.format(
         "Lat:\t %f\nLong:\t %f\nAlt:\t %f\nBearing:\t %f", location
@@ -397,6 +411,7 @@ public class WhereAmI extends Activity implements LocationListener { // #{1}
     textOut.setText(text);
 
     // Perform geocoding for this location
+    // 解析位置信息
     try {
       List<Address> addresses = geocoder.getFromLocation(
           location.getLatitude(), location.getLongitude(), 10); // #{12}
@@ -409,6 +424,7 @@ public class WhereAmI extends Activity implements LocationListener { // #{1}
   }
 
   // Methods required by LocationListener 
+  // LocationListener中声明的几个方法
   public void onProviderDisabled(String provider) {
   }
 
@@ -636,12 +652,14 @@ public class StatusActivity extends BaseActivity implements OnClickListener,
   String provider;
 
   /** Called when the activity is first created. */
+  /** 在Activity首次创建时调用 **/
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.status);
 
     // Find views
+    // 获取对View的引用
     editText = (EditText) findViewById(R.id.editText);
     updateButton = (Button) findViewById(R.id.buttonUpdate);
     updateButton.setOnClickListener(this);
@@ -679,6 +697,7 @@ public class StatusActivity extends BaseActivity implements OnClickListener,
   }
 
   // Called when button is clicked
+  // 在点击按钮时触发
   public void onClick(View v) {
     String status = editText.getText().toString();
     new PostToTwitter().execute(status);
@@ -686,8 +705,10 @@ public class StatusActivity extends BaseActivity implements OnClickListener,
   }
 
   // Asynchronously posts to twitter
+  // 异步发送到Twitter
   class PostToTwitter extends AsyncTask<String, Integer, String> {
     // Called to initiate the background activity
+    // 在触发时负责发起后台操作
     @Override
     protected String doInBackground(String... statuses) {
       try {
@@ -705,6 +726,7 @@ public class StatusActivity extends BaseActivity implements OnClickListener,
     }
 
     // Called once the background activity has completed
+    // 在后台任务执行完毕时触发
     @Override
     protected void onPostExecute(String result) {
       Toast.makeText(StatusActivity.this, result, Toast.LENGTH_LONG).show();
@@ -712,6 +734,7 @@ public class StatusActivity extends BaseActivity implements OnClickListener,
   }
 
   // TextWatcher methods
+  // TextWatcher相关的几个方法
   public void afterTextChanged(Editable statusText) {
     int count = 140 - statusText.length();
     textCount.setText(Integer.toString(count));
@@ -729,6 +752,7 @@ public class StatusActivity extends BaseActivity implements OnClickListener,
   }
 
   // LocationListener methods
+  // LocationListener相关的几个方法
   public void onLocationChanged(Location location) { // #{10}
     this.location = location;
   }
@@ -1038,17 +1062,20 @@ public class BootReceiver extends BroadcastReceiver {
   public void onReceive(Context context, Intent callingIntent) {
 
     // Check if we should do anything at boot at all
+    // 检查是否需要在启动时做些事情
     long interval = ((YambaApplication) context.getApplicationContext())
         .getInterval(); // #{1}
     if (interval == YambaApplication.INTERVAL_NEVER)  // #{2}
       return;
 
     // Create the pending intent
+    // 创建一个PendingIntent对象
     Intent intent = new Intent(context, UpdaterService.class);  // #{3}
     PendingIntent pendingIntent = PendingIntent.getService(context, -1, intent,
         PendingIntent.FLAG_UPDATE_CURRENT); // #{4}
 
     // Setup alarm service to wake up and start service periodically
+    // 配置Alarm服务，使它可以定期唤醒并启动Service
     AlarmManager alarmManager = (AlarmManager) context
         .getSystemService(Context.ALARM_SERVICE); // #{5}
     alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, System
@@ -1141,9 +1168,14 @@ public class UpdaterService extends IntentService {
   /**
    * Creates a notification in the notification bar telling user there are new
    * messages
+   * 收到新消息时，在通知栏发送一条通知来提醒用户
    *
    * @param timelineUpdateCount
    *          Number of new statuses
+   * 
+   * @param timelineUpdateCount
+   *          新消息的数目
+   * 
    */
   private void sendTimelineNotification(int timelineUpdateCount) {
     Log.d(TAG, "sendTimelineNotification'ing");

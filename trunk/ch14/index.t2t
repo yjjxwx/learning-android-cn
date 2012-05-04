@@ -220,6 +220,7 @@ public class Message implements Parcelable { // #{1}
   };
 
   // Setters and Getters #{6}
+  // Setter与Getter #{6}
   public String getTag() {
     return tag;
   }
@@ -376,12 +377,14 @@ public class LogActivity extends Activity implements OnClickListener {
     setContentView(R.layout.main);
 
     // Request bind to the service
+    // 请求绑定到Service
     conn = new LogConnection(); // #{1}
     Intent intent = new Intent("com.marakana.logservice.ILogService"); // #{2}
     intent.putExtra("version", "1.0"); // #{3}
     bindService(intent, conn, Context.BIND_AUTO_CREATE); // #{4}
 
     // Attach listener to button
+    // 为按钮添加Listener
     ((Button) findViewById(R.id.buttonClick)).setOnClickListener(this);
   }
 

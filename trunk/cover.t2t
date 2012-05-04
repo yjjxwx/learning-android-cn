@@ -1,0 +1,46 @@
+%
+%
+%
+% == Cover ==
+
+= 封底 =
+
+% Want to build apps for Android devices? This book is the perfect way to master the fundamentals. Written by an expert who's taught this mobile platform to hundreds of developers in large organizations, this gentle introduction shows experienced object-oriented programmers how to use Android's basic building blocks to create user interfaces, store data, connect to network, and more.
+
+想为Andorid设备开发应用程序？ 这本书就是入门的最佳途径。 作者身为针对移动平台的专业讲师，凭借自己在面向大型机构的开发者培训中积累的经验， 在这本书中循循善诱地介绍了有经验的面向对象开发者是如何利用Android的基本构件来实现构造用户界面、存储数据、连接网络等操作的。
+
+% You'll build a Twitter-like application thoughout the cource of this book, adding new features with each chapter. Along the way, you'll also create own toolbox of code patterns to help you program any type of Android application with ease.
+
+按照本书中介绍的步骤，你将亲手实现一个类twitter的应用，并随着章节的推进不断地为它添加新功能。在此过程中，你也将慢慢地积累出自己的代码模式库，从而在开发Android应用中做到举一反三。
+
+% + Get an overview of the Android platform and discover how it fits into the mobile system.
+% + Learn about the android stack, including its application framework and the structure and distribution of application package (APK).
+% + Setup your Android development environment and get started with simple programs.
+% + Learn how to build basic Android user interfaces and organize UI elements in Views and Layouts.
+% + Build a service that uses a background process to update data in your application.
+% + Get an introduction to Android Interface Definition Lanugage (AIDL) and the Native Development Kit (NDK).
+
++ 了解Android平台的概况，体会它作为移动系统的独特优势。
++ 了解Android的设计架构，包括它的应用程序框架以及应用程序的打包/分发机制(APK)。
++ 配置你的Android开发环境，并通过开发一个简单的程序来入门。
++ 学习如何构建基本的Android用户界面，以及通过视图(View)与布局(Layout)组织UI元件的方法。
++ 构建一个服务(Service)来执行后台任务，为应用程序更新数据。
++ 简单介绍Android接口描述语言(AIDL)，以及本地代码开发包(NDK)。
+
+*建议读者拥有一定面向对象编程基础。
+
+
+== 赞词 ==
+
+% "Learning Android's author Marko Gargenta, is an expert instructor with years of experience. Now you can get benefit of his Android Bootcamp training class distilled down into an easy-to-read volume. Marko's book quickly guides the reader past the first baby steps of Android coding, then bits its stride with in-depth coverage of Service, Intents, and Broadcast Recievers. " - Ed Burnette. Author of Hello, Android
+
+//"Learning Android到作者Marko Gargenta是一位经验丰富的专业讲师。现在他将自己的Android Bootcamp培训课程中所得的教学经验总结提炼，写成了这一本易读的小册子供大家学习。Marko的书首先帮助读者踏出Android开发的第一步，也更深一步地讲解了Android的高级内容，比如服务(Service)，Intents与Broadcast Recievers。"// - Ed Burnette, 《Hello, Android》作者
+
+(to 编辑: 并不了解Intents与Broadcast Recievers在最终译稿中的用词，在此保留。)
+
+== 作者简介 ==
+
+**Marko Gargenta** 是旧金山 Marakana 培训公司的创始人与首席Android专家。他创建了 Android Bootcamp 与 Android Internals 两门课程， 并培训了来自四大洲的超过 1,000 名开发者。他的客户包括高通、索尼爱立信、摩托罗拉、夏普、思科与美国国防部。
+
+
+

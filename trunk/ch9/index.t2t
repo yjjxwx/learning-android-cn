@@ -203,12 +203,14 @@ public class DbHelper1 extends SQLiteOpenHelper { //#{1}
   Context context;
 
   // Constructor
+  // 构造函数
   public DbHelper1(Context context) { //#{5}
     super(context, DB_NAME, null, DB_VERSION);
     this.context = context;
   }
 
   // Called only once, first time the DB is created
+  // 仅在数据库第一次创建时触发
   @Override
   public void onCreate(SQLiteDatabase db) {
     String sql = "create table " + TABLE + " (" + C_ID + " int primary key, "
@@ -220,14 +222,20 @@ public class DbHelper1 extends SQLiteOpenHelper { //#{1}
   }
 
   // Called whenever newVersion != oldVersion
+  // 在 newVersion != oldVersion 时触发
   @Override
   public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) { //#{8}
     // Typically do ALTER TABLE statements, but...we're just in development,
     // so:
+    // 一般都是在这里执行 ALTER TABLE 语句， 不过...我们这里只是开发环境，
+    // 可以先不管数据的迁移：
+    // (to 编辑： 这里加了一句“可以先不管数据的迁移”，意指可以删掉数据库重建。)
 
-    db.execSQL("drop table if exists " + TABLE); // drops the old database
+%    db.execSQL("drop table if exists " + TABLE); // drops the old database
+    db.execSQL("drop table if exists " + TABLE); // 删除旧的数据库
     Log.d(TAG, "onUpgraded");
-    onCreate(db); // run onCreate to get new database
+%    onCreate(db); // run onCreate to get new database
+    onCreate(db); // 调用onCreate，重建新的数据库
   }
 
 }
@@ -293,7 +301,8 @@ import android.util.Log;
 public class UpdaterService1 extends Service {
   private static final String TAG = "UpdaterService";
 
-  static final int DELAY = 60000; // wait a minute
+%  static final int DELAY = 60000; // wait a minute
+  static final int DELAY = 60000; // 等待的时间是一分钟
   private boolean runFlag = false;
   private Updater updater;
   private YambaApplication yamba;
@@ -343,6 +352,7 @@ public class UpdaterService1 extends Service {
 
   /**
    * Thread that performs the actual update from the online service
+   * 负责从服务端抓取更新的线程。
    */
   private class Updater extends Thread {
     List<Twitter.Status> timeline;
@@ -598,6 +608,7 @@ public class StatusData { //#{1}
   private static final String[] DB_TEXT_COLUMNS = { C_TEXT };
 
   // DbHelper implementations
+  // DbHelper的实现
   class DbHelper extends SQLiteOpenHelper {
 
     public DbHelper(Context context) {
@@ -643,6 +654,7 @@ public class StatusData { //#{1}
   /**
    *
    * @return Cursor where the columns are _id, created_at, user, txt
+   * @return Cursor，它可以访问的列为_id, created_at, user, txt
    */
   public Cursor getStatusUpdates() {  //#{9}
     SQLiteDatabase db = this.dbHelper.getReadableDatabase();
@@ -651,7 +663,8 @@ public class StatusData { //#{1}
 
   /**
    *
-   * @return Timestamp of the latest status we ahve it the database
+%   * @return Timestamp of the latest status we ahve it the database
+   * @return 数据库中最后一条消息的时间戳
    */
   public long getLatestStatusCreatedAtTime() {  //#{10}
     SQLiteDatabase db = this.dbHelper.getReadableDatabase();
@@ -670,8 +683,10 @@ public class StatusData { //#{1}
 
   /**
    *
-   * @param id of the status we are looking for
-   * @return Text of the status
+%   * @param id of the status we are looking for
+   * @param 目标消息的id
+%   * @return Text of the status
+   * @return 目标消息的正文
    */
   public String getStatusTextById(long id) {  //#{11}
     SQLiteDatabase db = this.dbHelper.getReadableDatabase();
@@ -731,8 +746,10 @@ public StatusData getStatusData() { //#{2}
   return statusData;
 }
 
-// Connects to the online service and puts the latest statuses into DB.
-// Returns the count of new statuses
+% // Connects to the online service and puts the latest statuses into DB.
+% // Returns the count of new statuses
+// 连接到服务端，存储最新的消息到数据库
+// 返回所获得的消息数
 public synchronized int fetchStatusUpdates() {  //#{3}
   Log.d(TAG, "Fetching status updates");
   Twitter twitter = this.getTwitter();

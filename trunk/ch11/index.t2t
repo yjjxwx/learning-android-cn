@@ -177,15 +177,18 @@ protected void onResume() {
   super.onResume();
 
   // Get the data from the database
+  // 从数据库中读取数据
   cursor = db.query(DbHelper.TABLE, null, null, null, null, null,
       DbHelper.C_CREATED_AT + " DESC");
   startManagingCursor(cursor);
 
   // Create the adapter
+  // 创建Adapter
   adapter = new TimelineAdapter(this, cursor);
   listTimeline.setAdapter(adapter);
 
   // Register the receiver
+  // 注册receiver对象
   registerReceiver(receiver, filter);   // #{1}
 }
 
@@ -194,6 +197,7 @@ protected void onPause() {
   super.onPause();
 
   // UNregister the receiver
+  // 取消reciever对象的注册
   unregisterReceiver(receiver);  // #{2}
 }
 ...

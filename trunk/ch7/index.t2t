@@ -545,11 +545,11 @@ public void onClick(View v) {
 
 % Note that although we moved the code where we initialize our connection to the cloud, we still need the AsyncTask to deal with the fact that this call is still blocking and may take a while to complete, as it’s subject to network availability and latency.
 
-留意，我们虽将初始化的代码移到了外面，但它依然是阻塞的，可能会因为网络状况的不同产生一定的延迟。日后我们仍需对此做些考虑，利用AsyncTask来改进它。
+留意，我们虽然将初始化网络连接的代码移到了外面，但它依然是阻塞的，可能会因为网络状况的不同产生一定的延迟。日后我们仍需对此做些考虑，利用AsyncTask来改进它。
 
 % Now, as we mentioned before when updating onCreate() and registering for preference updates, we need to handle what happens when user changes username or password. By registering prefs.registerOnSharedPreferenceChangeListener(this) in onCreate() and implementing OnSharedPreferenceChangeListener, we got a callback method onSharedPreferenceChanged() that system will invoke whenever preferences change. In this method, we simply invalidate the twitter object so next time it is needed, getTwitter() will recreate it.
 
-前面修改``onCreate()``时曾提到，我们需要跟踪用户名与密码的变化。因此，在当前的类中添加``onSharedPreferenceChanged()``方法，然后在``onCreate()``中通过``pres.registerOnSharedPreferenceChangeListener(this)``将它注册到prefs对象，这样就得到一个回调函数，它会在选项数据变化时触发。在这里我们只需简单将twitter设为null，到下次获取引用时，``getTwitter()``会重新创建它的实例。
+前面在修改``onCreate()``为选项数据的更新注册侦听器之前曾提到，我们需要跟踪用户名与密码的变化。为此在当前的类中添加``onSharedPreferenceChanged()``方法，实现``OnSharedPreferenceChangeListener``，然后在``onCreate()``中通过``pres.registerOnSharedPreferenceChangeListener(this)``将它注册到prefs对象，这样就得到一个回调函数``onSharedPreferenceChanged()``，它会在选项数据变化时触发。在这个方法中，我们只需简单地将twitter对象设为null使之失效，到下次试图获取它的引用时，``getTwitter()``会重新创建它的实例。
 
 {CODE}
 public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
