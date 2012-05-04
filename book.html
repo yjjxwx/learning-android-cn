@@ -15,7 +15,7 @@
 
 <DIV CLASS="body" ID="body">
 <P>
-Build at: 2012/03/04 21:35:42.
+Build at: 2012/05/04 11:03:41.
 </P>
 <HR NOSHADE SIZE=5>
 <P></P>
@@ -164,7 +164,12 @@ Build at: 2012/03/04 21:35:42.
     <LI><A HREF="#toc109">15.3. NDK实例： 计算菲波那契数列</A>
     <LI><A HREF="#toc110">15.4. 总结</A>
     </UL>
-  <LI><A HREF="#toc111">封面动物</A>
+  <LI><A HREF="#toc111">封底</A>
+    <UL>
+    <LI><A HREF="#toc112">16.1. 赞词</A>
+    <LI><A HREF="#toc113">16.2. 作者简介</A>
+    </UL>
+  <LI><A HREF="#toc114">封面动物</A>
   </OL>
 
 </DIV>
@@ -951,6 +956,8 @@ R文件负责Java与外部资源之间的关联。它在res目录中的内容发
  * should not be modified by hand.
  */
 
+(to 编辑：以上注释为Eclipse自动生成，不可翻译。)
+
 package com.marakana;
 
 public final class R {
@@ -983,7 +990,8 @@ import android.app.Activity;
 import android.os.Bundle;
 
 public class HelloWorld extends Activity {
-  /** Called when the activity is first created. */
+%  /** Called when the activity is first created. */
+  /* 在Activity首次创建时触发 */
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -1697,7 +1705,7 @@ Eclipse默认会在<CODE>res/layout</CODE>下创建一个<CODE>main.xml</CODE>�
 <UL>
 <LI>屏幕上方显示的标题，TextView控件。
 <LI>消息的输入框，在此使用EditText控件。
-<LI>更新状态的按钮，Button控件。
+<LI>更新消息的按钮，Button控件。
 <LI>一个容纳以上所有控件的Layout，它负责将这些控件垂直排开。在此选用前面提到的常用Layout之一——LinearLayout。
 </UL>
 
@@ -1710,24 +1718,28 @@ StatusActivity的源码大致如下：
 <PRE>
 &lt;?xml version="1.0" encoding="utf-8"?&gt;
 
-&lt;!-- Main Layout of Status Activity --&gt;
+% &lt;!-- Main Layout of Status Activity --&gt;
+&lt;!-- StatusActivity的主布局 --&gt;
 &lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:orientation="vertical" android:layout_width="fill_parent"
   android:layout_height="fill_parent"&gt;
 
-  &lt;!-- Title TextView--&gt;
+% &lt;!-- Title TextView--&gt;
+  &lt;!-- 表示标题的TextView --&gt;
   &lt;TextView android:layout_width="fill_parent"
     android:layout_height="wrap_content" android:gravity="center"
     android:textSize="30sp"
     android:layout_margin="10dp" android:text="@string/titleStatus"/&gt;
 
-  &lt;!-- Status EditText  --&gt;
+% &lt;!-- Status EditText  --&gt;
+  &lt;!-- 消息的输入框 --&gt;
   &lt;EditText android:layout_width="fill_parent"
     android:layout_height="fill_parent" android:layout_weight="1"
     android:hint="@string/hintText" android:id="@+id/editText"
     android:gravity="top|center_horizontal"&gt;&lt;/EditText&gt;
 
-  &lt;!-- Update Button --&gt;
+%  &lt;!-- Update Button --&gt;
+  &lt;!-- 更新消息的按钮 --&gt;
   &lt;Button android:layout_width="fill_parent"
     android:layout_height="wrap_content" android:text="@string/buttonUpdate"
     android:textSize="20sp" android:id="@+id/buttonUpdate"&gt;&lt;/Button&gt;
@@ -1879,12 +1891,14 @@ public class StatusActivity1 extends Activity implements OnClickListener { // <i
   Twitter twitter;
 
   /** Called when the activity is first created. */
+  /** 在Activity首次创建时调用 **/
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.status);
 
     // Find views
+    // 获取对View的引用
     editText = (EditText) findViewById(R.id.editText); // <img src="images/2.png"></img>
     updateButton = (Button) findViewById(R.id.buttonUpdate);
 
@@ -1895,6 +1909,7 @@ public class StatusActivity1 extends Activity implements OnClickListener { // <i
   }
 
   // Called when button is clicked // <img src="images/5.png"></img>
+  // 在点击按钮时触发
   public void onClick(View v) {
     twitter.setStatus(editText.getText().toString()); // <img src="images/6.png"></img>
     Log.d(TAG, "onClicked");
@@ -2177,12 +2192,14 @@ public class StatusActivity2 extends Activity implements OnClickListener {
   Twitter twitter;
 
   /** Called when the activity is first created. */
+  /** 在Activity首次创建时调用 **/
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.status);
 
     // Find views
+    // 获取对View的引用
     editText = (EditText) findViewById(R.id.editText);
     updateButton = (Button) findViewById(R.id.buttonUpdate);
     updateButton.setOnClickListener(this);
@@ -2192,8 +2209,10 @@ public class StatusActivity2 extends Activity implements OnClickListener {
   }
 
   // Asynchronously posts to twitter
+  // 异步发送到Twitter
   class PostToTwitter extends AsyncTask&lt;String, Integer, String&gt; { // <img src="images/1.png"></img>
     // Called to initiate the background activity
+    // 在触发时负责发起后台操作
     @Override
     protected String doInBackground(String... statuses) { // <img src="images/2.png"></img>
       try {
@@ -2207,13 +2226,16 @@ public class StatusActivity2 extends Activity implements OnClickListener {
     }
 
     // Called when there's a status to be updated
+    // 在更新消息时触发
     @Override
     protected void onProgressUpdate(Integer... values) { // <img src="images/3.png"></img>
       super.onProgressUpdate(values);
       // Not used in this case
+      // 在此留空
     }
 
     // Called once the background activity has completed
+    // 在后台任务执行完毕时触发
     @Override
     protected void onPostExecute(String result) { // <img src="images/4.png"></img>
       Toast.makeText(StatusActivity2.this, result, Toast.LENGTH_LONG).show();
@@ -2221,6 +2243,7 @@ public class StatusActivity2 extends Activity implements OnClickListener {
   }
 
   // Called when button is clicked
+  // 在点击按钮时触发
   public void onClick(View v) {
     String status = editText.getText().toString();
     new PostToTwitter().execute(status); // <img src="images/5.png"></img>
@@ -2273,24 +2296,28 @@ Android为不同的事件(如触摸、点击等)提供了不同的侦听器。�
   android:layout_height="fill_parent"&gt;
 
   &lt;!-- Title TextView--&gt;
+  &lt;!-- 表示标题的TextView --&gt;
   &lt;TextView android:layout_width="fill_parent"
     android:layout_height="wrap_content" android:gravity="center"
     android:text="@string/titleStatus" android:textSize="30sp"
     android:layout_margin="10dp" /&gt;
 
   &lt;!-- Text Counter TextView <img src="images/1.png"></img> --&gt;
+  &lt;!-- 表示文字数的TextView <img src="images/1.png"></img> --&gt;
   &lt;TextView android:layout_width="wrap_content"
     android:layout_height="wrap_content" android:layout_gravity="right"
     android:id="@+id/textCount" android:text="000"
     android:layout_marginRight="10dp" /&gt;
 
   &lt;!-- Status EditText  --&gt;
+  &lt;!-- 消息的输入框 --&gt;
   &lt;EditText android:layout_width="fill_parent"
     android:layout_height="fill_parent" android:layout_weight="1"
     android:hint="@string/hintText" android:id="@+id/editText"
     android:gravity="top|center_horizontal"&gt;&lt;/EditText&gt;
 
   &lt;!-- Update Button --&gt;
+  &lt;!-- 更新消息的按钮 --&gt;
   &lt;Button android:layout_width="fill_parent"
     android:layout_height="wrap_content" android:text="@string/buttonUpdate"
     android:textSize="20sp" android:id="@+id/buttonUpdate"&gt;&lt;/Button&gt;
@@ -2336,12 +2363,14 @@ public class StatusActivity extends Activity implements OnClickListener,
   TextView textCount; // <img src="images/2.png"></img>
 
   /** Called when the activity is first created. */
+  /** 在Activity首次创建时调用 **/
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.status);
 
     // Find views
+    // 获取对View的引用
     editText = (EditText) findViewById(R.id.editText);
     updateButton = (Button) findViewById(R.id.buttonUpdate);
     updateButton.setOnClickListener(this);
@@ -2356,6 +2385,7 @@ public class StatusActivity extends Activity implements OnClickListener,
   }
 
   // Called when button is clicked
+  // 在点击按钮时触发
   public void onClick(View v) {
     String status = editText.getText().toString();
     new PostToTwitter().execute(status);
@@ -2363,8 +2393,10 @@ public class StatusActivity extends Activity implements OnClickListener,
   }
 
   // Asynchronously posts to twitter
+  // 异步发送到Twitter
   class PostToTwitter extends AsyncTask&lt;String, Integer, String&gt; {
     // Called to initiate the background activity
+    // 在触发时负责发起后台操作
     @Override
     protected String doInBackground(String... statuses) {
       try {
@@ -2378,13 +2410,16 @@ public class StatusActivity extends Activity implements OnClickListener,
     }
 
     // Called when there's a status to be updated
+    // 在更新消息时触发
     @Override
     protected void onProgressUpdate(Integer... values) {
       super.onProgressUpdate(values);
       // Not used in this case
+      // 在此留空
     }
 
     // Called once the background activity has completed
+    // 在后台任务执行完毕时触发
     @Override
     protected void onPostExecute(String result) {
       Toast.makeText(StatusActivity.this, result, Toast.LENGTH_LONG).show();
@@ -2392,6 +2427,7 @@ public class StatusActivity extends Activity implements OnClickListener,
   }
 
   // TextWatcher methods
+  // TextWatcher相关方法
   public void afterTextChanged(Editable statusText) { // <img src="images/7.png"></img>
     int count = 140 - statusText.length(); // <img src="images/8.png"></img>
     textCount.setText(Integer.toString(count));
@@ -2532,29 +2568,34 @@ Android使用标准的<A HREF="http://en.wikipedia.org/wiki/Rgb">RGB</A>颜色�
 &lt;?xml version="1.0" encoding="utf-8"?&gt;
 
 &lt;!-- Main Layout of Status Activity --&gt;
+&lt;!-- StatusActivity的主布局 --&gt;
 &lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:orientation="vertical" android:layout_width="fill_parent"
   android:layout_height="fill_parent" android:background="@drawable/background"&gt;&lt;!-- <img src="images/1.png"></img> --&gt;
 
-  &lt;!-- Title TextView--&gt;
+  &lt;!-- Title TextView --&gt;
+  &lt;!-- 表示标题的TextView --&gt;
   &lt;TextView android:layout_width="fill_parent"
     android:layout_height="wrap_content" android:gravity="center"
     android:text="@string/titleStatus" android:textSize="30sp"
     android:layout_margin="10dp" android:textColor="@android:color/white" /&gt;&lt;!-- <img src="images/2.png"></img> --&gt;
 
   &lt;!-- Text Counter TextView --&gt;
+  &lt;!-- 表示文字数的TextView --&gt;
   &lt;TextView android:layout_width="wrap_content"
     android:layout_height="wrap_content" android:layout_gravity="right"
     android:id="@+id/textCount" android:text="000"
     android:layout_marginRight="10dp" /&gt;
 
   &lt;!-- Status EditText  --&gt;
+  &lt;!-- 消息的输入框 --&gt;
   &lt;EditText android:layout_width="fill_parent"
     android:layout_height="fill_parent" android:layout_weight="1"
     android:hint="@string/hintText" android:id="@+id/editText"
     android:gravity="top|center_horizontal" android:background="#cfff" /&gt;&lt;!-- <img src="images/3.png"></img> --&gt;
 
   &lt;!-- Update Button --&gt;
+  &lt;!-- 更新消息的按钮 --&gt;
   &lt;Button android:layout_width="fill_parent"
     android:layout_height="wrap_content" android:text="@string/buttonUpdate"
     android:textSize="20sp" android:id="@+id/buttonUpdate" /&gt;
@@ -3110,10 +3151,10 @@ public void onClick(View v) {
 </PRE>
 <P></P>
 <P>
-留意，我们虽将初始化的代码移到了外面，但它依然是阻塞的，可能会因为网络状况的不同产生一定的延迟。日后我们仍需对此做些考虑，利用AsyncTask来改进它。
+留意，我们虽然将初始化网络连接的代码移到了外面，但它依然是阻塞的，可能会因为网络状况的不同产生一定的延迟。日后我们仍需对此做些考虑，利用AsyncTask来改进它。
 </P>
 <P>
-前面修改<CODE>onCreate()</CODE>时曾提到，我们需要跟踪用户名与密码的变化。因此，在当前的类中添加<CODE>onSharedPreferenceChanged()</CODE>方法，然后在<CODE>onCreate()</CODE>中通过<CODE>pres.registerOnSharedPreferenceChangeListener(this)</CODE>将它注册到prefs对象，这样就得到一个回调函数，它会在选项数据变化时触发。在这里我们只需简单将twitter设为null，到下次获取引用时，<CODE>getTwitter()</CODE>会重新创建它的实例。
+前面在修改<CODE>onCreate()</CODE>为选项数据的更新注册侦听器之前曾提到，我们需要跟踪用户名与密码的变化。为此在当前的类中添加<CODE>onSharedPreferenceChanged()</CODE>方法，实现<CODE>OnSharedPreferenceChangeListener</CODE>，然后在<CODE>onCreate()</CODE>中通过<CODE>pres.registerOnSharedPreferenceChangeListener(this)</CODE>将它注册到prefs对象，这样就得到一个回调函数<CODE>onSharedPreferenceChanged()</CODE>，它会在选项数据变化时触发。在这个方法中，我们只需简单地将twitter对象设为null使之失效，到下次试图获取它的引用时，<CODE>getTwitter()</CODE>会重新创建它的实例。
 </P>
 <PRE>
 public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
@@ -3653,7 +3694,8 @@ import android.util.Log;
 public class UpdaterService2 extends Service {
   private static final String TAG = "UpdaterService";
 
-  static final int DELAY = 60000; // a minute <img src="images/1.png"></img>
+%  static final int DELAY = 60000; // a minute <img src="images/1.png"></img>
+  static final int DELAY = 60000; // 一分钟 <img src="images/1.png"></img>
   private boolean runFlag = false;  // <img src="images/2.png"></img>
   private Updater updater;
 
@@ -3695,6 +3737,7 @@ public class UpdaterService2 extends Service {
 
   /**
    * Thread that performs the actual update from the online service
+   * 负责从服务端抓取更新的线程。
    */
   private class Updater extends Thread {  // <img src="images/7.png"></img>
 
@@ -3809,7 +3852,8 @@ import android.util.Log;
 public class UpdaterService extends Service {
   private static final String TAG = "UpdaterService";
 
-  static final int DELAY = 60000; // wait a minute
+%  static final int DELAY = 60000; // wait a minute
+  static final int DELAY = 60000; // 等待时间为一分钟
   private boolean runFlag = false;
   private Updater updater;
   private YambaApplication yamba; // <img src="images/1.png"></img>
@@ -3854,6 +3898,7 @@ public class UpdaterService extends Service {
 
   /**
    * Thread that performs the actual update from the online service
+   * 负责从服务端抓取更新的线程。
    */
   private class Updater extends Thread {
     List&lt;Twitter.Status&gt; timeline; // <img src="images/5.png"></img>
@@ -4103,12 +4148,14 @@ public class DbHelper1 extends SQLiteOpenHelper { //<img src="images/1.png"></im
   Context context;
 
   // Constructor
+  // 构造函数
   public DbHelper1(Context context) { //<img src="images/5.png"></img>
     super(context, DB_NAME, null, DB_VERSION);
     this.context = context;
   }
 
   // Called only once, first time the DB is created
+  // 仅在数据库第一次创建时触发
   @Override
   public void onCreate(SQLiteDatabase db) {
     String sql = "create table " + TABLE + " (" + C_ID + " int primary key, "
@@ -4120,14 +4167,20 @@ public class DbHelper1 extends SQLiteOpenHelper { //<img src="images/1.png"></im
   }
 
   // Called whenever newVersion != oldVersion
+  // 在 newVersion != oldVersion 时触发
   @Override
   public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) { //<img src="images/8.png"></img>
     // Typically do ALTER TABLE statements, but...we're just in development,
     // so:
+    // 一般都是在这里执行 ALTER TABLE 语句， 不过...我们这里只是开发环境，
+    // 可以先不管数据的迁移：
+    // (to 编辑： 这里加了一句“可以先不管数据的迁移”，意指可以删掉数据库重建。)
 
-    db.execSQL("drop table if exists " + TABLE); // drops the old database
+%    db.execSQL("drop table if exists " + TABLE); // drops the old database
+    db.execSQL("drop table if exists " + TABLE); // 删除旧的数据库
     Log.d(TAG, "onUpgraded");
-    onCreate(db); // run onCreate to get new database
+%    onCreate(db); // run onCreate to get new database
+    onCreate(db); // 调用onCreate，重建新的数据库
   }
 
 }
@@ -4182,7 +4235,8 @@ import android.util.Log;
 public class UpdaterService1 extends Service {
   private static final String TAG = "UpdaterService";
 
-  static final int DELAY = 60000; // wait a minute
+%  static final int DELAY = 60000; // wait a minute
+  static final int DELAY = 60000; // 等待的时间是一分钟
   private boolean runFlag = false;
   private Updater updater;
   private YambaApplication yamba;
@@ -4232,6 +4286,7 @@ public class UpdaterService1 extends Service {
 
   /**
    * Thread that performs the actual update from the online service
+   * 负责从服务端抓取更新的线程。
    */
   private class Updater extends Thread {
     List&lt;Twitter.Status&gt; timeline;
@@ -4451,6 +4506,7 @@ public class StatusData { //<img src="images/1.png"></img>
   private static final String[] DB_TEXT_COLUMNS = { C_TEXT };
 
   // DbHelper implementations
+  // DbHelper的实现
   class DbHelper extends SQLiteOpenHelper {
 
     public DbHelper(Context context) {
@@ -4496,6 +4552,7 @@ public class StatusData { //<img src="images/1.png"></img>
   /**
    *
    * @return Cursor where the columns are _id, created_at, user, txt
+   * @return Cursor，它可以访问的列为_id, created_at, user, txt
    */
   public Cursor getStatusUpdates() {  //<img src="images/9.png"></img>
     SQLiteDatabase db = this.dbHelper.getReadableDatabase();
@@ -4504,7 +4561,8 @@ public class StatusData { //<img src="images/1.png"></img>
 
   /**
    *
-   * @return Timestamp of the latest status we ahve it the database
+%   * @return Timestamp of the latest status we ahve it the database
+   * @return 数据库中最后一条消息的时间戳
    */
   public long getLatestStatusCreatedAtTime() {  //<img src="images/10.png"></img>
     SQLiteDatabase db = this.dbHelper.getReadableDatabase();
@@ -4523,8 +4581,10 @@ public class StatusData { //<img src="images/1.png"></img>
 
   /**
    *
-   * @param id of the status we are looking for
-   * @return Text of the status
+%   * @param id of the status we are looking for
+   * @param 目标消息的id
+%   * @return Text of the status
+   * @return 目标消息的正文
    */
   public String getStatusTextById(long id) {  //<img src="images/11.png"></img>
     SQLiteDatabase db = this.dbHelper.getReadableDatabase();
@@ -4574,8 +4634,10 @@ public StatusData getStatusData() { //<img src="images/2.png"></img>
   return statusData;
 }
 
-// Connects to the online service and puts the latest statuses into DB.
-// Returns the count of new statuses
+% // Connects to the online service and puts the latest statuses into DB.
+% // Returns the count of new statuses
+// 连接到服务端，存储最新的消息到数据库
+// 返回所获得的消息数
 public synchronized int fetchStatusUpdates() {  //<img src="images/3.png"></img>
   Log.d(TAG, "Fetching status updates");
   Twitter twitter = this.getTwitter();
@@ -4731,17 +4793,20 @@ ScrollView中只能存放单独一个子元素。要让多个View一起滚动，
   android:orientation="vertical" android:layout_height="fill_parent"
   android:layout_width="fill_parent" android:background="@drawable/background"&gt;
 
-  &lt;!-- Title <img src="images/1.png"></img> --&gt;
+% &lt;!-- Title <img src="images/1.png"></img> --&gt;
+  &lt;!-- 标题 <img src="images/1.png"></img> --&gt;
   &lt;TextView android:layout_width="wrap_content"
     android:layout_height="wrap_content" android:layout_gravity="center"
     android:layout_margin="10dp" android:text="@string/titleTimeline"
     android:textColor="#fff" android:textSize="30sp" /&gt;
 
-  &lt;!-- Text output wrapper <img src="images/2.png"></img> --&gt;
+% &lt;!-- Text output wrapper <img src="images/2.png"></img> --&gt;
+  &lt;!-- 将输出的文本包起来 <img src="images/2.png"></img> --&gt;
   &lt;ScrollView android:layout_height="fill_parent"
     android:layout_width="fill_parent"&gt;
 
-    &lt;!-- Text output <img src="images/3.png"></img> --&gt;
+%   &lt;!-- Text output <img src="images/3.png"></img> --&gt;
+    &lt;!-- 文本输出 <img src="images/3.png"></img> --&gt;
     &lt;TextView android:layout_height="fill_parent"
       android:layout_width="fill_parent" android:id="@+id/textTimeline"
       android:background="#6000" /&gt;
@@ -4786,10 +4851,12 @@ public class TimelineActivity1 extends Activity { // <img src="images/1.png"></i
     super.onCreate(savedInstanceState);
     setContentView(R.layout.timeline);
 
-    // Find your views
+%    // Find your views
+    // 获取对View的引用
     textTimeline = (TextView) findViewById(R.id.textTimeline);
 
-    // Connect to database
+%   // Connect to database
+    // 连接到数据库
     dbHelper = new DbHelper(this);  // <img src="images/2.png"></img>
     db = dbHelper.getReadableDatabase();  // <img src="images/3.png"></img> 
   }
@@ -4798,7 +4865,8 @@ public class TimelineActivity1 extends Activity { // <img src="images/1.png"></i
   public void onDestroy() {
     super.onDestroy();
 
-    // Close the database
+%   // Close the database
+    // 关闭数据库
     db.close(); // <img src="images/4.png"></img>
   }
 
@@ -4806,12 +4874,14 @@ public class TimelineActivity1 extends Activity { // <img src="images/1.png"></i
   protected void onResume() {
     super.onResume();
 
-    // Get the data from the database
+%   // Get the data from the database
+    // 从数据库中读取数据
     cursor = db.query(DbHelper.TABLE, null, null, null, null, null,
         DbHelper.C_CREATED_AT + " DESC"); // <img src="images/5.png"></img>
     startManagingCursor(cursor);  // <img src="images/6.png"></img>
 
-    // Iterate over all the data and print it out
+%   // Iterate over all the data and print it out
+    // 遍历所得的数据并输出
     String user, text, output;
     while (cursor.moveToNext()) {  // <img src="images/7.png"></img>
       user = cursor.getString(cursor.getColumnIndex(DbHelper.C_USER));  // <img src="images/8.png"></img>
@@ -4940,9 +5010,11 @@ public class TimelineActivity2 extends Activity {
     setContentView(R.layout.timeline);
 
     // Find your views
+    // 获取对View的引用
     listTimeline = (ListView) findViewById(R.id.listTimeline);  // <img src="images/6.png"></img>
 
     // Connect to database
+    // 连接到数据库
     dbHelper = new DbHelper(this);
     db = dbHelper.getReadableDatabase();
   }
@@ -4952,6 +5024,7 @@ public class TimelineActivity2 extends Activity {
     super.onDestroy();
 
     // Close the database
+    // 关闭数据库
     db.close();
   }
 
@@ -4960,11 +5033,13 @@ public class TimelineActivity2 extends Activity {
     super.onResume();
 
     // Get the data from the database
+    // 从数据库中读取数据
     cursor = db.query(DbHelper.TABLE, null, null, null, null, null,
         DbHelper.C_CREATED_AT + " DESC");
     startManagingCursor(cursor);
 
     // Setup the adapter
+    // 设置Adapter
     adapter = new SimpleCursorAdapter(this, R.layout.row, cursor, FROM, TO);  // <img src="images/7.png"></img>
     listTimeline.setAdapter(adapter); // <img src="images/8.png"></img>
   }
@@ -5010,16 +5085,19 @@ public class TimelineAdapter extends SimpleCursorAdapter { // <img src="images/1
   static final int[] TO = { R.id.textCreatedAt, R.id.textUser, R.id.textText }; // <img src="images/3.png"></img>
 
   // Constructor
+  // 构造函数
   public TimelineAdapter(Context context, Cursor c) { // <img src="images/4.png"></img>
     super(context, R.layout.row, c, FROM, TO);
   }
 
   // This is where the actual binding of a cursor to view happens
+  // 在这里Cursor将绑定到对应的View
   @Override
   public void bindView(View row, Context context, Cursor cursor) { // <img src="images/5.png"></img>
     super.bindView(row, context, cursor);
 
     // Manually bind created at timestamp to its view
+    // 手工将表示创建时间的时间戳绑定到对应的View
     long timestamp = cursor.getLong(cursor
         .getColumnIndex(DbHelper.C_CREATED_AT)); // <img src="images/6.png"></img>
     TextView textCreatedAt = (TextView) row.findViewById(R.id.textCreatedAt); // <img src="images/7.png"></img>
@@ -5068,9 +5146,11 @@ public class TimelineActivity3 extends Activity {
     setContentView(R.layout.timeline);
 
     // Find your views
+    // 获取对View的引用
     listTimeline = (ListView) findViewById(R.id.listTimeline);
 
     // Connect to database
+    // 连接到数据库
     dbHelper = new DbHelper(this);
     db = dbHelper.getReadableDatabase();
   }
@@ -5080,6 +5160,7 @@ public class TimelineActivity3 extends Activity {
     super.onDestroy();
 
     // Close the database
+    // 关闭数据库
     db.close();
   }
 
@@ -5088,11 +5169,13 @@ public class TimelineActivity3 extends Activity {
     super.onResume();
 
     // Get the data from the database
+    // 从数据库中读取数据
     cursor = db.query(DbHelper.TABLE, null, null, null, null, null,
         DbHelper.C_CREATED_AT + " DESC");
     startManagingCursor(cursor);
 
     // Create the adapter
+    // 创建Adapter
     adapter = new TimelineAdapter(this, cursor);  // <img src="images/2.png"></img>
     listTimeline.setAdapter(adapter); // <img src="images/3.png"></img>
   }
@@ -5133,8 +5216,8 @@ public class TimelineActivity3 extends Activity {
     ...
   }
 
-  // View binder constant to inject business logic that converts a timestamp to
-  // relative time
+%  // View binder constant to inject business logic that converts a timestamp to relative time
+  // 定义常量VIEW_BINDER，由它实现将时间戳转化为相对时间的业务逻辑
   static final ViewBinder VIEW_BINDER = new ViewBinder() { // <img src="images/2.png"></img>
 
     public boolean setViewValue(View view, Cursor cursor, int columnIndex) { // <img src="images/3.png"></img>
@@ -5142,6 +5225,7 @@ public class TimelineActivity3 extends Activity {
         return false; // <img src="images/4.png"></img>
 
       // Update the created at text to relative time
+      // 将创建时间转换为相对时间
       long timestamp = cursor.getLong(columnIndex); // <img src="images/5.png"></img>
       CharSequence relTime = DateUtils.getRelativeTimeSpanString(view
           .getContext(), timestamp); // <img src="images/6.png"></img>
@@ -5320,6 +5404,7 @@ import android.widget.Toast;
 /**
  * The base activity with common features shared by TimelineActivity and
  * StatusActivity
+ * TimelineActivity与StatusActivity共有的基类，将需要重用的代码放在这里
  */
 public class BaseActivity extends Activity { // <img src="images/1.png"></img>
   YambaApplication yamba; // <img src="images/2.png"></img>
@@ -5331,6 +5416,7 @@ public class BaseActivity extends Activity { // <img src="images/1.png"></img>
   }
 
   // Called only once first time menu is clicked on
+  // 仅在第一次点击菜单时触发
   @Override
   public boolean onCreateOptionsMenu(Menu menu) { // <img src="images/4.png"></img>
     getMenuInflater().inflate(R.menu.menu, menu);
@@ -5338,6 +5424,7 @@ public class BaseActivity extends Activity { // <img src="images/1.png"></img>
   }
 
   // Called every time user clicks on a menu item
+  // 在每次点击菜单项时触发
   @Override
   public boolean onOptionsItemSelected(MenuItem item) { // <img src="images/5.png"></img>
 
@@ -5371,6 +5458,7 @@ public class BaseActivity extends Activity { // <img src="images/1.png"></img>
   }
 
   // Called every time menu is opened
+  // 在菜单打开时触发
   @Override
   public boolean onMenuOpened(int featureId, Menu menu) { // <img src="images/6.png"></img>
     MenuItem toggleItem = menu.findItem(R.id.itemToggleService); // <img src="images/7.png"></img>
@@ -5439,6 +5527,7 @@ public class TimelineActivity extends BaseActivity { // <img src="images/1.png">
     }
 
     // Find your views
+    // 获取对View的引用
     listTimeline = (ListView) findViewById(R.id.listTimeline);
   }
 
@@ -5447,6 +5536,7 @@ public class TimelineActivity extends BaseActivity { // <img src="images/1.png">
     super.onResume();
 
     // Setup List
+    // 设置消息列表
     this.setupList(); // <img src="images/3.png"></img>
   }
 
@@ -5455,12 +5545,14 @@ public class TimelineActivity extends BaseActivity { // <img src="images/1.png">
     super.onDestroy();
 
     // Close the database
+    // 关闭数据库
     yamba.getStatusData().close(); // <img src="images/4.png"></img>
   }
 
   // Responsible for fetching data and setting up the list and the adapter
   private void setupList() { // <img src="images/5.png"></img>
     // Get the data
+    // 读取数据
     cursor = yamba.getStatusData().getStatusUpdates();
     startManagingCursor(cursor);
 
@@ -5472,6 +5564,7 @@ public class TimelineActivity extends BaseActivity { // <img src="images/1.png">
 
   // View binder constant to inject business logic for timestamp to relative
   // time conversion
+  // 定义常量VIEW_BINDER，由它实现将时间戳转化为相对时间的业务逻辑
   static final ViewBinder VIEW_BINDER = new ViewBinder() { // <img src="images/7.png"></img>
 
     public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
@@ -5479,6 +5572,7 @@ public class TimelineActivity extends BaseActivity { // <img src="images/1.png">
         return false;
 
       // Update the created at text to relative time
+      // 将创建时间转换为相对时间
       long timestamp = cursor.getLong(columnIndex);
       CharSequence relTime = DateUtils.getRelativeTimeSpanString(view
           .getContext(), timestamp);
@@ -5673,15 +5767,18 @@ protected void onResume() {
   super.onResume();
 
   // Get the data from the database
+  // 从数据库中读取数据
   cursor = db.query(DbHelper.TABLE, null, null, null, null, null,
       DbHelper.C_CREATED_AT + " DESC");
   startManagingCursor(cursor);
 
   // Create the adapter
+  // 创建Adapter
   adapter = new TimelineAdapter(this, cursor);
   listTimeline.setAdapter(adapter);
 
   // Register the receiver
+  // 注册receiver对象
   registerReceiver(receiver, filter);   // <img src="images/1.png"></img>
 }
 
@@ -5690,6 +5787,7 @@ protected void onPause() {
   super.onPause();
 
   // UNregister the receiver
+  // 取消reciever对象的注册
   unregisterReceiver(receiver);  // <img src="images/2.png"></img>
 }
 ...
@@ -6609,26 +6707,31 @@ import android.view.Window;
 import android.view.WindowManager;
 
 // implement SensorListener
+// 实现SensorListener
 public class Compass extends Activity implements SensorEventListener { //<img src="images/1.png"></img>
   SensorManager sensorManager; //<img src="images/2.png"></img>
   Sensor sensor;
   Rose rose;
 
-  /** Called when the activity is first created. */
+%  /** Called when the activity is first created. */
+  /** 在Activity第一次创建时触发 **/
   @Override
   public void onCreate(Bundle savedInstanceState) { //<img src="images/3.png"></img>
     super.onCreate(savedInstanceState);
 
     // Set full screen view <img src="images/4.png"></img>
+    // 设置为全屏显示 <img src="images/4.png"></img>
     getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
         WindowManager.LayoutParams.FLAG_FULLSCREEN);
     requestWindowFeature(Window.FEATURE_NO_TITLE);
 
     // Create new instance of custom Rose and set it on the screen
+    // 创建自定义的Rose类实例，并将它显示在屏幕上
     rose = new Rose(this); //<img src="images/5.png"></img>
     setContentView(rose); // <img src="images/6.png"></img>
 
     // Get sensor and sensor manager
+    // 获取sensor与sensorManager对象的引用
     sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE); // <img src="images/7.png"></img>
     sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION); // <img src="images/8.png"></img>
 
@@ -6636,6 +6739,7 @@ public class Compass extends Activity implements SensorEventListener { //<img sr
   }
 
   // Register to listen to sensors
+  // 将侦听器对象注册到sensorManager
   @Override
   public void onResume() {
     super.onResume();
@@ -6644,6 +6748,7 @@ public class Compass extends Activity implements SensorEventListener { //<img sr
   }
 
   // Unregister the sensor listener
+  // 取消侦听器对象的注册
   @Override
   public void onPause() {
     super.onPause();
@@ -6651,10 +6756,12 @@ public class Compass extends Activity implements SensorEventListener { //<img sr
   }
 
   // Ignore accuracy changes
+  // 忽略精度的变化
   public void onAccuracyChanged(Sensor sensor, int accuracy) { // <img src="images/11.png"></img>
   }
 
   // Listen to sensor and provide output
+  // 侦听传感器的变化并输出
   public void onSensorChanged(SensorEvent event) { // <img src="images/12.png"></img>
     int orientation = (int) event.values[0]; // <img src="images/13.png"></img>
     Log.d("Compass", "Got sensor event: " + event.values[0]);
@@ -6720,6 +6827,7 @@ public class Rose extends ImageView { //<img src="images/1.png"></img>
   }
 
   // Called when component is to be drawn
+  // 在组件绘制时触发
   @Override
   public void onDraw(Canvas canvas) { // <img src="images/3.png"></img>
     int height = this.getHeight();  // <img src="images/4.png"></img>
@@ -6730,9 +6838,11 @@ public class Rose extends ImageView { //<img src="images/1.png"></img>
   }
 
   // Called by Compass to update the orientation
+  // 由Compass对象调用，来更新方向
   public void setDirection(int direction) { // <img src="images/7.png"></img>
     this.direction = direction;
-    this.invalidate(); // request to be redrawn <img src="images/8.png"></img>
+%    this.invalidate(); // request to be redrawn <img src="images/8.png"></img>
+    this.invalidate(); // 请求重绘 <img src="images/8.png"></img>
   }
 
 }
@@ -6840,6 +6950,7 @@ public class WhereAmI extends Activity implements LocationListener { // <img src
     geocoder = new Geocoder(this); // <img src="images/6.png"></img>
 
     // Initialize with the last known location
+    // 按照上个已知位置初始化
     Location lastLocation = locationManager
         .getLastKnownLocation(LocationManager.GPS_PROVIDER); // <img src="images/7.png"></img>
     if (lastLocation != null)
@@ -6860,6 +6971,7 @@ public class WhereAmI extends Activity implements LocationListener { // <img src
   }
 
   // Called when location has changed
+  // 在位置变化时触发
   public void onLocationChanged(Location location) { // <img src="images/10.png"></img>
     String text = String.format(
         "Lat:\t %f\nLong:\t %f\nAlt:\t %f\nBearing:\t %f", location
@@ -6868,6 +6980,7 @@ public class WhereAmI extends Activity implements LocationListener { // <img src
     textOut.setText(text);
 
     // Perform geocoding for this location
+    // 解析位置信息
     try {
       List&lt;Address&gt; addresses = geocoder.getFromLocation(
           location.getLatitude(), location.getLongitude(), 10); // <img src="images/12.png"></img>
@@ -6880,6 +6993,7 @@ public class WhereAmI extends Activity implements LocationListener { // <img src
   }
 
   // Methods required by LocationListener 
+  // LocationListener中声明的几个方法
   public void onProviderDisabled(String provider) {
   }
 
@@ -7077,12 +7191,14 @@ public class StatusActivity extends BaseActivity implements OnClickListener,
   String provider;
 
   /** Called when the activity is first created. */
+  /** 在Activity首次创建时调用 **/
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.status);
 
     // Find views
+    // 获取对View的引用
     editText = (EditText) findViewById(R.id.editText);
     updateButton = (Button) findViewById(R.id.buttonUpdate);
     updateButton.setOnClickListener(this);
@@ -7120,6 +7236,7 @@ public class StatusActivity extends BaseActivity implements OnClickListener,
   }
 
   // Called when button is clicked
+  // 在点击按钮时触发
   public void onClick(View v) {
     String status = editText.getText().toString();
     new PostToTwitter().execute(status);
@@ -7127,8 +7244,10 @@ public class StatusActivity extends BaseActivity implements OnClickListener,
   }
 
   // Asynchronously posts to twitter
+  // 异步发送到Twitter
   class PostToTwitter extends AsyncTask&lt;String, Integer, String&gt; {
     // Called to initiate the background activity
+    // 在触发时负责发起后台操作
     @Override
     protected String doInBackground(String... statuses) {
       try {
@@ -7146,6 +7265,7 @@ public class StatusActivity extends BaseActivity implements OnClickListener,
     }
 
     // Called once the background activity has completed
+    // 在后台任务执行完毕时触发
     @Override
     protected void onPostExecute(String result) {
       Toast.makeText(StatusActivity.this, result, Toast.LENGTH_LONG).show();
@@ -7153,6 +7273,7 @@ public class StatusActivity extends BaseActivity implements OnClickListener,
   }
 
   // TextWatcher methods
+  // TextWatcher相关的几个方法
   public void afterTextChanged(Editable statusText) {
     int count = 140 - statusText.length();
     textCount.setText(Integer.toString(count));
@@ -7170,6 +7291,7 @@ public class StatusActivity extends BaseActivity implements OnClickListener,
   }
 
   // LocationListener methods
+  // LocationListener相关的几个方法
   public void onLocationChanged(Location location) { // <img src="images/10.png"></img>
     this.location = location;
   }
@@ -7435,17 +7557,20 @@ public class BootReceiver extends BroadcastReceiver {
   public void onReceive(Context context, Intent callingIntent) {
 
     // Check if we should do anything at boot at all
+    // 检查是否需要在启动时做些事情
     long interval = ((YambaApplication) context.getApplicationContext())
         .getInterval(); // <img src="images/1.png"></img>
     if (interval == YambaApplication.INTERVAL_NEVER)  // <img src="images/2.png"></img>
       return;
 
     // Create the pending intent
+    // 创建一个PendingIntent对象
     Intent intent = new Intent(context, UpdaterService.class);  // <img src="images/3.png"></img>
     PendingIntent pendingIntent = PendingIntent.getService(context, -1, intent,
         PendingIntent.FLAG_UPDATE_CURRENT); // <img src="images/4.png"></img>
 
     // Setup alarm service to wake up and start service periodically
+    // 配置Alarm服务，使它可以定期唤醒并启动Service
     AlarmManager alarmManager = (AlarmManager) context
         .getSystemService(Context.ALARM_SERVICE); // <img src="images/5.png"></img>
     alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, System
@@ -7528,9 +7653,14 @@ public class UpdaterService extends IntentService {
   /**
    * Creates a notification in the notification bar telling user there are new
    * messages
+   * 收到新消息时，在通知栏发送一条通知来提醒用户
    *
    * @param timelineUpdateCount
    *          Number of new statuses
+   * 
+   * @param timelineUpdateCount
+   *          新消息的数目
+   * 
    */
   private void sendTimelineNotification(int timelineUpdateCount) {
     Log.d(TAG, "sendTimelineNotification'ing");
@@ -7750,6 +7880,7 @@ public class Message implements Parcelable { // <img src="images/1.png"></img>
   };
 
   // Setters and Getters <img src="images/6.png"></img>
+  // Setter与Getter <img src="images/6.png"></img>
   public String getTag() {
     return tag;
   }
@@ -7877,12 +8008,14 @@ public class LogActivity extends Activity implements OnClickListener {
     setContentView(R.layout.main);
 
     // Request bind to the service
+    // 请求绑定到Service
     conn = new LogConnection(); // <img src="images/1.png"></img>
     Intent intent = new Intent("com.marakana.logservice.ILogService"); // <img src="images/2.png"></img>
     intent.putExtra("version", "1.0"); // <img src="images/3.png"></img>
     bindService(intent, conn, Context.BIND_AUTO_CREATE); // <img src="images/4.png"></img>
 
     // Attach listener to button
+    // 为按钮添加Listener
     ((Button) findViewById(R.id.buttonClick)).setOnClickListener(this);
   }
 
@@ -8012,7 +8145,7 @@ NDK提供了交叉编译所需的完整工具链。通过它的构建系统，�
 如果应用程序需要加载某个本地库，那就必须保证系统能够找到它。在Linux下，它们通常都是通过<CODE>LD_LIBRARY_PATH</CODE>中定义的路径找到。在Android中，这个环境变量中只包含一个路径，即<CODE>system/lib</CODE>。这里存在一个问题，那就是<CODE>/system</CODE>分区一般都是只读的，应用程序无法将自己的本地库安装到<CODE>/system/lib</CODE>。
 </P>
 <P>
-为解决这一问题，NDK使用了这样的机制，那就是将本地库打包进APK文件，当用户安装含有本地库的APK文件时，系统将在/data/data<I>/your_package/</I>lib创建一个目录，用来存放应用程序的本地库，而不允许其它程序访问。这样的打包机制简化了Android的安装过程，也避免了本地库的版本冲突。此外，这也大大地扩展了Android的功能。
+为解决这一问题，NDK使用了这样的机制，那就是将本地库打包进APK文件，当用户安装含有本地库的APK文件时，系统将在/data/data<I>/your_package/</I>lib创建一个目录，用来存放应用程序的本地库。在前面"简介文件系统"一节曾提到，这个目录是应用程序所私有的，通过文件系统的权限机制，可以限制它只可以为这一应用程序单独使用，而不允许其它应用程序访问。这样的打包机制简化了Android应用程序的分发，也避免了本地库的版本冲突。此外，这也使得大量既有的三方库能够引入到Android之中，大大地扩展了Android的功能。
 </P>
 <H3>15.2.3. 文档与标准头文件</H3>
 <P>
@@ -8088,6 +8221,7 @@ package com.marakana;
 public class FibLib {
 
         // Java implementation - recursive
+        // Java的递归实现
         public static long fibJ(long n) {  //<img src="images/1.png"></img>
                 if (n &lt;= 0)
                         return 0;
@@ -8097,6 +8231,7 @@ public class FibLib {
         }
 
         // Java implementation - iterative
+        // Java的迭代实现
         public static long fibJI(long n) { //<img src="images/2.png"></img>
           long previous = -1;
           long result = 1;
@@ -8109,14 +8244,17 @@ public class FibLib {
         }
 
         // Native implementation
+        // 本地实现
         static {
                 System.loadLibrary("fib"); //<img src="images/3.png"></img>
         }
 
         // Native implementation - recursive
+        // 本地的递归实现
         public static native long fibN(int n); //<img src="images/4.png"></img>
 
         // Native implementation - iterative
+        // 本地的迭代实现
         public static native long fibNI(int n);  //<img src="images/5.png"></img>
 }
 </PRE>
@@ -8124,9 +8262,9 @@ public class FibLib {
 <OL>
 <LI>Java 递归版本的菲波那契算法
 <LI>Java 迭代版本的菲波那契算法，与迭代相比省去了递归的开销。
-<LI>本地版本将在共享库中实现，这里只是告诉 JVM 在需要时加载这个库。
+<LI>本地版本将在共享库中实现，这里只是告诉 JVM 在相应的函数被调用时加载这个库。
 <LI>定义了对应的函数，但是并不实现他们。注意这里使用了 <CODE>native</CODE> 关键字。它告诉 JVM 该函数的代码在共享库中实现。在调用这个函数前应该加载对应的库。
-<LI>这是迭代的版本。
+<LI>对应递归版本的本地实现，这是迭代的版本。
 </OL>
 
 <P>
@@ -8212,6 +8350,7 @@ C版本的菲波那契算法与Java版本差异不大。下面就是<CODE>fib.c<
 #include "com_marakana_FibLib.h" /* <img src="images/1.png"></img> */
 
 /* Recursive Fibonacci Algorithm <img src="images/2.png"></img> */
+/* 递归的菲波那契算法 <img src="images/2.png"></img> */
 long fibN(long n) {
   if(n&lt;=0) return 0;
   if(n==1) return 1;
@@ -8219,6 +8358,7 @@ long fibN(long n) {
 }
 
 /* Iterative Fibonacci Algorithm <img src="images/3.png"></img> */
+/* 迭代的菲波那契算法 <img src="images/3.png"></img> */
 long fibNI(long n) {
   long previous = -1;
   long result = 1;
@@ -8233,11 +8373,14 @@ long fibNI(long n) {
 }
 
 /* Signature of the JNI method as generated in header file <img src="images/4.png"></img> */
+/* 与头文件中生成的JNI方法的签名一致 <img src="images/4.png"></img> */
 JNIEXPORT jlong JNICALL Java_com_marakana_FibLib_fibN
   (JNIEnv *env, jclass obj, jlong  n) {
   return fibN(n);
 }
+
 /* Signature of the JNI method as generated in header file <img src="images/5.png"></img> */
+/* 与头文件中生成的JNI方法的签名一致 <img src="images/5.png"></img> */
 JNIEXPORT jlong JNICALL Java_com_marakana_FibLib_fibNI
   (JNIEnv *env, jclass obj, jlong  n) {
   return fibNI(n);
@@ -8340,6 +8483,7 @@ public class Fibonacci extends Activity implements OnClickListener {
                 String out = "";
 
                 // Dalvik - Recursive
+                // Dalvik - 递归
                 start = System.currentTimeMillis(); //<img src="images/2.png"></img>
                 result = FibLib.fibJ(input);  //<img src="images/3.png"></img>
                 stop = System.currentTimeMillis();  //<img src="images/4.png"></img>
@@ -8347,6 +8491,7 @@ public class Fibonacci extends Activity implements OnClickListener {
                                 - start);
 
                 // Dalvik - Iterative
+                // Dalvik - 迭代
                 start = System.currentTimeMillis();
                 result = FibLib.fibJI(input); //<img src="images/5.png"></img>
                 stop = System.currentTimeMillis();
@@ -8354,6 +8499,7 @@ public class Fibonacci extends Activity implements OnClickListener {
                                 - start);
 
                 // Native - Recursive
+                // 本地 - 递归
                 start = System.currentTimeMillis();
                 result = FibLib.fibN(input); //<img src="images/6.png"></img>
                 stop = System.currentTimeMillis();
@@ -8361,6 +8507,7 @@ public class Fibonacci extends Activity implements OnClickListener {
                                 - start);
 
                 // Native - Iterative
+                // 本地 - 迭代
                 start = System.currentTimeMillis();
                 result = FibLib.fibNI(input); //<img src="images/7.png"></img>
                 stop = System.currentTimeMillis();
@@ -8407,7 +8554,40 @@ public class Fibonacci extends Activity implements OnClickListener {
 </P>
 <HR NOSHADE SIZE=1>
 <A NAME="toc111"></A>
-<H1>16. 封面动物</H1>
+<H1>16. 封底</H1>
+<P>
+想为Andorid设备开发应用程序？ 这本书就是入门的最佳途径。 作者身为针对移动平台的专业讲师，凭借自己在面向大型机构的开发者培训中积累的经验， 在这本书中循循善诱地介绍了有经验的面向对象开发者是如何利用Android的基本构件来实现构造用户界面、存储数据、连接网络等操作的。
+</P>
+<P>
+按照本书中介绍的步骤，你将亲手实现一个类twitter的应用，并随着章节的推进不断地为它添加新功能。在此过程中，你也将慢慢地积累出自己的代码模式库，从而在开发Android应用中做到举一反三。
+</P>
+<OL>
+<LI>了解Android平台的概况，体会它作为移动系统的独特优势。
+<LI>了解Android的设计架构，包括它的应用程序框架以及应用程序的打包/分发机制(APK)。
+<LI>配置你的Android开发环境，并通过开发一个简单的程序来入门。
+<LI>学习如何构建基本的Android用户界面，以及通过视图(View)与布局(Layout)组织UI元件的方法。
+<LI>构建一个服务(Service)来执行后台任务，为应用程序更新数据。
+<LI>简单介绍Android接口描述语言(AIDL)，以及本地代码开发包(NDK)。
+<P></P>
+*建议读者拥有一定面向对象编程基础。
+</OL>
+
+<A NAME="toc112"></A>
+<H2>16.1. 赞词</H2>
+<P>
+<I>"Learning Android到作者Marko Gargenta是一位经验丰富的专业讲师。现在他将自己的Android Bootcamp培训课程中所得的教学经验总结提炼，写成了这一本易读的小册子供大家学习。Marko的书首先帮助读者踏出Android开发的第一步，也更深一步地讲解了Android的高级内容，比如服务(Service)，Intents与Broadcast Recievers。"</I> - Ed Burnette, 《Hello, Android》作者
+</P>
+<P>
+(to 编辑: 并不了解Intents与Broadcast Recievers在最终译稿中的用词，在此保留。)
+</P>
+<A NAME="toc113"></A>
+<H2>16.2. 作者简介</H2>
+<P>
+<B>Marko Gargenta</B> 是旧金山 Marakana 培训公司的创始人与首席Android专家。他创建了 Android Bootcamp 与 Android Internals 两门课程， 并培训了来自四大洲的超过 1,000 名开发者。他的客户包括高通、索尼爱立信、摩托罗拉、夏普、思科与美国国防部。
+</P>
+<HR NOSHADE SIZE=1>
+<A NAME="toc114"></A>
+<H1>17. 封面动物</H1>
 <P>
 <I>Leaning Android</I> 的封面动物是纵纹腹小鸮(Little Owl)。
 </P>
@@ -8421,10 +8601,10 @@ public class Fibonacci extends Activity implements OnClickListener {
 纵纹腹小鸮的特征为腿长，面圆，眼为黄色，眉为白色；它的眉毛通常给人一种表情严肃的感觉。其最大的一支，<I>Athene noctua</I>，上体为白色而有棕色斑点，下体为白色与棕色的条纹。另外在中东地区广为分布的一支，<I>A. n. lilith</I>(又称叙利亚小鸮)，则是浅灰色与棕色的条纹。
 </P>
 <P>
-纵纹腹小鸮主要栖息于空旷地带，如草场或者农场。食物主要以蜥蜴、蚯蚓、昆虫，甚至小型的哺乳动物和鸟类为主；纵纹腹小鸮生性凶猛，虽身型小巧，仍敢于攻击许多猛禽。与鸱鸮科其它的许多物种不同的是，纵纹腹小鸮为昼行性动物，主要在白天行动，并在其间休息。取决于栖息地的不同，它们通常会在悬崖、礁石、树洞、河畔或者建筑物上筑巢。在接近人类活动的地方居住的纵纹腹小鸮，一般都已习惯了人类，在人类接近时并不怕人。
+纵纹腹小鸮主要栖息于空旷地带，如草场或者农场。食物以蜥蜴、蚯蚓、昆虫甚至小型的哺乳动物和鸟类为主；纵纹腹小鸮生性凶猛，虽身型小巧，仍敢于攻击许多猛禽。与鸱鸮科其它的许多物种不同的是，纵纹腹小鸮为昼行性动物，主要在白天行动，并在其间休息。取决于栖息地的不同，它们通常会在悬崖、礁石、树洞、河畔或者建筑物上筑巢。在接近人类活动的地方居住的纵纹腹小鸮，一般都已习惯了人类，在人类接近时并不怕人。
 </P>
 <P>
-封面图片取自Cassell的<I>自然历史</I>。封面的字体为Adobe ITC Garamond；正文的字体为Linotype Birka；标题字体为Adobe Myriad Condensed；代码的字体为LucasFont的TheSansMonoCondensed。
+封面图片取自Cassell的<I>自然历史</I>。封面字体为Adobe ITC Garamond；正文字体为Linotype Birka；标题字体为Adobe Myriad Condensed；代码的字体为LucasFont的TheSansMonoCondensed。
 </P>
 <HR NOSHADE SIZE=5>
 <P>

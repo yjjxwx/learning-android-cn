@@ -506,7 +506,8 @@ import android.util.Log;
 public class UpdaterService2 extends Service {
   private static final String TAG = "UpdaterService";
 
-  static final int DELAY = 60000; // a minute #{1}
+%  static final int DELAY = 60000; // a minute #{1}
+  static final int DELAY = 60000; // 一分钟 #{1}
   private boolean runFlag = false;  // #{2}
   private Updater updater;
 
@@ -548,6 +549,7 @@ public class UpdaterService2 extends Service {
 
   /**
    * Thread that performs the actual update from the online service
+   * 负责从服务端抓取更新的线程。
    */
   private class Updater extends Thread {  // #{7}
 
@@ -689,7 +691,8 @@ import android.util.Log;
 public class UpdaterService extends Service {
   private static final String TAG = "UpdaterService";
 
-  static final int DELAY = 60000; // wait a minute
+%  static final int DELAY = 60000; // wait a minute
+  static final int DELAY = 60000; // 等待时间为一分钟
   private boolean runFlag = false;
   private Updater updater;
   private YambaApplication yamba; // #{1}
@@ -734,6 +737,7 @@ public class UpdaterService extends Service {
 
   /**
    * Thread that performs the actual update from the online service
+   * 负责从服务端抓取更新的线程。
    */
   private class Updater extends Thread {
     List<Twitter.Status> timeline; // #{5}

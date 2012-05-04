@@ -233,7 +233,7 @@ Eclipse默认会在``res/layout``下创建一个``main.xml``文件。出于一�
 
 - 屏幕上方显示的标题，TextView控件。
 - 消息的输入框，在此使用EditText控件。
-- 更新状态的按钮，Button控件。
+- 更新消息的按钮，Button控件。
 - 一个容纳以上所有控件的Layout，它负责将这些控件垂直排开。在此选用前面提到的常用Layout之一——LinearLayout。
 
 % The source code for our StatusActivity layout looks like this:
@@ -244,24 +244,28 @@ StatusActivity的源码大致如下：
 {CODE}
 <?xml version="1.0" encoding="utf-8"?>
 
-<!-- Main Layout of Status Activity -->
+% <!-- Main Layout of Status Activity -->
+<!-- StatusActivity的主布局 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:orientation="vertical" android:layout_width="fill_parent"
   android:layout_height="fill_parent">
 
-  <!-- Title TextView-->
+% <!-- Title TextView-->
+  <!-- 表示标题的TextView -->
   <TextView android:layout_width="fill_parent"
     android:layout_height="wrap_content" android:gravity="center"
     android:textSize="30sp"
     android:layout_margin="10dp" android:text="@string/titleStatus"/>
 
-  <!-- Status EditText  -->
+% <!-- Status EditText  -->
+  <!-- 消息的输入框 -->
   <EditText android:layout_width="fill_parent"
     android:layout_height="fill_parent" android:layout_weight="1"
     android:hint="@string/hintText" android:id="@+id/editText"
     android:gravity="top|center_horizontal"></EditText>
 
-  <!-- Update Button -->
+%  <!-- Update Button -->
+  <!-- 更新消息的按钮 -->
   <Button android:layout_width="fill_parent"
     android:layout_height="wrap_content" android:text="@string/buttonUpdate"
     android:textSize="20sp" android:id="@+id/buttonUpdate"></Button>
@@ -429,12 +433,14 @@ public class StatusActivity1 extends Activity implements OnClickListener { // #{
   Twitter twitter;
 
   /** Called when the activity is first created. */
+  /** 在Activity首次创建时调用 **/
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.status);
 
     // Find views
+    // 获取对View的引用
     editText = (EditText) findViewById(R.id.editText); // #{2}
     updateButton = (Button) findViewById(R.id.buttonUpdate);
 
@@ -445,6 +451,7 @@ public class StatusActivity1 extends Activity implements OnClickListener { // #{
   }
 
   // Called when button is clicked // #{5}
+  // 在点击按钮时触发
   public void onClick(View v) {
     twitter.setStatus(editText.getText().toString()); // #{6}
     Log.d(TAG, "onClicked");
@@ -745,12 +752,14 @@ public class StatusActivity2 extends Activity implements OnClickListener {
   Twitter twitter;
 
   /** Called when the activity is first created. */
+  /** 在Activity首次创建时调用 **/
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.status);
 
     // Find views
+    // 获取对View的引用
     editText = (EditText) findViewById(R.id.editText);
     updateButton = (Button) findViewById(R.id.buttonUpdate);
     updateButton.setOnClickListener(this);
@@ -760,8 +769,10 @@ public class StatusActivity2 extends Activity implements OnClickListener {
   }
 
   // Asynchronously posts to twitter
+  // 异步发送到Twitter
   class PostToTwitter extends AsyncTask<String, Integer, String> { // #{1}
     // Called to initiate the background activity
+    // 在触发时负责发起后台操作
     @Override
     protected String doInBackground(String... statuses) { // #{2}
       try {
@@ -775,13 +786,16 @@ public class StatusActivity2 extends Activity implements OnClickListener {
     }
 
     // Called when there's a status to be updated
+    // 在更新消息时触发
     @Override
     protected void onProgressUpdate(Integer... values) { // #{3}
       super.onProgressUpdate(values);
       // Not used in this case
+      // 在此留空
     }
 
     // Called once the background activity has completed
+    // 在后台任务执行完毕时触发
     @Override
     protected void onPostExecute(String result) { // #{4}
       Toast.makeText(StatusActivity2.this, result, Toast.LENGTH_LONG).show();
@@ -789,6 +803,7 @@ public class StatusActivity2 extends Activity implements OnClickListener {
   }
 
   // Called when button is clicked
+  // 在点击按钮时触发
   public void onClick(View v) {
     String status = editText.getText().toString();
     new PostToTwitter().execute(status); // #{5}
@@ -847,24 +862,28 @@ Android为不同的事件(如触摸、点击等)提供了不同的侦听器。�
   android:layout_height="fill_parent">
 
   <!-- Title TextView-->
+  <!-- 表示标题的TextView -->
   <TextView android:layout_width="fill_parent"
     android:layout_height="wrap_content" android:gravity="center"
     android:text="@string/titleStatus" android:textSize="30sp"
     android:layout_margin="10dp" />
 
   <!-- Text Counter TextView #{1} -->
+  <!-- 表示文字数的TextView #{1} -->
   <TextView android:layout_width="wrap_content"
     android:layout_height="wrap_content" android:layout_gravity="right"
     android:id="@+id/textCount" android:text="000"
     android:layout_marginRight="10dp" />
 
   <!-- Status EditText  -->
+  <!-- 消息的输入框 -->
   <EditText android:layout_width="fill_parent"
     android:layout_height="fill_parent" android:layout_weight="1"
     android:hint="@string/hintText" android:id="@+id/editText"
     android:gravity="top|center_horizontal"></EditText>
 
   <!-- Update Button -->
+  <!-- 更新消息的按钮 -->
   <Button android:layout_width="fill_parent"
     android:layout_height="wrap_content" android:text="@string/buttonUpdate"
     android:textSize="20sp" android:id="@+id/buttonUpdate"></Button>
@@ -910,12 +929,14 @@ public class StatusActivity extends Activity implements OnClickListener,
   TextView textCount; // #{2}
 
   /** Called when the activity is first created. */
+  /** 在Activity首次创建时调用 **/
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.status);
 
     // Find views
+    // 获取对View的引用
     editText = (EditText) findViewById(R.id.editText);
     updateButton = (Button) findViewById(R.id.buttonUpdate);
     updateButton.setOnClickListener(this);
@@ -930,6 +951,7 @@ public class StatusActivity extends Activity implements OnClickListener,
   }
 
   // Called when button is clicked
+  // 在点击按钮时触发
   public void onClick(View v) {
     String status = editText.getText().toString();
     new PostToTwitter().execute(status);
@@ -937,8 +959,10 @@ public class StatusActivity extends Activity implements OnClickListener,
   }
 
   // Asynchronously posts to twitter
+  // 异步发送到Twitter
   class PostToTwitter extends AsyncTask<String, Integer, String> {
     // Called to initiate the background activity
+    // 在触发时负责发起后台操作
     @Override
     protected String doInBackground(String... statuses) {
       try {
@@ -952,13 +976,16 @@ public class StatusActivity extends Activity implements OnClickListener,
     }
 
     // Called when there's a status to be updated
+    // 在更新消息时触发
     @Override
     protected void onProgressUpdate(Integer... values) {
       super.onProgressUpdate(values);
       // Not used in this case
+      // 在此留空
     }
 
     // Called once the background activity has completed
+    // 在后台任务执行完毕时触发
     @Override
     protected void onPostExecute(String result) {
       Toast.makeText(StatusActivity.this, result, Toast.LENGTH_LONG).show();
@@ -966,6 +993,7 @@ public class StatusActivity extends Activity implements OnClickListener,
   }
 
   // TextWatcher methods
+  // TextWatcher相关方法
   public void afterTextChanged(Editable statusText) { // #{7}
     int count = 140 - statusText.length(); // #{8}
     textCount.setText(Integer.toString(count));
@@ -1133,29 +1161,34 @@ Android使用标准的[RGB http://en.wikipedia.org/wiki/Rgb]颜色，加上可�
 <?xml version="1.0" encoding="utf-8"?>
 
 <!-- Main Layout of Status Activity -->
+<!-- StatusActivity的主布局 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:orientation="vertical" android:layout_width="fill_parent"
   android:layout_height="fill_parent" android:background="@drawable/background"><!-- #{1} -->
 
-  <!-- Title TextView-->
+  <!-- Title TextView -->
+  <!-- 表示标题的TextView -->
   <TextView android:layout_width="fill_parent"
     android:layout_height="wrap_content" android:gravity="center"
     android:text="@string/titleStatus" android:textSize="30sp"
     android:layout_margin="10dp" android:textColor="@android:color/white" /><!-- #{2} -->
 
   <!-- Text Counter TextView -->
+  <!-- 表示文字数的TextView -->
   <TextView android:layout_width="wrap_content"
     android:layout_height="wrap_content" android:layout_gravity="right"
     android:id="@+id/textCount" android:text="000"
     android:layout_marginRight="10dp" />
 
   <!-- Status EditText  -->
+  <!-- 消息的输入框 -->
   <EditText android:layout_width="fill_parent"
     android:layout_height="fill_parent" android:layout_weight="1"
     android:hint="@string/hintText" android:id="@+id/editText"
     android:gravity="top|center_horizontal" android:background="#cfff" /><!-- #{3} -->
 
   <!-- Update Button -->
+  <!-- 更新消息的按钮 -->
   <Button android:layout_width="fill_parent"
     android:layout_height="wrap_content" android:text="@string/buttonUpdate"
     android:textSize="20sp" android:id="@+id/buttonUpdate" />

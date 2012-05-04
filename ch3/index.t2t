@@ -254,6 +254,8 @@ R文件负责Java与外部资源之间的关联。它在res目录中的内容发
  * should not be modified by hand.
  */
 
+(to 编辑：以上注释为Eclipse自动生成，不可翻译。)
+
 package com.marakana;
 
 public final class R {
@@ -287,7 +289,8 @@ import android.app.Activity;
 import android.os.Bundle;
 
 public class HelloWorld extends Activity {
-  /** Called when the activity is first created. */
+%  /** Called when the activity is first created. */
+  /* 在Activity首次创建时触发 */
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);

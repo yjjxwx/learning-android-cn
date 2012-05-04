@@ -53,7 +53,7 @@ NDK提供了交叉编译所需的完整工具链。通过它的构建系统，�
 
 % NDK solves this problem by providing for a mechanism to ship your native library as part of your Application Package (APK) file. Basically, when the user installs an APK that contains a native library, the system creates a directory named ///data/data/your.package/lib///. If you recall from the section called __“File System, Explained”__, this partition is private just to your application and thus a safe place to keep your libraries for the user, while not letting other applications load and use your libraries. This packaging mechanism is a dramatic change to the rules for distributing applications on Android devices, and is a big deal because it brings the huge range of legacy and new native code into the game.
 
-为解决这一问题，NDK使用了这样的机制，那就是将本地库打包进APK文件，当用户安装含有本地库的APK文件时，系统将在/data/data///your_package///lib创建一个目录，用来存放应用程序的本地库，而不允许其它程序访问。这样的打包机制简化了Android的安装过程，也避免了本地库的版本冲突。此外，这也大大地扩展了Android的功能。
+为解决这一问题，NDK使用了这样的机制，那就是将本地库打包进APK文件，当用户安装含有本地库的APK文件时，系统将在/data/data///your_package///lib创建一个目录，用来存放应用程序的本地库。在前面"简介文件系统"一节曾提到，这个目录是应用程序所私有的，通过文件系统的权限机制，可以限制它只可以为这一应用程序单独使用，而不允许其它应用程序访问。这样的打包机制简化了Android应用程序的分发，也避免了本地库的版本冲突。此外，这也使得大量既有的三方库能够引入到Android之中，大大地扩展了Android的功能。
 
 
 % === Documentation and Standardized Headers ===
@@ -162,6 +162,7 @@ package com.marakana;
 public class FibLib {
 
         // Java implementation - recursive
+        // Java的递归实现
         public static long fibJ(long n) {  //#{1}
                 if (n <= 0)
                         return 0;
@@ -171,6 +172,7 @@ public class FibLib {
         }
 
         // Java implementation - iterative
+        // Java的迭代实现
         public static long fibJI(long n) { //#{2}
           long previous = -1;
           long result = 1;
@@ -183,14 +185,17 @@ public class FibLib {
         }
 
         // Native implementation
+        // 本地实现
         static {
                 System.loadLibrary("fib"); //#{3}
         }
 
         // Native implementation - recursive
+        // 本地的递归实现
         public static native long fibN(int n); //#{4}
 
         // Native implementation - iterative
+        // 本地的迭代实现
         public static native long fibNI(int n);  //#{5}
 }
 {/CODE}
@@ -203,9 +208,9 @@ public class FibLib {
 
 + Java 递归版本的菲波那契算法
 + Java 迭代版本的菲波那契算法，与迭代相比省去了递归的开销。
-+ 本地版本将在共享库中实现，这里只是告诉 JVM 在需要时加载这个库。
++ 本地版本将在共享库中实现，这里只是告诉 JVM 在相应的函数被调用时加载这个库。
 + 定义了对应的函数，但是并不实现他们。注意这里使用了 ``native`` 关键字。它告诉 JVM 该函数的代码在共享库中实现。在调用这个函数前应该加载对应的库。
-+ 这是迭代的版本。
++ 对应递归版本的本地实现，这是迭代的版本。
 
 % At this point, our FibLib is complete, but we still need to back the ``native`` methods with their C implementations. To do that, first we need to create the appropriate JNI header file.
 
@@ -314,6 +319,7 @@ C版本的菲波那契算法与Java版本差异不大。下面就是``fib.c``中
 #include "com_marakana_FibLib.h" /* #{1} */
 
 /* Recursive Fibonacci Algorithm #{2} */
+/* 递归的菲波那契算法 #{2} */
 long fibN(long n) {
   if(n<=0) return 0;
   if(n==1) return 1;
@@ -321,6 +327,7 @@ long fibN(long n) {
 }
 
 /* Iterative Fibonacci Algorithm #{3} */
+/* 迭代的菲波那契算法 #{3} */
 long fibNI(long n) {
   long previous = -1;
   long result = 1;
@@ -335,11 +342,14 @@ long fibNI(long n) {
 }
 
 /* Signature of the JNI method as generated in header file #{4} */
+/* 与头文件中生成的JNI方法的签名一致 #{4} */
 JNIEXPORT jlong JNICALL Java_com_marakana_FibLib_fibN
   (JNIEnv *env, jclass obj, jlong  n) {
   return fibN(n);
 }
+
 /* Signature of the JNI method as generated in header file #{5} */
+/* 与头文件中生成的JNI方法的签名一致 #{5} */
 JNIEXPORT jlong JNICALL Java_com_marakana_FibLib_fibNI
   (JNIEnv *env, jclass obj, jlong  n) {
   return fibNI(n);
@@ -459,6 +469,7 @@ public class Fibonacci extends Activity implements OnClickListener {
                 String out = "";
 
                 // Dalvik - Recursive
+                // Dalvik - 递归
                 start = System.currentTimeMillis(); //#{2}
                 result = FibLib.fibJ(input);  //#{3}
                 stop = System.currentTimeMillis();  //#{4}
@@ -466,6 +477,7 @@ public class Fibonacci extends Activity implements OnClickListener {
                                 - start);
 
                 // Dalvik - Iterative
+                // Dalvik - 迭代
                 start = System.currentTimeMillis();
                 result = FibLib.fibJI(input); //#{5}
                 stop = System.currentTimeMillis();
@@ -473,6 +485,7 @@ public class Fibonacci extends Activity implements OnClickListener {
                                 - start);
 
                 // Native - Recursive
+                // 本地 - 递归
                 start = System.currentTimeMillis();
                 result = FibLib.fibN(input); //#{6}
                 stop = System.currentTimeMillis();
@@ -480,6 +493,7 @@ public class Fibonacci extends Activity implements OnClickListener {
                                 - start);
 
                 // Native - Iterative
+                // 本地 - 迭代
                 start = System.currentTimeMillis();
                 result = FibLib.fibNI(input); //#{7}
                 stop = System.currentTimeMillis();
